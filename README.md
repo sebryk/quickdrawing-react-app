@@ -1,2 +1,0 @@
-# Quickdrawing React App
-
