@@ -1,8 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
-// See: https://quickdrawing-82835-default-rtdb.europe-west1.firebasedatabase.app/
-
 const firebaseConfig = {
   apiKey: "AIzaSyA2zxZ5c90OGNyjUUhfhPvtAJ5hO3PlMXQ",
   authDomain: "quickdrawing-82835.firebaseapp.com",
