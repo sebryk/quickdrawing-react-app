@@ -18,7 +18,7 @@ const initialState: IImageSliderState = {
   isMouseMoving: true,
   currentIndex: 0,
   isLoading: true,
-  isFinished: true
+  isFinished: false
 }
 
 const imageSliderSlice = createSlice({
