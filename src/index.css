@@ -1,0 +1,61 @@
+/* --------------------------- Fonts import --------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700&family=Roboto+Slab:wght@700&display=swap');
+
+/* -------------------------------- Variables ------------------------------- */
+
+:root {
+  --red-color: #f12354;
+  --dark-red-color: #ae1a3c;
+  --black-color: #191919;
+  --dark-gray-color: #474747;
+  --gray-color: #7f7f7f;
+  --light-gray-color: #e7e7e7;
+  --white-color: #f5f5f5;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  min-width: 768px;
+  height: 100dvh;
+  background-image: url('./assets/background-img.webp'), url('./assets/background-img.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+a {
+  color: unset;
+  text-decoration: unset;
+}
+
+.scroll-lock {
+  overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1380px;
+  padding-inline: 20px;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: space-between;
+}
