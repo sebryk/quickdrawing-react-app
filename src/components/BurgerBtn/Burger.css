@@ -1,0 +1,41 @@
+.icon {
+  display: none;
+}
+
+@media (max-width: 830px) {
+  .icon {
+    width: 36px;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+    display: block;
+    z-index: 3;
+  }
+  .icon__stripe {
+    width: 36px;
+    height: 3px;
+    background-color: var(--red-color);
+    position: absolute;
+    top: 50%;
+    transition: all 0.3s;
+  }
+  .icon__stripe:first-child {
+    top: 25%;
+  }
+  .icon__stripe:last-child {
+    top: 75%;
+  }
+  .icon--active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 50%;
+    background-color: var(--red-color);
+  }
+  .icon--active span:nth-child(2) {
+    transform: scale(0);
+  }
+  .icon--active span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 50%;
+    background-color: var(--red-color);
+  }
+}
