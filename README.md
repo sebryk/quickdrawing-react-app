@@ -14,9 +14,10 @@
 
 - **React**
 - **TypeScript**
+- **CSS**
 - **Redux Toolkit**
 - **RTK Query**
-- **CSS**
+- **Firebase**
 
 ## Visuals
 
