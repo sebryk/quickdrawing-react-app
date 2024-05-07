@@ -12,11 +12,11 @@
 
 ## Technical Stack:
 
-**React**
-**TypeScript**
-**Redux Toolkit**
-**RTK Query**
-**CSS**
+- **React**
+- **TypeScript**
+- **Redux Toolkit**
+- **RTK Query**
+- **CSS**
 
 ## Visuals
 
