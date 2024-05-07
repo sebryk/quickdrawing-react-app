@@ -10,6 +10,14 @@
 - **Manual navigation:** Switching between pages manually using buttons or preview images after the session ends.
 - **Image API Integration:** Get images with a seamless connection to an images API service.
 
+## Technical Stack:
+
+**React**
+**TypeScript**
+**Redux Toolkit**
+**RTK Query**
+**CSS**
+
 ## Visuals
 
 ## Link
