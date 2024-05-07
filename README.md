@@ -1,14 +1,14 @@
 # Quickdrawing
 
-**Quickdrawing** is a prototype of web application designed specifically for artists. No matter which level you acquire, whether you are just newbie or you are already proficient, this app allows users to create fast and dynamic sketches from a vast library of high-quality images from external API.
+**Quickdrawing** is a prototype web application designed specifically for artists. Regardless of your skill level, whether you're a newbie or already proficient, this app allows users to create fast and dynamic sketches from a vast library of high-quality images sourced from an external API.
 
 ## Features
 
 - **Customizable session settings:** Selectable variety of themes to draw, number of images and time interval between image changes.
-- **Unique media player:** Special image media player with embeded image slider and functional control bar.
-- **Controll bar:** Integrated control bar with timer with the ability to pause and restart session.
-- **Manual navigation:** Switching between pages manually using buttons or preview images after the session ends.
-- **Image API Integration:** Get images with a seamless connection to an images API service.
+- **Unique media player:** Special image media player with embedded image slider and functional control bar.
+- **Controll bar:** Integrated control bar with a timer and the ability to pause and restart session.
+- **Manual navigation:** Manual switching between pages with buttons or preview images after the session ends.
+- **Image API Integration:** Connection to an image API service.
 
 ## Technical Stack:
 
