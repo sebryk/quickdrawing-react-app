@@ -20,6 +20,8 @@
 
 ## Visuals
 
+![quickdrawing](https://github.com/sebryk/quickdrawing-react-app/assets/106953297/4bbebbcc-186b-4e0e-bb64-bf11360b8bf0)
+
 ## Link
 
 https://sebryk.github.io/quickdrawing-react-app/
