@@ -41,7 +41,7 @@ const ObjectsFormSelect: FC<ObjectsFormSelectProps> = ({...props}) => {
       <h1 className={`select__title ${isDisabled ? 'select__title--disabled' : ''}`}>{children}</h1> 
       <Select
         styles={styles}
-        value={selectedOptions.object ? selectedOptions?.[name] : null} 
+        value={selectedOptions ? selectedOptions?.[name] : null} 
         onChange={handleChange}
         className='select__menu'
         options={options} 
