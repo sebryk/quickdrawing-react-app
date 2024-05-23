@@ -101,7 +101,6 @@ const Form = () => {
       <Button
         className={`home-section__btn btn ${isFormValid ? '' : 'home-content__btn--disabled' }`}
         handleClick={() => navigate('/drawing')}
-        // onClick={handleFormSubmit}
       >
         Get Drawing
       </Button>
