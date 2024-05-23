@@ -8,7 +8,7 @@ import './ControlBar.css'
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { resetTime, toggleTimer} from '../../features/timer/timerSlice';
 import { setCompletionBar } from '../../features/completionBar/completionBarSlice';
-import { goToNextImage, goToPrevImage, resetImageSlider, setIsFinished } from '../../features/imageSlider/imageSliderSlice';
+import { goToNextImage, goToPrevImage, resetImageSlider, setIsFinished, setProgressIndex } from '../../features/imageSlider/imageSliderSlice';
 import { showModal } from '../../features/modal/modalSlice';
 import { DataContext } from '../../context/context';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
@@ -38,6 +38,7 @@ const ControlBar = () => {
       dispatch(setIsFinished(true))
       dispatch(showModal())
     } else if (completionBar.completedPercentOfTime === 100) {
+      dispatch(setProgressIndex())
       dispatch(goToNextImage())
     }
   }, [timer.seconds])
@@ -59,7 +60,7 @@ const ControlBar = () => {
           <ControlBarBtn
             className="control-panel__btn"
             handleClick={() => dispatch(goToPrevImage())}
-            disabled={imageSlider.currentIndex === 0 || !imageSlider.isFinished}
+            disabled={imageSlider.currentIndex === 0}
           >
             <FaAngleLeft
               className='control-panel__btn-icon control-panel__btn-icon--prev'
@@ -77,7 +78,7 @@ const ControlBar = () => {
           <ControlBarBtn
             className="control-panel__btn"
             handleClick={() => dispatch(goToNextImage())}
-            disabled={imageSlider.currentIndex === imgData.length - 1 || !imageSlider.isFinished}
+            disabled={imageSlider.currentIndex === imgData.length - 1 || !imageSlider.isFinished && imageSlider.currentIndex === imageSlider.progressIndex}
           >
             <FaAngleRight
               className='control-panel__btn-icon control-panel__btn-icon--next'

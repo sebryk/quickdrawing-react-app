@@ -7,6 +7,7 @@ export interface IImageSliderState{
   isMouseOver: boolean
   isMouseMoving: boolean
   currentIndex: number
+  progressIndex: number
   isLoading: boolean
   isFinished: boolean
 }
@@ -17,6 +18,7 @@ const initialState: IImageSliderState = {
   isMouseOver: false,
   isMouseMoving: true,
   currentIndex: 0,
+  progressIndex: 0,
   isLoading: true,
   isFinished: false
 }
@@ -43,6 +45,11 @@ const imageSliderSlice = createSlice({
     setIsFinished: (state, action: PayloadAction<boolean>) => {
       state.isFinished = action.payload
     },
+    setProgressIndex: state => {
+      if (state.currentIndex === state.progressIndex) {
+        state.progressIndex += 1;
+      }
+    },    
     goToNextImage: state => {
       state.isLoading = true,
       state.currentIndex = state.currentIndex + 1
@@ -80,6 +87,7 @@ export const {
   setIsLoading,
   setIsFinished,
   goToImage,
-  resetImageSlider
+  resetImageSlider,
+  setProgressIndex
 } = imageSliderSlice.actions
 export default imageSliderSlice.reducer

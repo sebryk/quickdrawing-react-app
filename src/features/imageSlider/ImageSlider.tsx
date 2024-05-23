@@ -146,7 +146,7 @@ const ImageSlider = () => {
                       className={`image-slider__preview-img 
                         ${isActive 
                         ? 'image-slider__preview-img--active'
-                        : imageIndex > imageSlider.currentIndex && !imageSlider.isFinished
+                        : imageIndex > imageSlider.progressIndex && !imageSlider.isFinished
                         ? 'image-slider__preview-img--hidden'
                         : ''}`}
                       style={{
@@ -155,12 +155,12 @@ const ImageSlider = () => {
                           ? `url(${loader})`  
                           : isActive 
                           ? `url(${image?.urls?.thumb})` 
-                          : imageIndex <= imageSlider.currentIndex || imageSlider.isFinished
+                          : imageIndex <= imageSlider.progressIndex || imageSlider.isFinished
                           ? `linear-gradient(0deg, rgba(127, 127, 127, 0.5) 0%, rgba(127, 127, 127, 0.5) 100%), url(${image.urls.thumb})`
                           : '',
-                        cursor: imageSlider.isFinished ? 'pointer' : ''
+                        cursor: imageIndex <= imageSlider.progressIndex || imageSlider.isFinished ? 'pointer' : ''
                       }}
-                      onClick={() => imageSlider.isFinished ? dispatch(goToImage(imageIndex)) : null}
+                      onClick={() => imageIndex <= imageSlider.progressIndex || imageSlider.isFinished ? dispatch(goToImage(imageIndex)) : null}
                     ></div>;
 
         })}

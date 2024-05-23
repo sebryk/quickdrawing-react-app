@@ -39,7 +39,7 @@ const Drawing = () => {
     if (!imageSlider.isMouseOver) { 
       timeoutId.current = setTimeout(() => {
         dispatch(mouseIsMoving(false))
-      }, 3000);
+      }, 2300);
     }
   }
   
