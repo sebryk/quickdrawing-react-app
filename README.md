@@ -1,6 +1,6 @@
 # Quickdrawing
 
-**Quickdrawing** is a prototype web application designed specifically for artists. Regardless of your skill level, whether you're a newbie or already proficient, this app allows users to create fast and dynamic sketches from a vast library of high-quality images sourced from an external API. Available only for tablets and desctops
+**Quickdrawing** is a prototype web application designed specifically for artists. Regardless of your skill level, whether you're a newbie or already proficient, this app allows users to create fast and dynamic sketches from a vast library of high-quality images sourced from an external API. Available only for tablets and desktops
 
 ## Features
 
