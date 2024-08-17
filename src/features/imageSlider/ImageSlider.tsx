@@ -141,7 +141,7 @@ const ImageSlider = () => {
         </div>
         {imgData?.map((image, imageIndex) => {
           const isActive = imageIndex === imageSlider.currentIndex
-            return  <div
+            return  <button
                       key={image.id}
                       className={`image-slider__preview-img 
                         ${isActive 
@@ -152,16 +152,18 @@ const ImageSlider = () => {
                       style={{
                         backgroundImage:
                           isActive && imageSlider.isLoading
-                          ? `url(${loader})`  
+                          ? `linear-gradient(0deg, rgba(241, 35, 84, 0.8) 0%, rgba(241, 35, 84, 0.8) 100%), url(${loader})`  
                           : isActive 
                           ? `url(${image?.urls?.thumb})` 
                           : imageIndex <= imageSlider.progressIndex || imageSlider.isFinished
                           ? `linear-gradient(0deg, rgba(127, 127, 127, 0.5) 0%, rgba(127, 127, 127, 0.5) 100%), url(${image.urls.thumb})`
                           : '',
-                        cursor: imageIndex <= imageSlider.progressIndex || imageSlider.isFinished ? 'pointer' : ''
+                        cursor: !isActive && imageIndex <= imageSlider.progressIndex || imageSlider.isFinished ? 'pointer' : ''
                       }}
                       onClick={() => imageIndex <= imageSlider.progressIndex || imageSlider.isFinished ? dispatch(goToImage(imageIndex)) : null}
-                    ></div>;
+                      disabled={isActive}
+                      aria-label='Preview buttons for each image'
+                    />
 
         })}
       </div>

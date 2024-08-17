@@ -10,6 +10,7 @@ import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { getRandomNumber } from "../../utils/getRandomNumber";
+import { Toaster, toast } from "sonner";
 
 
 const Drawing = () => {
@@ -29,6 +30,7 @@ const Drawing = () => {
   
   useEffect(() => {
     setRandomPageNumber(getRandomNumber(1))
+    setTimeout(() => toast.info('Press play button and start drawing'), 300)
   }, []);
 
   const handleMouseMove = () => {
@@ -64,13 +66,30 @@ const Drawing = () => {
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseMove}
         key={imageSlider.key}
-      >
+        >
       {modal.isOpen ? 
       <Modal
       /> : null}
       <DataContext.Provider value={{data, refetch }}>
         <ImageSlider /> 
       </DataContext.Provider>
+      <Toaster
+        position="top-center"
+        visibleToasts={1}
+        toastOptions={{
+          style: { 
+            background: 'rgba(25, 25, 25, 0.8)',
+            color: 'var(--red-color)',
+            border: 'none',
+            fontFamily: 'Montserrat',
+            textAlign: 'center',
+            width: 'unset',
+            top: '5px',
+            right: '40px'
+          },
+          className: 'my-toast',
+        }}
+      />
         </section>
     )
     :
@@ -79,7 +98,7 @@ const Drawing = () => {
       >
         <Skeleton 
           baseColor="#202020" 
-          highlightColor="#f12354" 
+          highlightColor="#F12354" 
           width='100%'
           height='100%'
           containerClassName="skeleton__animation"
