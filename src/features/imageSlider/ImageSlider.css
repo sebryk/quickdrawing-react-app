@@ -134,6 +134,7 @@
   background: linear-gradient(0deg, rgba(127, 127, 127, 0.5) 0%, rgba(127, 127, 127, 0.5) 100%);
   background-size: cover;
   background-position: center;
+  border: none;
 }
 
 .image-slider__preview-img--hidden {

@@ -11,9 +11,10 @@ import { useAppSelector } from "../../store/hooks";
 
 const options: IOptions = {
   object: [
-    { value: 'characters', label: 'Characters' },
-    { value: 'animals', label: 'Animals' },
+    { value: 'character', label: 'Character' },
+    { value: 'nature', label: 'Nature' },
     { value: 'creature', label: 'Creature' },
+    { value: 'animal', label: 'Animal' },
     { value: 'human', label: 'Human' },
   ],
   gender: [

@@ -20,7 +20,7 @@ const initialState: IImageSliderState = {
   currentIndex: 0,
   progressIndex: 0,
   isLoading: true,
-  isFinished: false
+  isFinished: true
 }
 
 const imageSliderSlice = createSlice({
