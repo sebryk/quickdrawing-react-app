@@ -11,6 +11,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { getRandomNumber } from "../../utils/getRandomNumber";
 import { Toaster, toast } from "sonner";
+import { LinearProgress } from "@mui/material";
 
 
 const Drawing = () => {
