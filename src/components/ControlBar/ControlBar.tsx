@@ -52,8 +52,6 @@ const ControlBar = () => {
       refetch();
    };
 
-   console.log(imageSlider?.isMouseMoving);
-
    return (
       <div
          className="image-slider__control-wrapper"
