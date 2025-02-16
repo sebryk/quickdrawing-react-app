@@ -15,6 +15,7 @@ import { PreviewSection } from './components/PreviewSection';
 import { PreviewDots } from './components/PreviewDots';
 import { PreviewImages } from './components/PreviewImages';
 import { Footer } from './components/Footer';
+import MessageBar from '../../components/MessageBar/MessageBar';
 
 const ImageSlider = () => {
    const imageSlider = useAppSelector((state) => state.imageSlider);

@@ -14,12 +14,12 @@ import MessageBar from '../../components/MessageBar/MessageBar';
 
 const Drawing = () => {
    const dispatch = useAppDispatch();
+   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
+   const [randomPageNumber, setRandomPageNumber] = useState(0);
+
    const { object, gender, clothing, count } = useAppSelector((state) => state.selectedOptions) || {};
    const { isMouseOver, key } = useAppSelector((state) => state.imageSlider);
    const { isOpen } = useAppSelector((state) => state.modal);
-
-   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
-   const [randomPageNumber, setRandomPageNumber] = useState(0);
 
    const isHuman = object?.value === 'human';
    const objectQuery = isHuman ? `${object.value} ${gender?.value} ${clothing?.value}`.trim() : object?.value;
@@ -43,10 +43,13 @@ const Drawing = () => {
 
    useEffect(() => {
       setRandomPageNumber(getRandomNumber(1));
-      const toastTimeoutId = setTimeout(() => toast.info('Press play button and start drawing'), 300);
+      const toastId = setTimeout(() => toast.info('Press play button and start drawing'), 300);
+
       return () => {
-         if (toastTimeoutId) clearTimeout(toastTimeoutId);
-         if (timeoutId.current) clearTimeout(timeoutId.current);
+         clearTimeout(toastId);
+         if (timeoutId.current) {
+            clearTimeout(timeoutId.current);
+         }
          handleMouseMove();
       };
    }, []);
@@ -58,7 +61,7 @@ const Drawing = () => {
       return <ErrorBoundary>Error: {error.status}</ErrorBoundary>;
    }
 
-   if (!data || isLoading) {
+   if (isLoading || !data) {
       return <LoadingBar />;
    }
 

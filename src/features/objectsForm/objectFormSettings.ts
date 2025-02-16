@@ -66,6 +66,7 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
          backgroundColor: '#E7E7E7',
       },
       border: 0,
+      cursor: 'pointer',
    }),
 };
 
