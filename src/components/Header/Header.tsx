@@ -1,14 +1,14 @@
-import { Link, NavLink } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
-import BurgerBtn from '../BurgerBtn/BurgerBtn';
-import './Header.css';
-import { Styles } from './types';
+import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import BurgerBtn from "../ui/buttons/burger-button/burger-button";
+import "./Header.css";
+import { Styles } from "./types";
 
 const Header = () => {
    const navigationItems = [
-      { route: '/', label: 'Home' },
-      { route: '/about', label: 'About' },
-      { route: '/contact', label: 'Contact' },
+      { route: "/", label: "Home" },
+      { route: "/about", label: "About" },
+      { route: "/contact", label: "Contact" },
    ];
 
    const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -19,27 +19,31 @@ const Header = () => {
    };
 
    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && event.target instanceof Node && !menuRef.current.contains(event.target)) {
+      if (
+         menuRef.current &&
+         event.target instanceof Node &&
+         !menuRef.current.contains(event.target)
+      ) {
          setIsBurgerMenuOpen(false);
       }
    };
 
    useEffect(() => {
       if (isBurgerMenuOpen) {
-         document.body.classList.add('scroll-lock');
+         document.body.classList.add("scroll-lock");
       } else {
-         document.body.classList.remove('scroll-lock');
+         document.body.classList.remove("scroll-lock");
       }
 
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
       return () => {
-         document.removeEventListener('click', handleClickOutside);
-         document.body.classList.remove('scroll-lock');
+         document.removeEventListener("click", handleClickOutside);
+         document.body.classList.remove("scroll-lock");
       };
    }, [isBurgerMenuOpen]);
 
    const activeStyles: Styles = {
-      color: '#f12354',
+      color: "#f12354",
    };
 
    return (
@@ -47,7 +51,7 @@ const Header = () => {
          <Link to="/" className="header__logo logo" onClick={() => setIsBurgerMenuOpen(false)}>
             QUICKDRAWING
          </Link>
-         <nav className={`header__nav nav ${isBurgerMenuOpen ? 'header__nav--show' : ''}`}>
+         <nav className={`header__nav nav ${isBurgerMenuOpen ? "header__nav--show" : ""}`}>
             {navigationItems.map((item, index) => (
                <NavLink
                   key={index}

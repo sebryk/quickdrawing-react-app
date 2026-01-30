@@ -7,11 +7,12 @@
    text-align: center;
    line-height: 158.47%;
 }
+
 .home-section__title {
    color: var(--white-color);
    text-align: center;
    font-size: 60px;
-   font-family: Roboto Slab;
+   font-family: 'Roboto Slab';
    font-style: normal;
    font-weight: 700;
    line-height: 60px;
@@ -33,8 +34,7 @@
    width: 100%;
    display: grid;
    grid-template-columns: 1fr 1fr;
-   column-gap: 70px;
-   row-gap: 40px;
+   gap: 40px 70px;
 }
 
 .home-section__btn {
