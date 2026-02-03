@@ -61,7 +61,7 @@ const ImageSlider = () => {
             isMouseMoving={imageSlider.isMouseMoving}
          />
 
-         <Loader />
+         {/* <Loader /> */}
 
          <img
             title="img"

@@ -1,0 +1,33 @@
+.tooltip {
+   position: relative;
+   display: inline-flex;
+   align-items: center;
+
+   &__content {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgb(255 255 255 / 30%);
+      background-color: rgb(25 25 25);
+      color: var(--white-color);
+      font-size: 12px;
+      line-height: 1.2;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+         opacity 0.2s ease,
+         visibility 0.2s ease;
+      z-index: 10;
+   }
+
+   &:hover .tooltip__content,
+   &:focus-within .tooltip__content {
+      opacity: 1;
+      visibility: visible;
+   }
+}
