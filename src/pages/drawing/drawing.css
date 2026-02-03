@@ -1,0 +1,24 @@
+.drawing-section {
+   width: 100%;
+   height: 100dvh;
+   overflow: hidden;
+}
+
+.skeleton__container {
+   width: 100%;
+   height: 100vh;
+   background-color: var(--black-color);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.skeleton__animation {
+   width: 200px;
+   height: 10px;
+   margin-bottom: 60px;
+}
+
+.skeleton__animation .react-loading-skeleton {
+   --pseudo-element-display: block;
+}
