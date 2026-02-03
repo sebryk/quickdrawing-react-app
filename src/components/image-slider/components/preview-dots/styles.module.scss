@@ -1,0 +1,33 @@
+.preview-dots {
+   position: absolute;
+   top: 160px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: flex;
+   justify-content: space-between;
+   gap: 10px;
+   opacity: 0;
+   transition: 0.3s ease;
+   &--raised {
+      top: -70px;
+   }
+
+   &--visible {
+      opacity: 1;
+   }
+
+   &__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--gray-color);
+
+      &--hidden {
+         background-color: var(--light-gray-color);
+      }
+
+      &--active {
+         background-color: var(--red-color);
+      }
+   }
+}

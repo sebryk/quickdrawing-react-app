@@ -1,7 +1,9 @@
-import { useAppDispatch } from '../../../store/hooks'
-import { goToImage } from '../imageSliderSlice'
+import cn from 'classnames'
+import { useAppDispatch } from '@/store/hooks'
+import { goToImage } from '../../../../store/slices/image-slider-slice'
 import loader from '@/assets/loader.svg'
-import { PreviewImagesProps } from '../types'
+import { PreviewImagesProps } from '../../types'
+import styles from './styles.module.scss'
 
 export const PreviewImages = ({
    imgData,
@@ -12,15 +14,12 @@ export const PreviewImages = ({
 }: PreviewImagesProps) => {
    const dispatch = useAppDispatch()
 
-   const getPreviewClassName = (isActive: boolean, imageIndex: number) => {
-      return `image-slider__preview-img ${
-         isActive
-            ? 'image-slider__preview-img--active'
-            : imageIndex > progressIndex && !isFinished
-              ? 'image-slider__preview-img--hidden'
-              : ''
-      }`.trim()
-   }
+   const getPreviewClassName = (isActive: boolean, imageIndex: number) =>
+      cn(styles['preview-images__image'], {
+         [styles['preview-images__image--active']]: isActive,
+         [styles['preview-images__image--hidden']]:
+            imageIndex > progressIndex && !isFinished && !isActive,
+      })
 
    const getBackgroundImage = (image: any, isActive: boolean, imageIndex: number) => {
       if (isActive && isLoading) {

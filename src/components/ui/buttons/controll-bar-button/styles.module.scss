@@ -1,0 +1,47 @@
+.control-bar-button {
+   width: 45px;
+   height: 45px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: 3px solid var(--light-gray-color);
+   border-radius: 50%;
+   background-color: transparent;
+   color: var(--light-gray-color);
+   cursor: pointer;
+   transition: color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+
+   &:not(:disabled):hover {
+      color: var(--red-color);
+      border-color: var(--red-color);
+   }
+
+   &--inactive {
+      opacity: 0.5;
+      cursor: unset;
+   }
+
+   &__icon {
+      width: 27px;
+      height: 27px;
+
+      &--play {
+         width: 18px;
+         height: 18px;
+         margin-left: 3px;
+      }
+
+      &--pause {
+         width: 22px;
+         height: 22px;
+      }
+
+      &--next {
+         margin-left: 2px;
+      }
+
+      &--prev {
+         margin-right: 2px;
+      }
+   }
+}

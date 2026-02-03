@@ -1,0 +1,134 @@
+.image-slider {
+   height: 100%;
+   position: relative;
+
+   &__close {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 5;
+
+      &--hidden {
+         right: -40px;
+      }
+   }
+
+   &__close-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding: 8px;
+      color: var(--white-color);
+   }
+
+   &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: rgb(0 0 0 / 80%);
+   }
+
+   &__loader {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 58px;
+      color: var(--red-color);
+      background-size: cover;
+      z-index: 1;
+
+      &-background {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         top: 0;
+         left: 0;
+         background:
+            linear-gradient(to bottom, rgb(10 10 10 / 80%), rgb(10 10 10 / 80%)),
+            url('../../assets/background-img.webp'), url('../../assets/background-img.jpg');
+         background-size: cover;
+         z-index: 1;
+      }
+
+      &-icon {
+         position: absolute;
+         animation: rotate 1s linear infinite;
+         top: calc(50% - 88px);
+         z-index: 2;
+      }
+   }
+
+   &__progress-bar {
+      width: 100%;
+      position: absolute;
+      top: -8px;
+      left: 0;
+      z-index: 0;
+   }
+
+   &__control-wrapper {
+      position: static;
+   }
+
+   &__btn-wrapper {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: -60px;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      z-index: 2;
+   }
+
+   &__btn {
+      width: 85px;
+      height: 85px;
+      font-size: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: none;
+      background-color: rgb(0 0 0 / 60%);
+      color: var(--light-gray-color);
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 1;
+      opacity: 0;
+
+      &-icon {
+         width: 27px;
+         height: 27px;
+
+         &--play {
+            width: 30px;
+            height: 30px;
+            margin-left: 3px;
+         }
+
+         &--pause {
+            width: 38px;
+            height: 38px;
+         }
+      }
+   }
+}
+
+@keyframes rotate {
+   100% {
+      transform: rotate(360deg);
+      opacity: 1;
+   }
+}

@@ -1,0 +1,14 @@
+.preview-section {
+   position: absolute;
+   bottom: 106px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: grid;
+   grid-auto-flow: column;
+   gap: 10px;
+   z-index: 2;
+   transition: 0.3s ease;
+   &--hidden {
+      bottom: -88px;
+   }
+}

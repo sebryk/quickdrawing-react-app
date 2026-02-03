@@ -1,0 +1,45 @@
+.control-bar {
+   position: static;
+
+   &--floating {
+      position: relative;
+   }
+
+   &__panel {
+      position: relative;
+   }
+
+   &__buttons {
+      display: flex;
+      gap: 10px;
+   }
+
+   &__timer {
+      position: absolute;
+      white-space: nowrap;
+      display: flex;
+      justify-content: space-between;
+      width: 98px;
+      align-items: center;
+      top: 50%;
+      right: -120px;
+      transform: translateY(-50%);
+      color: var(--light-gray-color);
+      font-family: Montserrat;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 22px;
+
+      &--docked {
+         top: -28px;
+         right: 20px;
+      }
+   }
+
+   @media (max-width: 945px) {
+      &__timer {
+         display: none;
+      }
+   }
+}
