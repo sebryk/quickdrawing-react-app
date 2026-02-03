@@ -1,9 +1,9 @@
 import cn from 'classnames'
 import { useEffect, useContext } from 'react'
 import ControllBarButton from '../ui/buttons/controll-bar-button'
-import Timer from '../../features/timer/Timer'
+import Timer from '../timer'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { toggleTimer } from '../../features/timer/timerSlice'
+import { toggleTimer } from '@/store/slices/timer-slice'
 import { setCompletionBar } from '../../features/completionBar/completionBarSlice'
 import {
    goToNextImage,
@@ -31,25 +31,33 @@ const ControlBar = () => {
    const { data: imgData, refetch } = imgDataContext
 
    useEffect(() => {
-      const percentOfTime = (
-         (timer.seconds / Number(selectedOptions.duration?.value)) *
-         100
-      ).toFixed(2)
-      if (selectedOptions.duration?.value) {
-         dispatch(setCompletionBar(Number(percentOfTime)))
-      }
-      if (
-         imageSlider.currentIndex === imgData?.length - 1 &&
-         completionBar.completedPercentOfTime === 100
-      ) {
+      const durationValue = Number(selectedOptions.duration?.value)
+      if (!durationValue) return
+
+      const percentOfTime = Number(((timer.seconds / durationValue) * 100).toFixed(2))
+      dispatch(setCompletionBar(percentOfTime))
+
+      const isTimerComplete = completionBar.completedPercentOfTime === 100
+      if (!isTimerComplete) return
+
+      const isLastImage = imageSlider.currentIndex === (imgData?.length ?? 0) - 1
+
+      if (isLastImage) {
          dispatch(toggleTimer())
          dispatch(setIsFinished(true))
          dispatch(showModal())
-      } else if (completionBar.completedPercentOfTime === 100) {
-         dispatch(setProgressIndex())
-         dispatch(goToNextImage())
+         return
       }
-   }, [timer.seconds])
+
+      dispatch(setProgressIndex())
+      dispatch(goToNextImage())
+   }, [
+      completionBar.completedPercentOfTime,
+      imageSlider.currentIndex,
+      imgData?.length,
+      selectedOptions.duration?.value,
+      timer.seconds,
+   ])
 
    const resetSession = () => {
       dispatch(resetImageSlider())

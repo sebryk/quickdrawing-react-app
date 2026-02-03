@@ -12,7 +12,7 @@ import {
 import { showModal } from '@/features/modal/modalSlice'
 import Loader from '../../components/Loader/Loader'
 import ControllBarButton from '../../components/ui/buttons/controll-bar-button'
-import { toggleTimer } from '@/features/timer/timerSlice'
+import { toggleTimer } from '@/store/slices/timer-slice'
 import { FaPlay } from 'react-icons/fa'
 import { useContext } from 'react'
 import { DataContext } from '../../context/context'

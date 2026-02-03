@@ -6,7 +6,7 @@ import {
    goToImage,
    resetImageSlider,
 } from '@/store/slices/image-slider-slice'
-import { resetTime } from '../timer/timerSlice'
+import { resetTime } from '@/store/slices/timer-slice'
 
 interface initialState {
    completedPercentOfTime: number
