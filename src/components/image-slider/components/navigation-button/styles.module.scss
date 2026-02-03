@@ -31,12 +31,27 @@
       }
    }
 
+   &--close {
+      width: auto;
+      height: auto;
+      top: 40px;
+      right: 40px;
+      opacity: 1;
+      background: transparent;
+      cursor: pointer;
+      z-index: 5;
+   }
+
    &--hidden-left {
       left: -120px;
    }
 
    &--hidden-right {
       right: -120px;
+   }
+
+   &--hidden-close {
+      right: -40px;
    }
 
    &--invisible {
@@ -51,5 +66,18 @@
       padding: 8px;
       color: var(--white-color);
       background-color: rgb(25 25 25);
+      transition: background-color 0.2s;
+
+      path {
+         transition: fill 0.2s;
+      }
+
+      &:hover {
+         background-color: rgb(35 35 35);
+
+         path {
+            fill: var(--red-color);
+         }
+      }
    }
 }

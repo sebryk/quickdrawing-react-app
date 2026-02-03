@@ -1,4 +1,3 @@
-import { RxCross2 } from 'react-icons/rx'
 import cn from 'classnames'
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
@@ -11,7 +10,7 @@ import {
 } from '../../store/slices/image-slider-slice'
 import { showModal } from '@/features/modal/modalSlice'
 import Loader from '../../components/Loader/Loader'
-import ControllBarButton from '../../components/ui/buttons/controll-bar-button'
+import ControllBarButton from '../control-bar/components/controll-bar-button'
 import { toggleTimer } from '@/store/slices/timer-slice'
 import { useContext } from 'react'
 import { DataContext } from '../../context/context'
@@ -53,20 +52,14 @@ const ImageSlider = () => {
             )}
          </div>
 
-         <button
-            className={cn(styles['image-slider__close'], {
-               [styles['image-slider__close--hidden']]: !imageSlider.isMouseMoving,
-            })}
+         <NavigationButton
+            variant="close"
             onClick={() => dispatch(showModal())}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
-            aria-label="Close image slider"
-         >
-            <RxCross2
-               style={{ backgroundColor: 'rgb(25, 25, 25)' }}
-               className={styles['image-slider__close-icon']}
-            />
-         </button>
+            isDisabled={false}
+            isMouseMoving={imageSlider.isMouseMoving}
+         />
 
          <Loader />
 
@@ -79,7 +72,7 @@ const ImageSlider = () => {
          />
 
          <NavigationButton
-            direction="left"
+            variant="left"
             onClick={() => dispatch(goToPrevImage())}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
@@ -88,7 +81,7 @@ const ImageSlider = () => {
             isMouseMoving={imageSlider.isMouseMoving}
          />
          <NavigationButton
-            direction="right"
+            variant="right"
             onClick={() => dispatch(goToNextImage())}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}

@@ -2,29 +2,6 @@
    height: 100%;
    position: relative;
 
-   &__close {
-      position: absolute;
-      top: 40px;
-      right: 40px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-      z-index: 5;
-
-      &--hidden {
-         right: -40px;
-      }
-   }
-
-   &__close-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      padding: 8px;
-      color: var(--white-color);
-   }
-
    &__img {
       width: 100%;
       height: 100%;

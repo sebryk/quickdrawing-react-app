@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { useEffect, useContext } from 'react'
-import ControllBarButton from '../ui/buttons/controll-bar-button'
+import ControllBarButton from './components/controll-bar-button'
 import Timer from '../timer'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleTimer } from '@/store/slices/timer-slice'
