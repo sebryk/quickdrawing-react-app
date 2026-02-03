@@ -13,7 +13,6 @@ import { showModal } from '@/features/modal/modalSlice'
 import Loader from '../../components/Loader/Loader'
 import ControllBarButton from '../../components/ui/buttons/controll-bar-button'
 import { toggleTimer } from '@/store/slices/timer-slice'
-import { FaPlay } from 'react-icons/fa'
 import { useContext } from 'react'
 import { DataContext } from '../../context/context'
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
@@ -42,21 +41,15 @@ const ImageSlider = () => {
    return (
       <div className={styles['image-slider']}>
          <div
-            className={styles['image-slider__btn-wrapper']}
+            className={styles['image-slider__button-wrapper']}
             onClick={() => dispatch(toggleTimer())}
          >
             {timer.isPaused && !imageSlider.isLoading && imageSlider.isMouseMoving && (
                <ControllBarButton
-                  className={styles['image-slider__btn']}
+                  className={styles['image-slider__button']}
                   isImageSliderFinished={imageSlider.isFinished}
-               >
-                  <FaPlay
-                     className={cn(
-                        styles['image-slider__btn-icon'],
-                        styles['image-slider__btn-icon--play'],
-                     )}
-                  />
-               </ControllBarButton>
+                  variant="play"
+               />
             )}
          </div>
 
