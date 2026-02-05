@@ -1,4 +1,3 @@
-import cn from 'classnames'
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import {
@@ -17,8 +16,8 @@ import { DataContext } from '../../context/context'
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
 import { NavigationButton } from './components/navigation-button'
 import { PreviewSection } from './components/preview-section'
-import { PreviewDots } from './components/preview-dots'
-import { PreviewImages } from './components/preview-images'
+import { PreviewDots } from './components/preview-section/components/preview-dots'
+import { PreviewImages } from './components/preview-section/components/preview-images'
 import { Footer } from './components/footer'
 
 const ImageSlider = () => {
@@ -38,7 +37,12 @@ const ImageSlider = () => {
    const handleMouseOut = () => dispatch(setMouseOut())
 
    return (
-      <div className={styles['image-slider']}>
+      <div
+         className={styles['image-slider']}
+         style={{
+            background: `url(${imgData?.[imageSlider.currentIndex]?.urls?.regular})`,
+         }}
+      >
          <div
             className={styles['image-slider__button-wrapper']}
             onClick={() => dispatch(toggleTimer())}

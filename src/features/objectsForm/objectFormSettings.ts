@@ -1,5 +1,5 @@
-import { GroupBase, StylesConfig } from 'react-select';
-import { IOption, IOptions } from './types';
+import { GroupBase, StylesConfig } from 'react-select'
+import { IOption, IOptions } from './types'
 
 export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
    control: (base, state) => ({
@@ -9,7 +9,7 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
       borderRadius: '20px',
       textAlign: 'left',
       paddingLeft: '5px',
-      fontFamily: 'Montserrat',
+      fontFamily: 'Montserrat, sans-serif',
       fontWeight: '600',
       backgroundColor: state.menuIsOpen ? '#E7E7E7' : state.isDisabled ? '#474747' : '#FFFFFF',
       border: 'none',
@@ -59,7 +59,7 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
       backgroundColor: state.isSelected ? '#FFFFFF' : '',
       textAlign: 'left',
       paddingLeft: '10px',
-      fontFamily: 'Montserrat',
+      fontFamily: 'Montserrat , sans-serif',
       fontWeight: '600',
       paddingBlock: '10px',
       ':hover': {
@@ -68,7 +68,7 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
       border: 0,
       cursor: 'pointer',
    }),
-};
+}
 
 export const options: IOptions = {
    object: [
@@ -106,4 +106,4 @@ export const options: IOptions = {
       { value: 240, label: '4 min' },
       { value: 300, label: '5 min' },
    ],
-};
+}

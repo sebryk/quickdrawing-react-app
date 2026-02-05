@@ -1,8 +1,8 @@
 import cn from 'classnames'
 import { useAppDispatch } from '@/store/hooks'
-import { goToImage } from '../../../../store/slices/image-slider-slice'
+import { goToImage } from '@/store/slices/image-slider-slice'
 import loader from '@/assets/loader.svg'
-import { PreviewImagesProps } from '../../types'
+import { PreviewImagesProps } from '../../../../types'
 import styles from './styles.module.scss'
 
 export const PreviewImages = ({
@@ -22,9 +22,9 @@ export const PreviewImages = ({
       })
 
    const getBackgroundImage = (image: any, isActive: boolean, imageIndex: number) => {
-      if (isActive && isLoading) {
-         return `linear-gradient(0deg, rgba(241, 35, 84, 0.8) 0%, rgba(241, 35, 84, 0.8) 100%), url(${loader})`
-      }
+      // if (isActive && isLoading) {
+      //    return `linear-gradient(0deg, rgba(241, 35, 84, 0.8) 0%, rgba(241, 35, 84, 0.8) 100%), url(${loader})`
+      // }
       if (isActive) {
          return `url(${image.urls.thumb})`
       }
@@ -52,7 +52,6 @@ export const PreviewImages = ({
                   }}
                   onClick={() => isInteractive && dispatch(goToImage(imageIndex))}
                   disabled={isActive}
-                  aria-label="Preview buttons for each image"
                />
             )
          })}

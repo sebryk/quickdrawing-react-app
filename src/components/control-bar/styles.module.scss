@@ -24,8 +24,8 @@
       top: 50%;
       right: -120px;
       transform: translateY(-50%);
-      color: var(--light-gray-color);
-      font-family: Montserrat;
+      color: var(--white-color);
+      font-family: Montserrat, sans-serif;
       font-size: 16px;
       font-style: normal;
       font-weight: 700;
@@ -37,7 +37,7 @@
       }
    }
 
-   @media (max-width: 945px) {
+   @media (width <= 945px) {
       &__timer {
          display: none;
       }

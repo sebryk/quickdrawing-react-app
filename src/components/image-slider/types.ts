@@ -5,7 +5,7 @@ export interface PreviewImagesProps {
    currentIndex: number
    progressIndex: number
    isFinished: boolean
-   isLoading: boolean
+   isLoading?: boolean
 }
 
 export interface PreviewDotsProps {

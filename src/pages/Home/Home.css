@@ -12,7 +12,7 @@
    color: var(--white-color);
    text-align: center;
    font-size: 60px;
-   font-family: 'Roboto Slab';
+   font-family: Montserrat, sans-serif;
    font-style: normal;
    font-weight: 700;
    line-height: 60px;
@@ -22,7 +22,7 @@
 .home-section__text {
    color: var(--red-color);
    font-size: 18px;
-   font-family: Montserrat;
+   font-family: Montserrat, sans-serif;
    font-style: normal;
    font-weight: 300;
    line-height: 158.47%;
