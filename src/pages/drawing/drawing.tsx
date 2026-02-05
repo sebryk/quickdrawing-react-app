@@ -3,13 +3,13 @@ import Modal from '../../features/modal/Modal'
 import { useRef, useEffect, useState } from 'react'
 import { mouseIsMoving } from '@/store/slices/image-slider-slice'
 import ImageSlider from '@/components/image-slider'
-import './Drawing.css'
 import { useGetImagesByTypeQuery } from '../../services/imagesApi'
 import { DataContext } from '../../context/context'
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
-import LoadingBar from '../../components/LoadingBar/LoadingBar'
+import LoadingBar from '../../components/loading-bar/loading-bar'
 import { getRandomNumber } from '../../utils/getRandomNumber'
 import MessageBar from '../../components/MessageBar/MessageBar'
+import styles from './styles.module.scss'
 
 const Drawing = () => {
    const dispatch = useAppDispatch()
@@ -67,7 +67,7 @@ const Drawing = () => {
 
    return (
       <section
-         className="drawing-section"
+         className={styles['drawing-section']}
          onMouseMove={handleMouseMove}
          onMouseDown={handleMouseMove}
          key={key}

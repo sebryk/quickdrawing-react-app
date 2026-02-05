@@ -11,11 +11,11 @@
 .home-section__title {
    color: var(--white-color);
    text-align: center;
-   font-size: 60px;
+   font-size: 50px;
    font-family: Montserrat, sans-serif;
    font-style: normal;
-   font-weight: 700;
-   line-height: 60px;
+   font-weight: 600;
+   line-height: 1;
    margin-bottom: 15px;
 }
 
@@ -24,8 +24,8 @@
    font-size: 18px;
    font-family: Montserrat, sans-serif;
    font-style: normal;
-   font-weight: 300;
-   line-height: 158.47%;
+   font-weight: 400;
+   line-height: 1.5;
    margin-bottom: 29px;
 }
 

@@ -1,9 +1,10 @@
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import styles from './styles.module.scss'
 
 const LoadingBar = () => {
    return (
-      <div className="skeleton__container">
+      <div className={styles['skeleton']}>
          <Skeleton
             baseColor="#202020"
             highlightColor="#f12354"
@@ -12,7 +13,7 @@ const LoadingBar = () => {
             containerClassName="skeleton__animation"
          />
       </div>
-   );
-};
+   )
+}
 
-export default LoadingBar;
+export default LoadingBar
