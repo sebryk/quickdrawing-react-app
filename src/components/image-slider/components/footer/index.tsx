@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useAppDispatch } from '@/store/hooks'
 import { showModal } from '@/features/modal/modalSlice'
-import CompletionBar from '@/features/completionBar/CompletionBar'
+import CompletionBar from '@/components/image-slider/components/footer/components/completion-bar'
 import ControlBar from '@/components/control-bar'
 import Tooltip from '@/components/ui/tooltip'
 import { truncateText } from '@/utils/truncateText'

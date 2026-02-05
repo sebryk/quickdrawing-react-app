@@ -21,11 +21,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: var(--white-color);
-
-      // &--hidden {
-      //    background-color: var(--light-gray-color);
-      // }
+      background: rgb(154 159 165);
 
       &--active {
          background-color: var(--red-color);

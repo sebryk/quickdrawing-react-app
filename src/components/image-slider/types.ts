@@ -27,7 +27,7 @@ export interface NavigationButtonProps {
    onClick: () => void
    onMouseOver: () => void
    onMouseOut: () => void
-   isDisabled: boolean
+   isDisabled?: boolean
    isVisible?: boolean
    isMouseMoving: boolean
 }

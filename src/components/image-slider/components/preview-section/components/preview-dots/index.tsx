@@ -1,15 +1,13 @@
 import cn from 'classnames'
-import { PreviewDotsProps } from '../../types'
+import { PreviewDotsProps } from '../../../../types'
 import styles from './styles.module.scss'
 
 export const PreviewDots = ({ imgData, currentIndex, isMouseMoving }: PreviewDotsProps) => {
    const getDotsClassName = (dotIndex: number) => {
       const isActive = dotIndex === currentIndex
-      // const isHidden = dotIndex > currentIndex
 
       return cn(styles['preview-dots__dot'], {
          [styles['preview-dots__dot--active']]: isActive,
-         // [styles['preview-dots__dot--hidden']]: isHidden && !isActive,
       })
    }
 

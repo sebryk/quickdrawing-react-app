@@ -50,10 +50,12 @@ const imageSliderSlice = createSlice({
          }
       },
       goToNextImage: (state) => {
-         ;((state.isLoading = true), (state.currentIndex = state.currentIndex + 1))
+         state.isLoading = true
+         state.currentIndex = state.currentIndex + 1
       },
       goToPrevImage: (state) => {
-         ;((state.isLoading = true), (state.currentIndex = state.currentIndex - 1))
+         state.isLoading = true
+         state.currentIndex = state.currentIndex - 1
       },
       goToImage: (state, action: PayloadAction<number>) => {
          state.isLoading = true

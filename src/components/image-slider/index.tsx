@@ -8,7 +8,6 @@ import {
    setMouseOver,
 } from '../../store/slices/image-slider-slice'
 import { showModal } from '@/features/modal/modalSlice'
-import Loader from '../../components/Loader/Loader'
 import ControllBarButton from '../control-bar/components/controll-bar-button'
 import { toggleTimer } from '@/store/slices/timer-slice'
 import { useContext } from 'react'
@@ -37,17 +36,12 @@ const ImageSlider = () => {
    const handleMouseOut = () => dispatch(setMouseOut())
 
    return (
-      <div
-         className={styles['image-slider']}
-         style={{
-            background: `url(${imgData?.[imageSlider.currentIndex]?.urls?.regular})`,
-         }}
-      >
+      <div className={styles['image-slider']}>
          <div
             className={styles['image-slider__button-wrapper']}
             onClick={() => dispatch(toggleTimer())}
          >
-            {timer.isPaused && !imageSlider.isLoading && imageSlider.isMouseMoving && (
+            {timer.isPaused && imageSlider.isMouseMoving && (
                <ControllBarButton
                   className={styles['image-slider__button']}
                   isImageSliderFinished={imageSlider.isFinished}
@@ -61,11 +55,8 @@ const ImageSlider = () => {
             onClick={() => dispatch(showModal())}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
-            isDisabled={false}
             isMouseMoving={imageSlider.isMouseMoving}
          />
-
-         {/* <Loader /> */}
 
          <img
             title="img"

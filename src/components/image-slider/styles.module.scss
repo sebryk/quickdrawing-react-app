@@ -1,3 +1,5 @@
+@use '@/styles/mixins';
+
 .image-slider {
    height: 100%;
    position: relative;
@@ -6,9 +8,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-
-      // background-color: rgb(0 0 0 / 80%);
-      // backdrop-filter: blur(20px);
    }
 
    &__loader {
@@ -41,17 +40,9 @@
       &-icon {
          position: absolute;
          animation: rotate 1s linear infinite;
-         top: calc(50% - 88px);
+         top: calc(50% - 94px);
          z-index: 2;
       }
-   }
-
-   &__progress-bar {
-      width: 100%;
-      position: absolute;
-      top: -8px;
-      left: 0;
-      z-index: 0;
    }
 
    &__control-wrapper {
@@ -75,9 +66,14 @@
    & .image-slider__button {
       width: 85px;
       height: 85px;
-      background: rgb(49 49 49 / 60%);
-      backdrop-filter: blur(16px);
       border: none;
+      transition: 0.2s;
+
+      @include mixins.glass-background;
+
+      &:hover {
+         transform: scale(1.05);
+      }
 
       svg {
          width: 27px;
@@ -93,24 +89,7 @@
       background-color: rgb(0 0 0 / 60%);
       color: var(--light-gray-color);
       cursor: pointer;
-      transition: 0.2s;
       z-index: 1;
-
-      &-icon {
-         width: 27px;
-         height: 27px;
-
-         &--play {
-            width: 30px;
-            height: 30px;
-            margin-left: 3px;
-         }
-
-         &--pause {
-            width: 38px;
-            height: 38px;
-         }
-      }
    }
 }
 

@@ -4,7 +4,7 @@ import ControllBarButton from './components/controll-bar-button'
 import Timer from '../timer'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleTimer } from '@/store/slices/timer-slice'
-import { setCompletionBar } from '../../features/completionBar/completionBarSlice'
+import { setCompletionBar } from '../../store/slices/completion-bar-slice/completion-bar-slice'
 import {
    goToNextImage,
    goToPrevImage,

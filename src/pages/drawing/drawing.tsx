@@ -39,7 +39,7 @@ const Drawing = () => {
       if (!isMouseOver) {
          timeoutId.current = setTimeout(() => {
             dispatch(mouseIsMoving(false))
-         }, 2300)
+         }, 3000)
       }
    }
 

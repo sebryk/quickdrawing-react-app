@@ -1,0 +1,4 @@
+@mixin glass-background($color: rgb(49 49 49 / 60%), $blur: 4px) {
+   background: $color;
+   backdrop-filter: blur($blur);
+}

@@ -16,7 +16,7 @@ export const NavigationButton = ({
    onClick,
    onMouseOver,
    onMouseOut,
-   isDisabled,
+   isDisabled = false,
    isVisible = true,
    isMouseMoving,
 }: NavigationButtonProps) => {
