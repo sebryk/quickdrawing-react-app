@@ -2,7 +2,7 @@ import { persistor } from '../../store/store'
 import { useEffect } from 'react'
 import './About.css'
 import { useAppDispatch } from '../../store/hooks'
-import { resetSelectedOptions } from '../../components/objects-form/objectsFormSlice'
+import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
 
 const About = () => {
    const dispatch = useAppDispatch()

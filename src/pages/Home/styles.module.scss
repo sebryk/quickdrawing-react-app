@@ -1,3 +1,5 @@
+@use '@/styles/mixins';
+
 .home {
    max-width: 840px;
    display: flex;
@@ -5,7 +7,7 @@
    justify-content: center;
    align-items: center;
    text-align: center;
-   line-height: 158.47%;
+   line-height: 1.5;
 
    &__title {
       color: var(--white-color);
@@ -18,7 +20,7 @@
       margin-bottom: 15px;
    }
 
-   &__text {
+   &__description {
       color: var(--red-color);
       font-size: 18px;
       font-family: Montserrat, sans-serif;
@@ -26,13 +28,19 @@
       font-weight: 400;
       line-height: 1.5;
       margin-bottom: 29px;
+      max-width: 520px;
    }
 
-   &__inputs {
-      max-width: 710px;
+   &__objects-form {
+      max-width: 520px;
+      border-radius: 24px;
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px 70px;
+      gap: 24px;
+      padding: 30px;
+      border: 1px solid #e6e6e62d;
+
+      @include mixins.glass-background(rgba(206, 206, 206, 0.1));
    }
 }

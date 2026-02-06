@@ -3,7 +3,7 @@ import ContactForm from '../../features/contactForm/ContactForm'
 import { persistor } from '../../store/store'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { resetSelectedOptions } from '../../components/objects-form/objectsFormSlice'
+import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
 
 const Contact = () => {
    const dispatch = useAppDispatch()

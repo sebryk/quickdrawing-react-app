@@ -3,6 +3,7 @@ import useBurgerMenu from '@/hooks/useBurgerMenu'
 import BurgerBtn from '../ui/buttons/burger-button/burger-button'
 import { activeStyles, data, navigationItems } from './data'
 import styles from './styles.module.scss'
+import cn from 'classnames'
 
 const Header = () => {
    const { logo } = data
@@ -14,7 +15,9 @@ const Header = () => {
             {logo}
          </Link>
          <nav
-            className={`${styles.header__nav} ${styles.nav} ${isBurgerMenuOpen ? styles['header__nav--show'] : ''}`}
+            className={cn(styles.header__nav, styles.nav, {
+               [styles['header__nav--show']]: isBurgerMenuOpen,
+            })}
          >
             {navigationItems.map((item, index) => (
                <NavLink

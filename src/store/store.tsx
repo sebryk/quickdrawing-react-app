@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import objectsFormReducer from '../components/objects-form/objectsFormSlice'
+import objectsFormReducer from './slices/objects-form-slice'
 import contactFormReducer from '../features/contactForm/contactFormSlice'
 import modalReducer from '../features/modal/modalSlice'
 import timerReducer from './slices/timer-slice'

@@ -10,3 +10,16 @@ export interface IOption {
 export interface ISelectedOptions {
    [name: string]: IOption | null
 }
+
+export interface ObjectsFormSelectProps {
+   options: { value: string | number; label: string }[]
+   placeholder: string
+   isDisabled?: boolean
+   isVisible?: boolean
+   name: string
+   children: string
+}
+
+export interface ObjectsFormProps {
+   className?: string
+}

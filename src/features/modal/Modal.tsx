@@ -4,7 +4,7 @@ import './Modal.css'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { closeModal } from './modalSlice'
 import { useRef, useEffect } from 'react'
-import { resetSelectedOptions } from '../../components/objects-form/objectsFormSlice'
+import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
 import { setMouseOver } from '@/store/slices/image-slider-slice'
 
 const Modal = () => {

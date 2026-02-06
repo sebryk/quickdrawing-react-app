@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import Form from '../../components/objects-form'
+import ObjectsForm from '../../components/objects-form'
 import { useAppDispatch } from '@/store/hooks'
-import { resetSelectedOptions } from '../../components/objects-form/objectsFormSlice'
+import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
 import { persistor } from '../../store/store'
 import { data } from './data'
 import styles from './styles.module.scss'
@@ -17,10 +17,10 @@ const Home = () => {
    }, [])
 
    return (
-      <section className={styles['main']}>
-         <h1 className={styles['main__title']}>{title}</h1>
-         <p className={styles['main__description']}>{description}</p>
-         <Form className={styles['main__form']} />
+      <section className={styles['home']}>
+         <h1 className={styles['home__title']}>{title}</h1>
+         <p className={styles['home__description']}>{description}</p>
+         <ObjectsForm className={styles['home__objects-form']} />
       </section>
    )
 }

@@ -4,21 +4,25 @@ import { IOption, IOptions } from './types'
 export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
    control: (base, state) => ({
       ...base,
-      width: '200px',
+      width: '100%',
       height: '40px',
       borderRadius: '20px',
       textAlign: 'left',
       paddingLeft: '5px',
       fontFamily: 'Montserrat, sans-serif',
-      fontWeight: '600',
-      backgroundColor: state.menuIsOpen ? '#E7E7E7' : state.isDisabled ? '#474747' : '#FFFFFF',
+      fontWeight: '500',
+      backgroundColor: state.menuIsOpen
+         ? 'var(--light-gray-color)'
+         : state.isDisabled
+           ? 'var(--dark-gray-color)'
+           : 'var(--white-color)',
       border: 'none',
       boxShadow: 'none',
       cursor: 'pointer',
-      color: state.isDisabled ? '#191919' : '#7F7F7F',
+      color: state.isDisabled ? 'var(--black-color)' : 'var(--gray-color)',
       transition: '0.3s',
       ':hover': {
-         backgroundColor: '#E7E7E7',
+         backgroundColor: 'var(--light-gray-color)',
       },
    }),
    menu: (base) => ({
@@ -28,12 +32,12 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
    }),
    placeholder: (base, state) => ({
       ...base,
-      color: state.isDisabled ? '#191919' : '#7F7F7F',
+      color: state.isDisabled ? 'var(--black-color)' : 'var(--gray-color)',
       opacity: state.isDisabled ? '0.5' : '1',
    }),
    dropdownIndicator: (base, state) => ({
       ...base,
-      color: state.isDisabled ? '#191919' : '#7F7F7F',
+      color: state.isDisabled ? 'var(--black-color)' : 'var(--gray-color)',
       opacity: state.isDisabled ? '0.5' : '1',
       ':hover': {
          backgroundColor: 'none',
@@ -51,19 +55,19 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
    }),
    singleValue: (base) => ({
       ...base,
-      color: '#7F7F7F',
+      color: 'var(--red-color)',
    }),
    option: (base, state) => ({
       ...base,
-      color: state.isSelected ? '#F12354' : '#7F7F7F',
-      backgroundColor: state.isSelected ? '#FFFFFF' : '',
+      color: state.isSelected ? 'var(--red-color)' : 'var(--gray-color)',
+      backgroundColor: state.isSelected ? 'var(--white-color)' : '',
       textAlign: 'left',
       paddingLeft: '10px',
       fontFamily: 'Montserrat , sans-serif',
-      fontWeight: '600',
+      fontWeight: '500',
       paddingBlock: '10px',
       ':hover': {
-         backgroundColor: '#E7E7E7',
+         backgroundColor: 'var(--light-gray-color)',
       },
       border: 0,
       cursor: 'pointer',
