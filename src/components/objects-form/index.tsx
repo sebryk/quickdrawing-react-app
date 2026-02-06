@@ -30,6 +30,7 @@ const ObjectsForm = ({ className }: ObjectsFormProps) => {
                   options={options[option.name]}
                   name={option.name}
                   isVisible={isHumanSpecific ? isHuman : true}
+                  isClearable={true}
                >
                   {option.name}
                </ObjectsFormSelect>

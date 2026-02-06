@@ -16,6 +16,7 @@ export interface ObjectsFormSelectProps {
    placeholder: string
    isDisabled?: boolean
    isVisible?: boolean
+   isClearable?: boolean
    name: string
    children: string
 }

@@ -35,14 +35,44 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
       color: state.isDisabled ? 'var(--black-color)' : 'var(--gray-color)',
       opacity: state.isDisabled ? '0.5' : '1',
    }),
-   dropdownIndicator: (base, state) => ({
-      ...base,
-      color: state.isDisabled ? 'var(--black-color)' : 'var(--gray-color)',
-      opacity: state.isDisabled ? '0.5' : '1',
-      ':hover': {
-         backgroundColor: 'none',
-      },
-   }),
+   dropdownIndicator: (base, state) => {
+      const hasValue = Boolean(state.selectProps.value)
+      const isOpen = state.selectProps.menuIsOpen
+      return {
+         ...base,
+         display: !isOpen && hasValue ? 'none' : 'flex',
+         transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+         transition: 'transform 0.2s',
+         color: !hasValue ? 'var(--gray-color)' : 'var(--red-color)',
+         opacity: state.isDisabled ? '0.5' : '1',
+         ':hover': {
+            backgroundColor: 'none',
+         },
+      }
+   },
+   clearIndicator: (base, state) => {
+      const isOpen = state.selectProps.menuIsOpen
+
+      return {
+         ...base,
+         display: isOpen ? 'none' : 'flex',
+         position: 'relative',
+         right: '13px',
+         border: '1px solid var(--red-color)',
+         borderRadius: '50%',
+         padding: '0',
+         width: '18px',
+         height: '18px',
+         alignItems: 'center',
+         color: 'var(--red-color)',
+
+         ':hover': {
+            backgroundColor: 'var(--red-color)',
+            color: 'var(--white-color)',
+            'border-color': 'transparent',
+         },
+      }
+   },
    menuList: (base) => ({
       ...base,
       borderRadius: '20px',

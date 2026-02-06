@@ -10,16 +10,15 @@ const ObjectsFormSelect = ({
    placeholder,
    isDisabled,
    isVisible,
+   isClearable,
    name,
 }: ObjectsFormSelectProps) => {
    const selectedOptions = useAppSelector((state) => state.selectedOptions)
    const dispatch = useAppDispatch()
 
    const handleChange = (option: IOption | null) => {
-      if (option) {
-         const selectedOption: ISelectedOptions = { [name]: option }
-         dispatch(selectOption(selectedOption))
-      }
+      const selectedOption: ISelectedOptions = { [name]: option }
+      dispatch(selectOption(selectedOption))
    }
 
    if (!isVisible) return null
@@ -35,6 +34,7 @@ const ObjectsFormSelect = ({
             isSearchable={false}
             placeholder={placeholder}
             isDisabled={isDisabled}
+            isClearable={isClearable}
          />
       </div>
    )

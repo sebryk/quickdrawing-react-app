@@ -2,11 +2,11 @@ export const data = {
    selectOption: [
       {
          name: 'object',
-         placeholder: 'Select object',
+         placeholder: 'Select object type',
       },
       {
          name: 'count',
-         placeholder: 'Select count',
+         placeholder: 'Select image count',
       },
       {
          name: 'duration',
