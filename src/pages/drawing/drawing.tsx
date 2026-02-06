@@ -5,7 +5,7 @@ import { mouseIsMoving } from '@/store/slices/image-slider-slice'
 import ImageSlider from '@/components/image-slider'
 import { useGetImagesByTypeQuery } from '../../services/imagesApi'
 import { DataContext } from '../../context/context'
-import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
+import Error from '../../components/error/Error'
 import LoadingBar from '../../components/loading-bar/loading-bar'
 import { getRandomNumber } from '../../utils/getRandomNumber'
 import MessageBar from '../../components/MessageBar/MessageBar'
@@ -55,10 +55,10 @@ const Drawing = () => {
    }, [])
 
    if (!object) {
-      return <ErrorBoundary>Error: Options are not selected</ErrorBoundary>
+      return <Error>Error: Options are not selected</Error>
    }
    if (error && 'status' in error) {
-      return <ErrorBoundary>Error: {error.status}</ErrorBoundary>
+      return <Error>Error: {error.status}</Error>
    }
 
    if (isLoading || !data) {

@@ -12,7 +12,7 @@ import ControllBarButton from '../control-bar/components/controll-bar-button'
 import { toggleTimer } from '@/store/slices/timer-slice'
 import { useContext } from 'react'
 import { DataContext } from '../../context/context'
-import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
+import Error from '../error/Error'
 import { NavigationButton } from './components/navigation-button'
 import { PreviewSection } from './components/preview-section'
 import { PreviewDots } from './components/preview-section/components/preview-dots'
@@ -26,7 +26,7 @@ const ImageSlider = () => {
    const imgDataContext = useContext(DataContext)
 
    if (!imgDataContext) {
-      return <ErrorBoundary>Error: The context data is unavailable</ErrorBoundary>
+      return <Error>Error: The context data is unavailable</Error>
    }
 
    const { data: imgData } = imgDataContext

@@ -14,7 +14,7 @@ import {
 } from '@/store/slices/image-slider-slice'
 import { showModal } from '../../features/modal/modalSlice'
 import { DataContext } from '../../context/context'
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
+import Error from '../error/Error'
 import styles from './styles.module.scss'
 
 const ControlBar = () => {
@@ -26,7 +26,7 @@ const ControlBar = () => {
    const dispatch = useAppDispatch()
 
    if (!imgDataContext) {
-      return <ErrorBoundary>Error: The context data is unavailable</ErrorBoundary>
+      return <Error>Error: The context data is unavailable</Error>
    }
    const { data: imgData, refetch } = imgDataContext
 

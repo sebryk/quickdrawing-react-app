@@ -1,12 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import ObjectsFormSelect from './ObjectsFormSelect'
-import Button from '../../components/ui/buttons/main-button'
+import Button from '../ui/buttons/main-button'
 import './ObjectsForm.css'
 import { useAppSelector } from '../../store/hooks'
-import { options } from './objectFormSettings'
+import { options } from './settings'
 import { BiChevronRight } from 'react-icons/bi'
 
-const Form = () => {
+type FormProps = {
+   className?: string
+}
+
+const Form = ({ className }: FormProps) => {
    const selectedOptions = useAppSelector((state) => state.selectedOptions)
 
    const navigate = useNavigate()
@@ -19,7 +23,7 @@ const Form = () => {
    const isFormValid = isHuman ? hasBasicOptions && hasHumanSpecificOptions : hasBasicOptions
 
    return (
-      <div className="home-section__inputs">
+      <div className={className}>
          <ObjectsFormSelect placeholder="Select object" options={options.object} name="object">
             Object
          </ObjectsFormSelect>

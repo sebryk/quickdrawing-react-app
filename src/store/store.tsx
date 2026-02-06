@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import objectsFormReducer from '../features/objectsForm/objectsFormSlice'
+import objectsFormReducer from '../components/objects-form/objectsFormSlice'
 import contactFormReducer from '../features/contactForm/contactFormSlice'
 import modalReducer from '../features/modal/modalSlice'
 import timerReducer from './slices/timer-slice'
@@ -8,7 +8,7 @@ import imageSliderReducer, { ImageSliderState } from './slices/image-slider-slic
 import { persistStore, persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
 import { imagesApi } from '../services/imagesApi'
-import { ISelectedOptions } from '../features/objectsForm/types'
+import { ISelectedOptions } from '../components/objects-form/types'
 
 const objectsPersistConfig = {
    key: 'options',
