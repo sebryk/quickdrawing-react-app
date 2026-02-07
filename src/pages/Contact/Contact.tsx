@@ -1,12 +1,14 @@
-import './Contact.css'
-import ContactForm from '../../features/contactForm/ContactForm'
-import { persistor } from '../../store/store'
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { persistor } from '../../store/store'
+import { useAppDispatch } from '../../store/hooks'
 import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
+import ContactForm from '@/features/contact-form/contact-form'
+import { data } from './data'
+import styles from './styles.module.scss'
 
 const Contact = () => {
    const dispatch = useAppDispatch()
+   const { title, description } = data
 
    useEffect(() => {
       dispatch(resetSelectedOptions())
@@ -14,12 +16,9 @@ const Contact = () => {
    }, [])
 
    return (
-      <section className="contact-section">
-         <h1 className="contact-section__title">Contact us</h1>
-         <p className="contact-section__text">
-            Got a guestion? We’d love to hear from you. Send us a message and we’ll respond as soon
-            as possible.
-         </p>
+      <section className={styles['contact']}>
+         <h1 className={styles['contact__title']}>{title}</h1>
+         <p className={styles['contact__text']}>{description}</p>
          <ContactForm />
       </section>
    )
