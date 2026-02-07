@@ -28,7 +28,10 @@ const Home = () => {
                <VscChevronRight className={styles['home__description-icon']} />
             </Link>
          </span>
-         <ObjectsForm />
+         <div className={styles['home__content']}>
+            <ObjectsForm />
+            <img src="/src/assets/images/player.jpg" alt="home" className={styles['home__image']} />
+         </div>
       </section>
    )
 }

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import Modal from '../../features/modal/Modal'
+import Modal from '../../features/modal/modal'
 import { useRef, useEffect, useState } from 'react'
 import { mouseIsMoving } from '@/store/slices/image-slider-slice'
 import ImageSlider from '@/components/image-slider'

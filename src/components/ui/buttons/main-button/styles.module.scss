@@ -1,5 +1,6 @@
 .main-button {
    width: 100%;
+   min-width: 200px;
    height: 40px;
    border-radius: 20px;
    background-color: var(--red-color);
@@ -37,5 +38,32 @@
       transition: transform 0.2s;
       width: 24px;
       height: 24px;
+   }
+}
+
+.close {
+   width: 40px;
+   min-width: 40px;
+   height: 40px;
+   padding: 0;
+   border-radius: 50%;
+   background-color: transparent;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+
+   &:hover {
+      background-color: transparent;
+   }
+
+   svg {
+      width: 28px;
+      height: 28px;
+      color: var(--white-color);
+      transition: 0.2s;
+   }
+
+   &:hover svg {
+      color: var(--red-color);
    }
 }

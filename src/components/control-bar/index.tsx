@@ -12,7 +12,7 @@ import {
    setIsFinished,
    setProgressIndex,
 } from '@/store/slices/image-slider-slice'
-import { showModal } from '../../features/modal/modalSlice'
+import { showModal } from '@/store/slices/modal-slice'
 import { DataContext } from '../../context/context'
 import Error from '../error/Error'
 import styles from './styles.module.scss'

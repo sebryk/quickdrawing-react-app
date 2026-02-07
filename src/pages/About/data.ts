@@ -1,5 +1,5 @@
 export const data = {
-   title: 'About app',
+   title: 'How it works',
    description:
       'This application is designed to help artists practice drawing in a focused and structured way. You choose an image theme, set the number of reference images, and define the time interval for each drawing session. The app then displays images one by one, encouraging you to draw quickly and consistently from visual references. This approach helps improve observation skills, speed, and visual memory. The project is intended for daily practice, warm-ups, and skill development, whether you are a beginner or an experienced artist.',
    // copyright: {

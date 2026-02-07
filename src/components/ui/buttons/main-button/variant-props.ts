@@ -12,5 +12,8 @@ const VARIANT_PROPS: Record<Variant, VariantProps> = {
       icon: BiChevronRight,
       iconPosition: 'right',
    },
+   close: {
+      className: styles.close,
+   },
 }
 export default VARIANT_PROPS

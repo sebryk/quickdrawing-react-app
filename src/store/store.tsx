@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import objectsFormReducer from './slices/objects-form-slice'
 import contactFormReducer from '../features/contactForm/contactFormSlice'
-import modalReducer from '../features/modal/modalSlice'
+import modalReducer from './slices/modal-slice'
 import timerReducer from './slices/timer-slice'
 import completionBarReducer from './slices/completion-bar-slice/completion-bar-slice'
 import imageSliderReducer, { ImageSliderState } from './slices/image-slider-slice'

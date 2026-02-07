@@ -7,7 +7,7 @@ import {
    setMouseOut,
    setMouseOver,
 } from '../../store/slices/image-slider-slice'
-import { showModal } from '@/features/modal/modalSlice'
+import { showModal } from '@/store/slices/modal-slice'
 import ControllBarButton from '../control-bar/components/controll-bar-button'
 import { toggleTimer } from '@/store/slices/timer-slice'
 import { useContext } from 'react'

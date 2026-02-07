@@ -1,8 +1,9 @@
 import { IconType } from 'react-icons/lib'
+import { ReactNode } from 'react'
 
 type Type = 'submit' | 'reset' | 'button'
 
-export type Variant = 'primary' | 'primary-with-arrow'
+export type Variant = 'primary' | 'primary-with-arrow' | 'close'
 
 export interface VariantProps {
    className: string
@@ -11,7 +12,7 @@ export interface VariantProps {
 }
 
 export interface MainButtonProps {
-   children?: string
+   children?: ReactNode
    variant?: Variant
    type?: Type
    onClick?: () => void
@@ -19,4 +20,5 @@ export interface MainButtonProps {
    icon?: IconType
    iconPosition?: 'left' | 'right'
    className?: string
+   ariaLabel?: string
 }

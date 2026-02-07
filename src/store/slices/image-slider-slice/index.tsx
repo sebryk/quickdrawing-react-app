@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { resetSelectedOptions } from '../objects-form-slice'
-import { closeModal } from '../../../features/modal/modalSlice'
+import { closeModal } from '../modal-slice'
 
 export interface ImageSliderState {
    key: number

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { showModal } from '@/features/modal/modalSlice'
+import { showModal } from '@/store/slices/modal-slice'
 import { resetSelectedOptions } from '@/store/slices/objects-form-slice'
 import {
    goToImage,

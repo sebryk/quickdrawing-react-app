@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom'
-import { RxCross2 } from 'react-icons/rx'
-import './Modal.css'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { closeModal } from './modalSlice'
+import { closeModal } from '../../store/slices/modal-slice'
 import { useRef, useEffect } from 'react'
 import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
 import { setMouseOver } from '@/store/slices/image-slider-slice'
+import { data } from './data'
+import styles from './styles.module.scss'
+import MainButton from '@/components/ui/buttons/main-button'
+import { RxCross2 } from 'react-icons/rx'
 
 const Modal = () => {
    const dispatch = useAppDispatch()
@@ -13,11 +15,12 @@ const Modal = () => {
    const completionBar = useAppSelector((state) => state.completionBar)
    const modalRef = useRef<HTMLDivElement>(null)
    const navigate = useNavigate()
+   const { titles, buttons } = data
 
    const clearLocalStorage = () => {
       dispatch(closeModal())
-      dispatch(resetSelectedOptions())
       navigate('/')
+      dispatch(resetSelectedOptions())
    }
 
    useEffect(() => {
@@ -35,34 +38,30 @@ const Modal = () => {
    }, [])
 
    return (
-      <div className="modal__overlay" onMouseOver={() => dispatch(setMouseOver())}>
-         <div className="modal__container" ref={modalRef}>
-            <button
+      <div className={styles['modal']} onMouseOver={() => dispatch(setMouseOver())}>
+         <div className={styles['modal__container']} ref={modalRef}>
+            <MainButton
                onClick={() => dispatch(closeModal())}
                type="button"
-               className="modal__close"
-               aria-label="Close modal window"
-            >
-               <RxCross2 className="modal__close-icon" />
-            </button>
-            <h3 className="modal__title">
-               {imageSlider.isFinished && completionBar.completedPercentOfTime === 100 ? (
-                  <span>
-                     {' '}
-                     The session is finished.
-                     <br /> Do you want to start a new session?{' '}
-                  </span>
-               ) : (
-                  `Do you want to finish this session?`
-               )}
-            </h3>
-            <div className="modal__buttons-wrap">
-               <button onClick={() => dispatch(closeModal())} className="modal__btn">
-                  No
-               </button>
-               <button className="modal__link" onClick={clearLocalStorage}>
-                  Yes
-               </button>
+               variant="close"
+               icon={RxCross2}
+               className={styles['modal__close']}
+            />
+            <p className={styles['modal__title']}>
+               {imageSlider.isFinished && completionBar.completedPercentOfTime === 100
+                  ? titles[0]
+                  : titles[1]}
+            </p>
+            <div className={styles['modal__buttons-wrap']}>
+               {buttons.map((button, index) => (
+                  <MainButton
+                     key={button.title}
+                     variant="primary"
+                     onClick={index === 0 ? () => dispatch(closeModal()) : clearLocalStorage}
+                  >
+                     {button.title}
+                  </MainButton>
+               ))}
             </div>
          </div>
       </div>

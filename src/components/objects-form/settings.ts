@@ -57,7 +57,7 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
          ...base,
          display: isOpen ? 'none' : 'flex',
          position: 'relative',
-         right: '13px',
+         right: '10px',
          border: '1px solid var(--red-color)',
          borderRadius: '50%',
          padding: '0',
