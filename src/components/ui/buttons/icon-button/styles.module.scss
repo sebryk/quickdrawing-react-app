@@ -1,0 +1,30 @@
+.icon-button {
+   padding: 0;
+   border: none;
+   cursor: pointer;
+   background-color: transparent;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.close {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+
+   &:hover {
+      background-color: transparent;
+   }
+
+   svg {
+      width: 28px;
+      height: 28px;
+      color: var(--white-color);
+      transition: 0.2s;
+   }
+
+   &:hover svg {
+      color: var(--red-color);
+   }
+}

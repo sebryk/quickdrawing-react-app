@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import Modal from '../../features/modal/modal'
+import Modal from '../../components/image-slider/components/modal'
 import { useRef, useEffect, useState } from 'react'
 import { mouseIsMoving } from '@/store/slices/image-slider-slice'
 import ImageSlider from '@/components/image-slider'
@@ -57,6 +57,7 @@ const Drawing = () => {
    if (!object) {
       return <Error>Error: Options are not selected</Error>
    }
+
    if (error && 'status' in error) {
       return <Error>Error: {error.status}</Error>
    }
