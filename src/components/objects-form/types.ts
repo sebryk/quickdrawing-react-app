@@ -20,7 +20,3 @@ export interface ObjectsFormSelectProps {
    name: string
    children: string
 }
-
-export interface ObjectsFormProps {
-   className?: string
-}

@@ -28,7 +28,7 @@ const Home = () => {
                <VscChevronRight className={styles['home__description-icon']} />
             </Link>
          </span>
-         <ObjectsForm className={styles['home__objects-form']} />
+         <ObjectsForm />
       </section>
    )
 }

@@ -16,3 +16,17 @@
    max-width: 1380px;
    padding-inline: 40px;
 }
+
+@mixin title {
+   font-size: 50px;
+   font-family: Montserrat, sans-serif;
+   font-weight: 600;
+   line-height: 1;
+}
+
+@mixin subtitle {
+   font-size: 40px;
+   font-family: Montserrat, sans-serif;
+   font-weight: 600;
+   line-height: 1;
+}

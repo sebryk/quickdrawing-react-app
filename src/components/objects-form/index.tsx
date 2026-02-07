@@ -3,10 +3,11 @@ import ObjectsFormSelect from './components/select'
 import Button from '../ui/buttons/main-button'
 import { useAppSelector } from '../../store/hooks'
 import { options } from './settings'
-import { ObjectsFormProps } from './types'
 import { data } from './data'
+import styles from './styles.module.scss'
+import cn from 'classnames'
 
-const ObjectsForm = ({ className }: ObjectsFormProps) => {
+const ObjectsForm = () => {
    const selectedOptions = useAppSelector((state) => state.selectedOptions)
 
    const navigate = useNavigate()
@@ -20,7 +21,7 @@ const ObjectsForm = ({ className }: ObjectsFormProps) => {
    const isFormValid = isHuman ? hasBasicOptions && hasHumanSpecificOptions : hasBasicOptions
 
    return (
-      <div className={className}>
+      <div className={cn(styles['objects-form'], { [styles['objects-form--human']]: isHuman })}>
          {selectOption.map((option) => {
             const isHumanSpecific = option.name === 'gender' || option.name === 'clothing'
             return (
