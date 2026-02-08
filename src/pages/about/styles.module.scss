@@ -21,6 +21,17 @@
       font-weight: 200;
       line-height: 158.47%;
       margin-bottom: 30px;
+
+      a {
+         color: var(--red-color);
+         font-weight: 500;
+         text-decoration: none;
+         transition: color 0.2s;
+
+         &:hover {
+            color: var(--dark-red-color);
+         }
+      }
    }
 
    &__copyright-title {

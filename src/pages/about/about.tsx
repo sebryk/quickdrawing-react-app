@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../store/hooks'
 import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
 import { persistor } from '../../store/store'
@@ -18,6 +19,9 @@ const About = () => {
          <article className={styles['about__article']}>
             <h1 className={styles['about__article-title']}>{data.title}</h1>
             <p className={styles['about__article-text']}>{data.description}</p>
+            <p className={styles['about__article-text']}>
+               See our <Link to="/policy">Privacy Policy</Link>
+            </p>
          </article>
       </section>
    )
