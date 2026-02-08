@@ -7,6 +7,7 @@ import { data } from './data'
 import styles from './styles.module.scss'
 import { Link } from 'react-router-dom'
 import { VscChevronRight } from 'react-icons/vsc'
+import PlayerImage from '@/assets/images/player.jpg'
 
 const Home = () => {
    const dispatch = useAppDispatch()
@@ -30,7 +31,7 @@ const Home = () => {
          </span>
          <div className={styles['home__content']}>
             <ObjectsForm />
-            <img src="/src/assets/images/player.jpg" alt="home" className={styles['home__image']} />
+            <img src={PlayerImage} alt="home" className={styles['home__image']} />
          </div>
       </section>
    )
