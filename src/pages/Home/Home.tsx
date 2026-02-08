@@ -1,30 +1,39 @@
-import { useEffect } from 'react';
-import './Home.css'
-import Form from "../../features/objectsForm/ObjectsForm";
-import { useAppDispatch } from "../../store/hooks";
-import { resetSelectedOptions } from "../../features/objectsForm/objectsFormSlice";
-import { persistor } from '../../store/store';
+import { useEffect } from 'react'
+import ObjectsForm from '../../components/objects-form'
+import { useAppDispatch } from '@/store/hooks'
+import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
+import { persistor } from '../../store/store'
+import { data } from './data'
+import styles from './styles.module.scss'
+import { Link } from 'react-router-dom'
+import { VscChevronRight } from 'react-icons/vsc'
 
 const Home = () => {
-  const dispatch = useAppDispatch()
+   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(resetSelectedOptions())
-    persistor.purge()
-  }, []);
+   const { title, description, link } = data
 
-  return (
-    <section className="home-section">
-        <h1 className="home-section__title">
-          What do you want to draw?
-        </h1>
-        <p className="home-section__text">
-        Select different objects, count of images and duration of time interval between drawings. 
-        </p>
-    <Form/>
+   useEffect(() => {
+      dispatch(resetSelectedOptions())
+      persistor.purge()
+   }, [])
 
-    </section>
-  );
+   return (
+      <section className={styles['home']}>
+         <h1 className={styles['home__title']}>{title}</h1>
+         <span className={styles['home__description']}>
+            <p className={styles['home__description-text']}>{description}</p>
+            <Link to={link.url} className={styles['home__description-link']}>
+               {link.title}
+               <VscChevronRight className={styles['home__description-icon']} />
+            </Link>
+         </span>
+         <div className={styles['home__content']}>
+            <ObjectsForm />
+            <img src="/src/assets/images/player.jpg" alt="home" className={styles['home__image']} />
+         </div>
+      </section>
+   )
 }
 
-export default Home;
+export default Home

@@ -5,5 +5,6 @@ module.exports = {
    rules: {
       'declaration-block-no-duplicate-properties': true,
       'rule-empty-line-before': ['always-multi-line', { except: ['first-nested'] }],
+      'selector-class-pattern': null,
    },
 }

@@ -12,6 +12,7 @@ const MainButton = ({
    icon,
    iconPosition = 'right',
    className,
+   ariaLabel,
 }: MainButtonProps) => {
    const variantProps = VARIANT_PROPS[variant]
    const Icon = icon ?? variantProps.icon
@@ -23,6 +24,7 @@ const MainButton = ({
          type={type}
          onClick={onClick}
          disabled={disabled}
+         aria-label={ariaLabel}
       >
          {Icon && resolvedPosition === 'left' && <Icon />}
          {children}

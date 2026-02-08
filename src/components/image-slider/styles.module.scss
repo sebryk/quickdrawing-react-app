@@ -1,35 +1,13 @@
+@use '@/styles/mixins';
+
 .image-slider {
    height: 100%;
    position: relative;
 
-   &__close {
-      position: absolute;
-      top: 40px;
-      right: 40px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-      z-index: 5;
-
-      &--hidden {
-         right: -40px;
-      }
-   }
-
-   &__close-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      padding: 8px;
-      color: var(--white-color);
-   }
-
    &__img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      background-color: rgb(0 0 0 / 80%);
+      object-fit: cover;
    }
 
    &__loader {
@@ -62,24 +40,16 @@
       &-icon {
          position: absolute;
          animation: rotate 1s linear infinite;
-         top: calc(50% - 88px);
+         top: calc(50% - 94px);
          z-index: 2;
       }
-   }
-
-   &__progress-bar {
-      width: 100%;
-      position: absolute;
-      top: -8px;
-      left: 0;
-      z-index: 0;
    }
 
    &__control-wrapper {
       position: static;
    }
 
-   &__btn-wrapper {
+   &__button-wrapper {
       width: 100%;
       height: 100%;
       position: absolute;
@@ -90,39 +60,36 @@
       align-items: center;
       background-color: transparent;
       z-index: 2;
+      cursor: pointer;
    }
 
-   &__btn {
+   & .image-slider__button {
       width: 85px;
       height: 85px;
-      font-size: 150px;
+      border: none;
+      transition: 0.2s;
+
+      @include mixins.glass-background;
+
+      &:hover {
+         transform: scale(1.05);
+      }
+
+      svg {
+         width: 27px;
+         height: 27px;
+      }
+   }
+
+   &__button {
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      border: none;
       background-color: rgb(0 0 0 / 60%);
       color: var(--light-gray-color);
       cursor: pointer;
-      transition: 0.3s;
       z-index: 1;
-      opacity: 0;
-
-      &-icon {
-         width: 27px;
-         height: 27px;
-
-         &--play {
-            width: 30px;
-            height: 30px;
-            margin-left: 3px;
-         }
-
-         &--pause {
-            width: 38px;
-            height: 38px;
-         }
-      }
    }
 }
 

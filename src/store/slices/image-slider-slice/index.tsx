@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { resetSelectedOptions } from '../../../features/objectsForm/objectsFormSlice'
-import { closeModal } from '../../../features/modal/modalSlice'
+import { resetSelectedOptions } from '../objects-form-slice'
+import { closeModal } from '../modal-slice'
 
 export interface ImageSliderState {
    key: number
@@ -50,10 +50,12 @@ const imageSliderSlice = createSlice({
          }
       },
       goToNextImage: (state) => {
-         ;((state.isLoading = true), (state.currentIndex = state.currentIndex + 1))
+         state.isLoading = true
+         state.currentIndex = state.currentIndex + 1
       },
       goToPrevImage: (state) => {
-         ;((state.isLoading = true), (state.currentIndex = state.currentIndex - 1))
+         state.isLoading = true
+         state.currentIndex = state.currentIndex - 1
       },
       goToImage: (state, action: PayloadAction<number>) => {
          state.isLoading = true

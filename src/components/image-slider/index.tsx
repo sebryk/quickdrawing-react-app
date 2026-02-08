@@ -1,5 +1,3 @@
-import { RxCross2 } from 'react-icons/rx'
-import cn from 'classnames'
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import {
@@ -9,18 +7,16 @@ import {
    setMouseOut,
    setMouseOver,
 } from '../../store/slices/image-slider-slice'
-import { showModal } from '@/features/modal/modalSlice'
-import Loader from '../../components/Loader/Loader'
-import ControllBarButton from '../../components/ui/buttons/controll-bar-button'
-import { toggleTimer } from '@/features/timer/timerSlice'
-import { FaPlay } from 'react-icons/fa'
+import { showModal } from '@/store/slices/modal-slice'
+import ControllBarButton from '../control-bar/components/controll-bar-button'
+import { toggleTimer } from '@/store/slices/timer-slice'
 import { useContext } from 'react'
 import { DataContext } from '../../context/context'
-import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
+import Error from '../error/Error'
 import { NavigationButton } from './components/navigation-button'
 import { PreviewSection } from './components/preview-section'
-import { PreviewDots } from './components/preview-dots'
-import { PreviewImages } from './components/preview-images'
+import { PreviewDots } from './components/preview-section/components/preview-dots'
+import { PreviewImages } from './components/preview-section/components/preview-images'
 import { Footer } from './components/footer'
 
 const ImageSlider = () => {
@@ -30,7 +26,7 @@ const ImageSlider = () => {
    const imgDataContext = useContext(DataContext)
 
    if (!imgDataContext) {
-      return <ErrorBoundary>Error: The context data is unavailable</ErrorBoundary>
+      return <Error>Error: The context data is unavailable</Error>
    }
 
    const { data: imgData } = imgDataContext
@@ -42,40 +38,25 @@ const ImageSlider = () => {
    return (
       <div className={styles['image-slider']}>
          <div
-            className={styles['image-slider__btn-wrapper']}
+            className={styles['image-slider__button-wrapper']}
             onClick={() => dispatch(toggleTimer())}
          >
-            {timer.isPaused && !imageSlider.isLoading && imageSlider.isMouseMoving && (
+            {timer.isPaused && imageSlider.isMouseMoving && (
                <ControllBarButton
-                  className={styles['image-slider__btn']}
+                  className={styles['image-slider__button']}
                   isImageSliderFinished={imageSlider.isFinished}
-               >
-                  <FaPlay
-                     className={cn(
-                        styles['image-slider__btn-icon'],
-                        styles['image-slider__btn-icon--play'],
-                     )}
-                  />
-               </ControllBarButton>
+                  variant="play"
+               />
             )}
          </div>
 
-         <button
-            className={cn(styles['image-slider__close'], {
-               [styles['image-slider__close--hidden']]: !imageSlider.isMouseMoving,
-            })}
+         <NavigationButton
+            variant="close"
             onClick={() => dispatch(showModal())}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
-            aria-label="Close image slider"
-         >
-            <RxCross2
-               style={{ backgroundColor: 'rgb(25, 25, 25)' }}
-               className={styles['image-slider__close-icon']}
-            />
-         </button>
-
-         <Loader />
+            isMouseMoving={imageSlider.isMouseMoving}
+         />
 
          <img
             title="img"
@@ -86,7 +67,7 @@ const ImageSlider = () => {
          />
 
          <NavigationButton
-            direction="left"
+            variant="left"
             onClick={() => dispatch(goToPrevImage())}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
@@ -95,7 +76,7 @@ const ImageSlider = () => {
             isMouseMoving={imageSlider.isMouseMoving}
          />
          <NavigationButton
-            direction="right"
+            variant="right"
             onClick={() => dispatch(goToNextImage())}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}

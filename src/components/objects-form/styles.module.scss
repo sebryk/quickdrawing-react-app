@@ -1,0 +1,42 @@
+@use '@/styles/mixins';
+
+.objects-form {
+   max-width: 300px;
+   min-width: 291px;
+   align-self: flex-start;
+   border-radius: 24px;
+   width: 100%;
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: 24px;
+   padding: 30px;
+   border: 1px solid #e6e6e62d;
+
+   @include mixins.glass-background(rgba(206, 206, 206, 0.1));
+
+   // &--human {
+   //    > :nth-child(1) {
+   //       order: 1;
+   //    }
+
+   //    > :nth-child(2) {
+   //       order: 3;
+   //    }
+
+   //    > :nth-child(3) {
+   //       order: 5;
+   //    }
+
+   //    > :nth-child(4) {
+   //       order: 4;
+   //    }
+
+   //    > :nth-child(5) {
+   //       order: 2;
+   //    }
+
+   //    > :nth-child(6) {
+   //       order: 6;
+   //    }
+   // }
+}

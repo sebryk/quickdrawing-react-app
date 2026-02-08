@@ -1,14 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import objectsFormReducer from '../features/objectsForm/objectsFormSlice'
-import contactFormReducer from '../features/contactForm/contactFormSlice'
-import modalReducer from '../features/modal/modalSlice'
-import timerReducer from '../features/timer/timerSlice'
-import completionBarReducer from '../features/completionBar/completionBarSlice'
+import objectsFormReducer from './slices/objects-form-slice'
+import modalReducer from './slices/modal-slice'
+import timerReducer from './slices/timer-slice'
+import completionBarReducer from './slices/completion-bar-slice/completion-bar-slice'
 import imageSliderReducer, { ImageSliderState } from './slices/image-slider-slice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
 import { imagesApi } from '../services/imagesApi'
-import { ISelectedOptions } from '../features/objectsForm/types'
+import { ISelectedOptions } from '../components/objects-form/types'
 
 const objectsPersistConfig = {
    key: 'options',
@@ -24,7 +23,6 @@ const imageSliderPersistConfig = {
 export const store = configureStore({
    reducer: {
       selectedOptions: persistReducer<ISelectedOptions>(objectsPersistConfig, objectsFormReducer),
-      contactFormData: contactFormReducer,
       modal: modalReducer,
       timer: timerReducer,
       completionBar: completionBarReducer,

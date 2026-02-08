@@ -1,15 +1,15 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import Modal from '../../features/modal/Modal'
+import Modal from '../../components/image-slider/components/modal'
 import { useRef, useEffect, useState } from 'react'
 import { mouseIsMoving } from '@/store/slices/image-slider-slice'
 import ImageSlider from '@/components/image-slider'
-import './Drawing.css'
 import { useGetImagesByTypeQuery } from '../../services/imagesApi'
 import { DataContext } from '../../context/context'
-import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
-import LoadingBar from '../../components/LoadingBar/LoadingBar'
+import Error from '../../components/error/Error'
+import LoadingBar from '../../components/loading-bar/loading-bar'
 import { getRandomNumber } from '../../utils/getRandomNumber'
 import MessageBar from '../../components/MessageBar/MessageBar'
+import styles from './styles.module.scss'
 
 const Drawing = () => {
    const dispatch = useAppDispatch()
@@ -39,7 +39,7 @@ const Drawing = () => {
       if (!isMouseOver) {
          timeoutId.current = setTimeout(() => {
             dispatch(mouseIsMoving(false))
-         }, 2300)
+         }, 3000)
       }
    }
 
@@ -55,10 +55,11 @@ const Drawing = () => {
    }, [])
 
    if (!object) {
-      return <ErrorBoundary>Error: Options are not selected</ErrorBoundary>
+      return <Error>Error: Options are not selected</Error>
    }
+
    if (error && 'status' in error) {
-      return <ErrorBoundary>Error: {error.status}</ErrorBoundary>
+      return <Error>Error: {error.status}</Error>
    }
 
    if (isLoading || !data) {
@@ -67,7 +68,7 @@ const Drawing = () => {
 
    return (
       <section
-         className="drawing-section"
+         className={styles['drawing-section']}
          onMouseMove={handleMouseMove}
          onMouseDown={handleMouseMove}
          key={key}

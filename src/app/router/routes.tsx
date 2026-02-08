@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 
-import Layout from '@/components/Layout/Layout'
-import Home from '@/pages/Home/Home'
-import About from '@/pages/About/About'
-import Contact from '@/pages/Contact/Contact'
+import Layout from '@/components/layout/index'
+import Home from '@/pages/home/home'
+import About from '@/pages/about/about'
+import Contact from '@/pages/contact/contact'
 import Drawing from '@/pages/drawing/drawing'
-import NotFound from '@/pages/NotFound/NotFound'
+import NotFound from '@/pages/not-found/not-found'
 
 export default function AppRoutes() {
    return (
