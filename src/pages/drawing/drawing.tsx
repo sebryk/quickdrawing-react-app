@@ -3,12 +3,11 @@ import Modal from '../../components/image-slider/components/modal'
 import { useRef, useEffect, useState } from 'react'
 import { mouseIsMoving } from '@/store/slices/image-slider-slice'
 import ImageSlider from '@/components/image-slider'
-import { useGetImagesByTypeQuery } from '../../services/imagesApi'
+import { useGetImagesByTypeQuery } from '../../api/imagesApi'
 import { DataContext } from '../../context/context'
 import Error from '../../components/error/Error'
 import LoadingBar from '../../components/loading-bar/loading-bar'
 import { getRandomNumber } from '../../utils/getRandomNumber'
-import MessageBar from '../../components/MessageBar/MessageBar'
 import styles from './styles.module.scss'
 
 const Drawing = () => {
@@ -77,7 +76,6 @@ const Drawing = () => {
          <DataContext.Provider value={{ data, refetch }}>
             <ImageSlider />
          </DataContext.Provider>
-         <MessageBar />
       </section>
    )
 }

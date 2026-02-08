@@ -1,5 +1,5 @@
-import { createContext } from 'react';
-import { IImage } from '../services/types';
+import { createContext } from 'react'
+import { IImage } from '../api/types'
 import {
    QueryActionCreatorResult,
    QueryDefinition,
@@ -7,10 +7,10 @@ import {
    FetchArgs,
    FetchBaseQueryError,
    FetchBaseQueryMeta,
-} from '@reduxjs/toolkit/query';
+} from '@reduxjs/toolkit/query'
 
 export interface IDataContext {
-   data: IImage[];
+   data: IImage[]
    refetch: () => QueryActionCreatorResult<
       QueryDefinition<
          Record<string, string | number>,
@@ -19,7 +19,7 @@ export interface IDataContext {
          IImage[],
          'imagesApi'
       >
-   >;
+   >
 }
 
-export const DataContext = createContext<IDataContext | null>(null);
+export const DataContext = createContext<IDataContext | null>(null)

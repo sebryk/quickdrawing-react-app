@@ -1,4 +1,4 @@
-import { IImage } from '../../services/types'
+import { IImage } from '../../api/types'
 
 export interface PreviewImagesProps {
    imgData: IImage[]

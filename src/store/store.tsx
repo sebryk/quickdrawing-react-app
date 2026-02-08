@@ -6,7 +6,7 @@ import completionBarReducer from './slices/completion-bar-slice/completion-bar-s
 import imageSliderReducer, { ImageSliderState } from './slices/image-slider-slice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
-import { imagesApi } from '../services/imagesApi'
+import { imagesApi } from '../api/imagesApi'
 import { ISelectedOptions } from '../components/objects-form/types'
 
 const objectsPersistConfig = {

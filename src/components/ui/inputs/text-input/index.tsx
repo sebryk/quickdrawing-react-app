@@ -1,6 +1,13 @@
 import { InputProps } from './types'
 
-const Input = ({ className, name, placeholder, type, inputProps, textareaProps }: InputProps) => {
+const TextInput = ({
+   className,
+   name,
+   placeholder,
+   type,
+   inputProps,
+   textareaProps,
+}: InputProps) => {
    return name === 'message' ? (
       <textarea className={className} name={name} placeholder={placeholder} {...textareaProps} />
    ) : (
@@ -14,4 +21,4 @@ const Input = ({ className, name, placeholder, type, inputProps, textareaProps }
    )
 }
 
-export default Input
+export default TextInput

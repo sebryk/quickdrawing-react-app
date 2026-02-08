@@ -25,6 +25,7 @@
    border-radius: 20px;
    text-align: center;
    padding: 10px;
+   border: 1px solid #e6e6e62d;
 
    @include mixins.glass-background;
 }

@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import Button from '@/components/ui/buttons/main-button'
-import Input from '@/components/ui/inputs/input'
+import TextInput from '@/components/ui/inputs/text-input'
 import { useContactForm } from '@/hooks/useContactForm'
 import { data } from './data'
 import styles from './styles.module.scss'
@@ -14,7 +14,7 @@ const ContactForm = () => {
          {fields.map(({ name, type, placeholder, props }) => {
             const isTextArea = name === 'message'
             return (
-               <Input
+               <TextInput
                   key={name}
                   className={cn({
                      [styles['contact-form__input']]: !isTextArea,
