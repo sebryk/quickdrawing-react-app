@@ -58,7 +58,7 @@ const timerSlice = createSlice({
             state.isPaused = !state.isPaused
          }
       })
-      builder.addCase(resetSelectedOptions, (state) => (state = initialState))
+      builder.addCase(resetSelectedOptions, () => initialState)
       builder.addCase(goToNextImage, reset)
       builder.addCase(goToPrevImage, reset)
       builder.addCase(goToImage, reset)
