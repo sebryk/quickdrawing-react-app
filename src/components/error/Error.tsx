@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Error.module.scss'
+import styles from './styles.module.scss'
 import { data } from './data'
 
 interface ErrorProps {

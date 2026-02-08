@@ -14,7 +14,7 @@ import {
 } from '@/store/slices/image-slider-slice'
 import { showModal } from '@/store/slices/modal-slice'
 import { DataContext } from '../../context/context'
-import Error from '../error/Error'
+import Error from '../error/error'
 import styles from './styles.module.scss'
 
 const ControlBar = () => {
