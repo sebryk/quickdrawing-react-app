@@ -18,8 +18,8 @@ export interface ContactFormField {
 
 export interface ContactFormData {
    fields: ContactFormField[]
-   submit: {
-      label: string
+   button: {
+      title: string
    }
    success: string
 }

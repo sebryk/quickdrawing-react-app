@@ -20,11 +20,11 @@
       font-weight: 500;
       line-height: normal;
       text-transform: uppercase;
-   }
 
-   &__nav--show {
-      right: 0;
-      transform: translateX(0);
+      &.header__nav--show {
+         right: 0;
+         transform: translateX(0);
+      }
    }
 }
 

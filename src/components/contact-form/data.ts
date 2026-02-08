@@ -25,8 +25,8 @@ export const data: ContactFormData = {
          props: { required: true },
       },
    ],
-   submit: {
-      label: 'Send',
+   button: {
+      title: 'Send',
    },
    success: 'Thank you for your message. We will connect with you very soon!',
 }

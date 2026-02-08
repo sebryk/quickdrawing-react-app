@@ -7,7 +7,7 @@ import styles from './styles.module.scss'
 
 const ContactForm = () => {
    const { register, onSubmit, isSubmitted, isSubmitting } = useContactForm()
-   const { fields, submit, success } = data
+   const { fields, button, success } = data
 
    return (
       <form className={styles['contact-form']} onSubmit={onSubmit}>
@@ -30,12 +30,10 @@ const ContactForm = () => {
          })}
          <Button
             type="submit"
-            className={cn(styles['contact-form__button'], 'btn', {
-               'btn--disabled': isSubmitted || isSubmitting,
-            })}
+            className={cn(styles['contact-form__button'])}
             disabled={isSubmitted || isSubmitting}
          >
-            {submit.label}
+            {button.title}
          </Button>
          {isSubmitted && <p className={styles['contact-form__message']}>{success}</p>}
       </form>
