@@ -1,12 +1,13 @@
+@use '@/styles/mixins';
+
 .contact {
    max-width: 800px;
 
    &__title {
       color: var(--white-color);
-      font-size: 60px;
-      font-family: Montserrat, sans-serif;
-      font-weight: 700;
-      line-height: 60px;
+
+      @include mixins.subtitle;
+
       margin-bottom: 11px;
    }
 
@@ -15,7 +16,7 @@
       font-size: 18px;
       font-family: Montserrat, sans-serif;
       font-weight: 200;
-      line-height: 158.47%;
+      line-height: 1.5;
       margin-bottom: 32px;
    }
 }

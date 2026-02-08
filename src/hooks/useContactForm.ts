@@ -1,4 +1,4 @@
-import { ContactFormValues } from '@/features/contact-form/types'
+import { ContactFormValues } from '@/components/contact-form/types'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
