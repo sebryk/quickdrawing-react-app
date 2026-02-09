@@ -7,7 +7,7 @@ import { data } from './data'
 import styles from './styles.module.scss'
 import { Link } from 'react-router-dom'
 import { VscChevronRight } from 'react-icons/vsc'
-import PlayerImage from '@/assets/images/player.jpg'
+import PlayerImage from '@/assets/images/player.webp'
 
 const Home = () => {
    const dispatch = useAppDispatch()
