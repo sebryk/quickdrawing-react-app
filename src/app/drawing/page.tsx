@@ -15,6 +15,7 @@ import styles from './styles.module.scss'
 const Drawing = () => {
    const dispatch = useAppDispatch()
    const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null)
+   const lastMouseMoveAt = useRef(0)
    const [randomPageNumber, setRandomPageNumber] = useState(0)
 
    const { object, gender, clothing, count } =
@@ -34,6 +35,12 @@ const Drawing = () => {
    })
 
    const handleMouseMove = () => {
+      const now = Date.now()
+      if (now - lastMouseMoveAt.current < 100) {
+         return
+      }
+      lastMouseMoveAt.current = now
+
       dispatch(mouseIsMoving(true))
       if (timeoutId.current) clearTimeout(timeoutId.current)
 
