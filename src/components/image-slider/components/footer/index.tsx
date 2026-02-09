@@ -1,4 +1,7 @@
+'use client'
+
 import cn from 'classnames'
+
 import { useAppDispatch } from '@/store/hooks'
 import { showModal } from '@/store/slices/modal-slice'
 import CompletionBar from '@/components/image-slider/components/footer/components/completion-bar'

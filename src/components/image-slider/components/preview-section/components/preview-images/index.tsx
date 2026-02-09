@@ -1,3 +1,5 @@
+'use client'
+
 import cn from 'classnames'
 import { useAppDispatch } from '@/store/hooks'
 import { goToImage } from '@/store/slices/image-slider-slice'

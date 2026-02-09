@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'

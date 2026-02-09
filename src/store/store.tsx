@@ -1,3 +1,5 @@
+'use client'
+
 import { configureStore } from '@reduxjs/toolkit'
 import objectsFormReducer from './slices/objects-form-slice'
 import modalReducer from './slices/modal-slice'

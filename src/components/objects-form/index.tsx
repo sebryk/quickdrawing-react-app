@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import ObjectsFormSelect from './components/select'
 import Button from '../ui/buttons/main-button'
 import { useAppSelector } from '../../store/hooks'
@@ -10,7 +12,7 @@ import cn from 'classnames'
 const ObjectsForm = () => {
    const selectedOptions = useAppSelector((state) => state.selectedOptions)
 
-   const navigate = useNavigate()
+   const router = useRouter()
 
    const { selectOption, button } = data
    const { object, gender, clothing, count, duration } = selectedOptions || {}
@@ -38,7 +40,7 @@ const ObjectsForm = () => {
             )
          })}
          <Button
-            onClick={() => navigate('/drawing')}
+            onClick={() => router.push('/drawing')}
             disabled={!isFormValid}
             variant="primary-with-arrow"
          >

@@ -1,4 +1,7 @@
+'use client'
+
 import cn from 'classnames'
+
 import { useEffect, useContext } from 'react'
 import ControllBarButton from './components/controll-bar-button'
 import Timer from '../timer'

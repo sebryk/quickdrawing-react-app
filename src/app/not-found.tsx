@@ -1,16 +1,20 @@
-import { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { data } from './data'
-import styles from './styles.module.scss'
+'use client'
 
-const NotFound = () => {
-   const navigate = useNavigate()
+import { useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
+import { data } from './not-found/data'
+import styles from './not-found/styles.module.scss'
+
+export default function NotFoundPage() {
+   const router = useRouter()
    const { title, description, link } = data
 
    useEffect(() => {
-      const timeoutId = setTimeout(() => navigate('/'), 10000)
+      const timeoutId = setTimeout(() => router.push('/'), 10000)
       return () => clearTimeout(timeoutId)
-   }, [navigate])
+   }, [router])
 
    return (
       <section className={styles['not-found']}>
@@ -19,7 +23,7 @@ const NotFound = () => {
             <p className={styles['not-found__description']}>{description}</p>
             <p className={styles['not-found__text']}>
                {link.prefix}{' '}
-               <Link className={styles['not-found__link']} to={link.url}>
+               <Link className={styles['not-found__link']} href={link.url}>
                   {link.title}
                </Link>
             </p>
@@ -27,5 +31,3 @@ const NotFound = () => {
       </section>
    )
 }
-
-export default NotFound

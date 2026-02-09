@@ -1,3 +1,5 @@
+'use client'
+
 import Select from 'react-select'
 import { IOption, ISelectedOptions, ObjectsFormSelectProps } from '../../types'
 import { styles as selectStyles } from '../../settings'

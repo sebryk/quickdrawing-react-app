@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 import { persistor } from '../../store/store'
 import { useAppDispatch } from '../../store/hooks'
@@ -13,7 +15,7 @@ const Contact = () => {
    useEffect(() => {
       dispatch(resetSelectedOptions())
       persistor.purge()
-   }, [])
+   }, [dispatch, persistor])
 
    return (
       <section className={styles['contact']}>

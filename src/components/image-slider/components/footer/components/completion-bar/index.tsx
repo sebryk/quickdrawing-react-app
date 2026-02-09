@@ -1,4 +1,7 @@
+'use client'
+
 import ProgressBar from '@ramonak/react-progress-bar'
+
 import { useAppSelector } from '@/store/hooks'
 import styles from './styles.module.scss'
 

@@ -1,30 +1,38 @@
 {
    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-         "@/*": ["src/*"],
-         "@pages/*": ["src/pages/*"],
-         "@components/*": ["src/components/*"],
-         "@hooks/*": ["src/hooks/*"]
-      },
-      "target": "ESNext",
-      "useDefineForClassFields": true,
+      "target": "ES2020",
       "lib": ["DOM", "DOM.Iterable", "ESNext"],
       "allowJs": false,
       "skipLibCheck": true,
-      "esModuleInterop": false,
-      "allowSyntheticDefaultImports": true,
       "strict": true,
-      "forceConsistentCasingInFileNames": true,
+      "noEmit": true,
+      "esModuleInterop": true,
       "module": "ESNext",
-      "moduleResolution": "node",
+      "moduleResolution": "bundler",
       "resolveJsonModule": true,
       "isolatedModules": true,
-      "noEmit": true,
       "jsx": "react-jsx",
-      "noUnusedLocals": true,
-      "noUnusedParameters": true
+      "incremental": true,
+      "baseUrl": ".",
+      "paths": {
+         "@/*": ["src/*"],
+         "@components/*": ["src/components/*"],
+         "@hooks/*": ["src/hooks/*"]
+      },
+      "plugins": [
+         {
+            "name": "next"
+         }
+      ]
    },
-   "include": ["src"],
-   "references": [{ "path": "./tsconfig.node.json" }]
+   "include": [
+      "next-env.d.ts",
+      ".next/types/**/*.ts",
+      "src/app",
+      "src",
+      "**/*.ts",
+      "**/*.tsx",
+      ".next/dev/types/**/*.ts"
+   ],
+   "exclude": ["node_modules"]
 }

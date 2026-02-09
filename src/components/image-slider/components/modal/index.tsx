@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import { closeModal } from '../../../../store/slices/modal-slice'
 import { useRef, useEffect } from 'react'
@@ -15,12 +17,12 @@ const Modal = () => {
    const imageSlider = useAppSelector((state) => state.imageSlider)
    const completionBar = useAppSelector((state) => state.completionBar)
    const modalRef = useRef<HTMLDivElement>(null)
-   const navigate = useNavigate()
+   const router = useRouter()
    const { titles, buttons } = data
 
    const clearLocalStorage = () => {
       dispatch(closeModal())
-      navigate('/')
+      router.push('/')
       dispatch(resetSelectedOptions())
    }
 

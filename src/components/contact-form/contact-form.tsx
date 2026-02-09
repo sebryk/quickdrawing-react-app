@@ -1,3 +1,5 @@
+'use client'
+
 import cn from 'classnames'
 import Button from '@/components/ui/buttons/main-button'
 import TextInput from '@/components/ui/inputs/text-input'

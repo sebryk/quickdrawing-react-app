@@ -1,5 +1,7 @@
+'use client'
 import { ContactFormValues } from '@/components/contact-form/types'
 import { useEffect, useState } from 'react'
+
 import { useForm } from 'react-hook-form'
 
 const defaultValues: ContactFormValues = {

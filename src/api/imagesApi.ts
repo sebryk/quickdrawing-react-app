@@ -1,3 +1,5 @@
+'use client'
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { IImage, IImageData, QueryParams } from './types'
 import { randomizeImages } from '../utils/randomizeImages'
@@ -5,9 +7,9 @@ import { randomizeImages } from '../utils/randomizeImages'
 export const imagesApi = createApi({
    reducerPath: 'imagesApi',
    baseQuery: fetchBaseQuery({
-      baseUrl: import.meta.env.VITE_UNSPLASH_API_URL,
+      baseUrl: process.env.NEXT_PUBLIC_UNSPLASH_API_URL || '',
       prepareHeaders: (headers) => {
-         headers.set('Authorization', `Client-ID ${import.meta.env.VITE_UNSPLASH_API_KEY}`)
+         headers.set('Authorization', `Client-ID ${process.env.NEXT_PUBLIC_UNSPLASH_API_KEY || ''}`)
          return headers
       },
    }),

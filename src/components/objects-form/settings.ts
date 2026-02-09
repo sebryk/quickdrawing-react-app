@@ -69,7 +69,7 @@ export const styles: StylesConfig<IOption, false, GroupBase<IOption>> = {
          ':hover': {
             backgroundColor: 'var(--red-color)',
             color: 'var(--white-color)',
-            'border-color': 'transparent',
+            borderColor: 'transparent',
          },
       }
    },

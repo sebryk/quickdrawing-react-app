@@ -1,4 +1,7 @@
-import { Link, NavLink } from 'react-router-dom'
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import useBurgerMenu from '@/hooks/useBurgerMenu'
 import BurgerBtn from '../ui/buttons/burger-button/burger-button'
 import { activeStyles, data, navigationItems } from './data'
@@ -8,10 +11,11 @@ import cn from 'classnames'
 const Header = () => {
    const { logo } = data
    const { isBurgerMenuOpen, toggleBurgerMenu, menuRef, setIsBurgerMenuOpen } = useBurgerMenu()
+   const pathname = usePathname()
 
    return (
       <header className={styles.header} ref={menuRef}>
-         <Link to="/" className={styles.logo} onClick={() => setIsBurgerMenuOpen(false)}>
+         <Link href="/" className={styles.logo} onClick={() => setIsBurgerMenuOpen(false)}>
             {logo}
          </Link>
          <nav
@@ -20,15 +24,15 @@ const Header = () => {
             })}
          >
             {navigationItems.map((item, index) => (
-               <NavLink
+               <Link
                   key={index}
-                  to={item.route}
+                  href={item.route}
                   className={styles.nav__listLink}
-                  style={({ isActive }: { isActive: boolean }) => (isActive ? activeStyles : {})}
+                  style={pathname === item.route ? activeStyles : {}}
                   onClick={() => setIsBurgerMenuOpen(false)}
                >
                   {item.label}
-               </NavLink>
+               </Link>
             ))}
          </nav>
          <BurgerBtn toggleBurgerMenu={toggleBurgerMenu} isBurgerMenuOpen={isBurgerMenuOpen} />
