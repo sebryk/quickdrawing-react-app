@@ -1,31 +1,12 @@
-'use client'
+import Layout from '@/components/layout'
+import Contact from './contact'
 
-import { useEffect } from 'react'
-import { persistor } from '../../store/store'
-import { useAppDispatch } from '../../store/hooks'
-import { resetSelectedOptions } from '../../store/slices/objects-form-slice'
-import ContactForm from '@/components/contact-form/contact-form'
-import { data } from './data'
-import styles from './styles.module.scss'
-
-const Contact = () => {
-   const dispatch = useAppDispatch()
-   const { title, description } = data
-
-   useEffect(() => {
-      dispatch(resetSelectedOptions())
-      persistor.purge()
-   }, [dispatch, persistor])
-
+const ContactPage = () => {
    return (
-      <section className={styles['contact']}>
-         <div className={styles['contact__container']}>
-            <h1 className={styles['contact__title']}>{title}</h1>
-            <p className={styles['contact__text']}>{description}</p>
-            <ContactForm />
-         </div>
-      </section>
+      <Layout>
+         <Contact />
+      </Layout>
    )
 }
 
-export default Contact
+export default ContactPage

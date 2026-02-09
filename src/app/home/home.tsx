@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { VscChevronRight } from 'react-icons/vsc'
 
@@ -8,19 +9,20 @@ import ObjectsForm from '@/components/objects-form'
 import { useAppDispatch } from '@/store/hooks'
 import { resetSelectedOptions } from '@/store/slices/objects-form-slice'
 import { persistor } from '@/store/store'
+import PlayerImage from '../../../public/assets/images/player.webp'
 
 import { data } from './data'
 import styles from './styles.module.scss'
 
 const Home = () => {
-   const dispatch = useAppDispatch()
-
    const { title, description, link } = data
+
+   const dispatch = useAppDispatch()
 
    useEffect(() => {
       dispatch(resetSelectedOptions())
       persistor.purge()
-   }, [dispatch, persistor])
+   }, [])
 
    return (
       <section className={styles['home']}>
@@ -34,7 +36,14 @@ const Home = () => {
          </span>
          <div className={styles['home__content']}>
             <ObjectsForm />
-            <img src="/assets/images/player.webp" alt="home" className={styles['home__image']} />
+            <Image
+               src={PlayerImage}
+               alt="home"
+               className={styles['home__image']}
+               width={530}
+               height={294}
+               priority
+            />
          </div>
       </section>
    )

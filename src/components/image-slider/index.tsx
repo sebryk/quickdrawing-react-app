@@ -20,6 +20,7 @@ import { PreviewSection } from './components/preview-section'
 import { PreviewDots } from './components/preview-section/components/preview-dots'
 import { PreviewImages } from './components/preview-section/components/preview-images'
 import { Footer } from './components/footer'
+import Image from 'next/image'
 
 const ImageSlider = () => {
    const dispatch = useAppDispatch()
@@ -60,12 +61,14 @@ const ImageSlider = () => {
             isMouseMoving={imageSlider.isMouseMoving}
          />
 
-         <img
+         <Image
             title="img"
             className={styles['image-slider__img']}
-            onLoad={() => setTimeout(() => dispatch(setIsLoading(false)), 300)}
             src={imgData?.[imageSlider.currentIndex]?.urls?.regular}
             alt={imgData?.[imageSlider.currentIndex]?.alt_description}
+            fill
+            sizes="100vw"
+            quality={100}
          />
 
          <NavigationButton

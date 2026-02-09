@@ -1,19 +1,12 @@
-import { data } from './data'
-import styles from './styles.module.scss'
+import Layout from '@/components/layout'
+import PrivacyPolicy from './privacy-policy'
 
-const Policy = () => {
+const PrivacyPolicyPage = () => {
    return (
-      <section className={styles.policy}>
-         <article className={styles['policy__article']}>
-            <h1 className={styles['policy__article-title']}>{data.title}</h1>
-            {data.sections.map((section, index) => (
-               <p key={index} className={styles['policy__article-text']}>
-                  {section}
-               </p>
-            ))}
-         </article>
-      </section>
+      <Layout>
+         <PrivacyPolicy />
+      </Layout>
    )
 }
 
-export default Policy
+export default PrivacyPolicyPage
