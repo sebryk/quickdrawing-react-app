@@ -1,7 +1,7 @@
 import { Styles } from './types'
 
 export const data = {
-   logo: 'QUICKDRAWING',
+   logo: 'WAVETAKE',
 }
 
 export const activeStyles: Styles = {

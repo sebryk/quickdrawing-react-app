@@ -1,3 +1,3 @@
 export const data = {
-   copyright: '&copy; Quickdrawing',
+   copyright: '&copy; WAVETAKE',
 }
