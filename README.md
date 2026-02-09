@@ -17,7 +17,7 @@
 - **CSS**
 - **Redux Toolkit**
 - **RTK Query**
-- **Firebase**
+- **Redux Persist**
 
 **Please note that the app's layout is optimized only for tablets, laptops and desktops.**
 
@@ -43,4 +43,4 @@ npm install
 npm run dev
 ```
 
-This will start the development server. Open http://localhost:5173 to view it in the browser.
+This will start the development server. Open http://localhost:3000 to view it in the browser.
