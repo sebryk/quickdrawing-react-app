@@ -20,7 +20,7 @@ const About = () => {
             <h1 className={styles['about__article-title']}>{data.title}</h1>
             <p className={styles['about__article-text']}>{data.description}</p>
             <p className={styles['about__article-text']}>
-               See our <Link to="/policy">Privacy Policy</Link>
+               See our <Link to="/privacy-policy">Privacy Policy</Link>
             </p>
          </article>
       </section>
