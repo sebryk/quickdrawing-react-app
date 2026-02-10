@@ -5,21 +5,26 @@ import MainButton from '@/components/ui/buttons/main-button'
 import styles from './styles.module.scss'
 import { data } from './data'
 
+import cn from 'classnames'
+
 type StartupCardProps = {
    onQuickSession: () => void
+   className?: string
 }
 
-const StartupCard = ({ onQuickSession }: StartupCardProps) => {
-   const { button, text, link } = data
+const StartupCard = ({ onQuickSession, className }: StartupCardProps) => {
+   const { buttons } = data
    return (
-      <div className={styles['startup-card']}>
-         <div className={styles['startup-card__actions']}>
-            <MainButton onClick={onQuickSession}>{button.tittle}</MainButton>
-            <p className={styles['startup-card__text']}>{text}</p>
-            <MainButton href={link.href} variant="accent" className={styles['startup-card__link']}>
-               {link.title}
+      <div className={cn(styles['startup-card'], className)}>
+         {buttons.map((button, index) => (
+            <MainButton
+               onClick={index === 0 ? onQuickSession : undefined}
+               key={index}
+               variant={index === 0 ? 'primary' : 'accent'}
+            >
+               {button.title}
             </MainButton>
-         </div>
+         ))}
       </div>
    )
 }

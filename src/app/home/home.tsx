@@ -36,7 +36,7 @@ const Home = () => {
             </Link>
          </span>
          <div className={styles['home__content']}>
-            {showForm ? <ObjectsForm /> : <StartupCard onQuickSession={() => setShowForm(true)} />}
+            {showForm && <ObjectsForm />}
             <Image
                src={PlayerImage}
                alt="home"
@@ -46,6 +46,7 @@ const Home = () => {
                priority
             />
          </div>
+         {!showForm && <StartupCard onQuickSession={() => setShowForm(true)} />}
       </section>
    )
 }
