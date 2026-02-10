@@ -12,5 +12,8 @@ const VARIANT_PROPS: Record<Variant, VariantProps> = {
       icon: BiChevronRight,
       iconPosition: 'right',
    },
+   accent: {
+      className: styles.accent,
+   },
 }
 export default VARIANT_PROPS

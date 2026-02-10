@@ -1,9 +1,9 @@
 import { IconType } from 'react-icons/lib'
-import { ReactNode } from 'react'
+import type { ReactNode, AnchorHTMLAttributes } from 'react'
 
 type Type = 'submit' | 'reset' | 'button'
 
-export type Variant = 'primary' | 'primary-with-arrow'
+export type Variant = 'primary' | 'primary-with-arrow' | 'accent'
 
 export interface VariantProps {
    className: string
@@ -20,5 +20,6 @@ export interface MainButtonProps {
    icon?: IconType
    iconPosition?: 'left' | 'right'
    className?: string
-   ariaLabel?: string
+   href?: string
+   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target']
 }

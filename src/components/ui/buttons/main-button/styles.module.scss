@@ -22,6 +22,17 @@
    }
 }
 
+.accent {
+   background-color: var(--white-color);
+   color: var(--red-color);
+   border: none;
+
+   &:hover {
+      background-color: var(--red-color);
+      color: var(--white-color);
+   }
+}
+
 .primary-with-arrow {
    display: flex;
    align-items: center;

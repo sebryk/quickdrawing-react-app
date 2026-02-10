@@ -1,0 +1,35 @@
+@use '@/styles/mixins';
+
+.startup-card {
+   max-width: 300px;
+   min-width: 291px;
+   align-self: flex-start;
+   border-radius: 24px;
+   width: 100%;
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: 16px;
+   padding: 30px;
+   border: 1px solid #e6e6e62d;
+
+   @include mixins.glass-background(rgba(206, 206, 206, 0.1));
+}
+
+.startup-card__text {
+   color: var(--white-color);
+   font-size: 14px;
+   font-family: Montserrat, sans-serif;
+   font-weight: 500;
+   text-transform: uppercase;
+}
+
+.startup-card__actions {
+   display: grid;
+   gap: 12px;
+}
+
+.startup-card__link {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+}
