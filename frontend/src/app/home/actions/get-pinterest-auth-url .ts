@@ -1,7 +1,7 @@
 'use server'
 
 export const getPinterestAuthUrl = async () => {
-   const backendUrl = process.env.BACKEND_API_URL || 'http://localhost:4000'
+   const backendUrl = process.env.BACKEND_API_URL
    const response = await fetch(`${backendUrl}/auth/pinterest/url`, {
       cache: 'no-store',
    })

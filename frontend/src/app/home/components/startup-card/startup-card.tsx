@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import MainButton from '@/components/ui/buttons/main-button'
-import { getPinterestAuthUrl } from '@/app/home/actions'
+import { getPinterestAuthUrl } from '@/app/home/actions/get-pinterest-auth-url '
 
 import styles from './styles.module.scss'
 import { data } from './data'

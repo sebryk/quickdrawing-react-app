@@ -1,4 +1,4 @@
-import cookieParser from 'cookie-parser'
+import cookieParser = require('cookie-parser')
 import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { ConfigService } from '@nestjs/config'

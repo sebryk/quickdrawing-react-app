@@ -11,10 +11,10 @@ const NotFound = () => {
    const router = useRouter()
    const { title, description, link } = data
 
-   useEffect(() => {
-      const timeoutId = setTimeout(() => router.push('/'), 10000)
-      return () => clearTimeout(timeoutId)
-   }, [router])
+   // useEffect(() => {
+   //    const timeoutId = setTimeout(() => router.push('/'), 10000)
+   //    return () => clearTimeout(timeoutId)
+   // }, [router])
 
    return (
       <section className={styles['not-found']}>
