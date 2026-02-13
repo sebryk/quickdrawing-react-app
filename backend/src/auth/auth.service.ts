@@ -16,6 +16,7 @@ type CallbackPayload = {
 type SessionUser = {
    providerUserId: string;
    username: string | null;
+   profileImageUrl: string | null;
 };
 
 @Injectable()
@@ -65,9 +66,11 @@ export class AuthService {
 
       const providerUserId = profile.id || `pinterest_${randomUUID()}`;
       const providerUsername = profile.username ?? null;
+      const providerProfileImageUrl = profile.profile_image ?? null;
       const user = await this.oauthAccountService.upsertPinterestUser(
          providerUserId,
          providerUsername,
+         providerProfileImageUrl,
          tokenPayload,
       );
       const { sessionToken, sessionExpiresAt } = await this.authSessionService.createSession(user.id);
@@ -116,6 +119,7 @@ export class AuthService {
       return {
          providerUserId: pinterestAccount.providerUserId,
          username: pinterestAccount.providerUsername ?? null,
+         profileImageUrl: pinterestAccount.providerProfileImageUrl ?? null,
       };
    }
 

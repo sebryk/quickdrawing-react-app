@@ -16,7 +16,12 @@ export class OAuthAccountService {
       private readonly pinterestOAuthService: PinterestOAuthService,
    ) {}
 
-   async upsertPinterestUser(providerUserId: string, providerUsername: string | null, tokenPayload: PinterestTokenResponse) {
+   async upsertPinterestUser(
+      providerUserId: string,
+      providerUsername: string | null,
+      providerProfileImageUrl: string | null,
+      tokenPayload: PinterestTokenResponse,
+   ) {
       const expiresAt = tokenPayload.expires_in ? new Date(Date.now() + tokenPayload.expires_in * 1000) : null;
 
       return this.prismaService.$transaction(async (tx) => {
@@ -25,7 +30,6 @@ export class OAuthAccountService {
                provider_providerUserId: {
                   provider: 'pinterest',
                   providerUserId,
-                  providerUsername,
                },
             },
             include: { user: true },
@@ -40,6 +44,8 @@ export class OAuthAccountService {
                      ? this.encrypt(tokenPayload.refresh_token)
                      : existingAccount.refreshTokenEncrypted,
                   providerUsername: providerUsername ?? existingAccount.providerUsername,
+                  providerProfileImageUrl:
+                     providerProfileImageUrl ?? existingAccount.providerProfileImageUrl,
                   scope: tokenPayload.scope,
                   expiresAt,
                },
@@ -55,6 +61,7 @@ export class OAuthAccountService {
                      provider: 'pinterest',
                      providerUserId,
                      providerUsername,
+                     providerProfileImageUrl,
                      accessTokenEncrypted: this.encrypt(tokenPayload.access_token),
                      refreshTokenEncrypted: tokenPayload.refresh_token
                         ? this.encrypt(tokenPayload.refresh_token)

@@ -20,6 +20,7 @@ model OAuthAccount {
   provider             String
   providerUserId       String
   providerUsername     String?
+  providerProfileImageUrl String?
   accessTokenEncrypted String
   refreshTokenEncrypted String?
   scope                String?
@@ -30,6 +31,7 @@ model OAuthAccount {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerUserId])
+  @@unique([provider, providerUsername])
   @@index([userId])
 }
 

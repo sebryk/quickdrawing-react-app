@@ -2,7 +2,7 @@ import { IconType } from 'react-icons/lib'
 
 type Type = 'submit' | 'reset' | 'button'
 
-export type Variant = 'close'
+export type Variant = 'close' | 'logout'
 
 export interface VariantProps {
    className: string

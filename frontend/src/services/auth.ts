@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 
 export type SessionUser = {
    user: string
-   profile_image: string
+   profileImageUrl: string
 }
 
 export async function getSessionUser(): Promise<SessionUser | null> {

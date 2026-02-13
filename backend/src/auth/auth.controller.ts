@@ -26,6 +26,9 @@ export class AuthController {
          throw new UnauthorizedException();
       }
 
-      return { user: sessionUser.username ?? sessionUser.providerUserId };
+      return {
+         user: sessionUser.username ?? sessionUser.providerUserId,
+         profileImageUrl: sessionUser.profileImageUrl,
+      };
    }
 }
