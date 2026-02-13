@@ -77,7 +77,7 @@ export class AuthService {
 
       response.cookie(this.authSessionService.getCookieName(), sessionToken, {
          httpOnly: true,
-         secure: this.appConfig.required('NODE_ENV') === 'production',
+         secure: this.shouldUseSecureCookies(),
          sameSite: 'lax',
          expires: sessionExpiresAt,
       });
@@ -123,7 +123,24 @@ export class AuthService {
       };
    }
 
+   async logout(sessionToken?: string) {
+      if (!sessionToken) {
+         return;
+      }
+
+      const session = await this.authSessionService.getSessionByToken(sessionToken);
+      if (!session || session.revokedAt) {
+         return;
+      }
+
+      await this.authSessionService.revokeSession(session.id);
+   }
+
    getSessionCookieName() {
       return this.authSessionService.getCookieName();
+   }
+
+   shouldUseSecureCookies() {
+      return this.appConfig.required('NODE_ENV') === 'production';
    }
 }

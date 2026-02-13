@@ -32,7 +32,6 @@ export class AuthSessionService {
 
    async getSessionByToken(sessionToken: string) {
       const tokenHash = this.hash(sessionToken);
-      console.log(tokenHash);
       return this.prismaService.authSession.findUnique({
          where: { tokenHash },
          include: {

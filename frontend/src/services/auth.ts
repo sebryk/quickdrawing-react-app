@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 
 export type SessionUser = {
    user: string
-   profileImageUrl: string
+   profileImageUrl: string | null
 }
 
 export async function getSessionUser(): Promise<SessionUser | null> {
@@ -11,10 +11,11 @@ export async function getSessionUser(): Promise<SessionUser | null> {
       throw new Error('BACKEND_API_URL is not set')
    }
 
+   const sessionCookieName = process.env.SESSION_COOKIE_NAME ?? 'qd_session'
    const cookieStore = await cookies()
-   const qd_session = cookieStore.get('qd_session')?.value
+   const sessionToken = cookieStore.get(sessionCookieName)?.value
    const response = await fetch(`${backendUrl}/auth/pinterest/me`, {
-      headers: qd_session ? { cookie: `qd_session=${qd_session}` } : undefined,
+      headers: sessionToken ? { cookie: `${sessionCookieName}=${sessionToken}` } : undefined,
       cache: 'no-store',
    })
 

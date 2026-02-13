@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Req, Res, UnauthorizedException } from '@nestjs/common';
+import { Controller, Get, Post, Query, Req, Res, UnauthorizedException } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 
@@ -30,5 +30,21 @@ export class AuthController {
          user: sessionUser.username ?? sessionUser.providerUserId,
          profileImageUrl: sessionUser.profileImageUrl,
       };
+   }
+
+   @Post('logout')
+   async logout(@Req() request: Request, @Res({ passthrough: true }) response: Response) {
+      const cookieName = this.authService.getSessionCookieName();
+      const sessionToken = request.cookies?.[cookieName];
+
+      await this.authService.logout(sessionToken);
+
+      response.clearCookie(cookieName, {
+         httpOnly: true,
+         secure: this.authService.shouldUseSecureCookies(),
+         sameSite: 'lax',
+      });
+
+      return { success: true };
    }
 }
