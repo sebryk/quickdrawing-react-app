@@ -15,8 +15,6 @@ export default async function UserPage({ params }: PageProps) {
       notFound()
    }
 
-   console.log(session)
-
    const username = decodeURIComponent(session.user)
 
    return (

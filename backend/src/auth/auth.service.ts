@@ -1,8 +1,11 @@
-import { createCipheriv, createDecipheriv, createHash, randomBytes, randomUUID } from 'crypto';
-import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import type { Response } from 'express';
+import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
+import { AuthSessionService } from './services/auth-session.service';
+import { OAuthAccountService } from './services/oauth-account.service';
+import { PinterestOAuthService } from './services/pinterest-oauth.service';
+import { AppConfigService } from '../config/app-config.service';
 
 type CallbackPayload = {
    code: string;
@@ -12,27 +15,17 @@ type CallbackPayload = {
 
 type SessionUser = {
    providerUserId: string;
-};
-
-type PinterestTokenResponse = {
-   access_token: string;
-   refresh_token?: string;
-   token_type: string;
-   scope?: string;
-   expires_in?: number;
-};
-
-type PinterestUserResponse = {
-   username?: string;
-   account_type?: string;
-   profile_image?: string;
+   username: string | null;
 };
 
 @Injectable()
 export class AuthService {
    constructor(
-      private readonly configService: ConfigService,
+      private readonly appConfig: AppConfigService,
       private readonly prismaService: PrismaService,
+      private readonly authSessionService: AuthSessionService,
+      private readonly oauthAccountService: OAuthAccountService,
+      private readonly pinterestOAuthService: PinterestOAuthService,
    ) {}
 
    async createPinterestAuthorizationUrl() {
@@ -46,12 +39,7 @@ export class AuthService {
          },
       });
 
-      const authUrl = new URL(this.required('PINTEREST_AUTH_URL'));
-
-      authUrl.searchParams.set('response_type', 'code');
-      authUrl.searchParams.set('client_id', this.required('PINTEREST_CLIENT_ID'));
-      authUrl.searchParams.set('redirect_uri', this.required('PINTEREST_REDIRECT_URI'));
-      authUrl.searchParams.set('scope', this.required('PINTEREST_SCOPE'));
+      const authUrl = this.pinterestOAuthService.createAuthorizationUrl();
       authUrl.searchParams.set('state', state);
 
       return authUrl.toString();
@@ -72,81 +60,27 @@ export class AuthService {
          data: { usedAt: new Date() },
       });
 
-      const tokenPayload = await this.requestPinterestTokens(code);
+      const tokenPayload = await this.pinterestOAuthService.exchangeCodeForToken(code);
+      const profile = await this.pinterestOAuthService.fetchProfile(tokenPayload.access_token);
 
-      console.log(tokenPayload);
-      const profile = await this.getPinterestProfile(tokenPayload.access_token);
+      const providerUserId = profile.id || `pinterest_${randomUUID()}`;
+      const providerUsername = profile.username ?? null;
+      const user = await this.oauthAccountService.upsertPinterestUser(
+         providerUserId,
+         providerUsername,
+         tokenPayload,
+      );
+      const { sessionToken, sessionExpiresAt } = await this.authSessionService.createSession(user.id);
 
-      const providerUserId = profile.username || `pinterest_${randomUUID()}`;
-      const expiresAt = tokenPayload.expires_in ? new Date(Date.now() + tokenPayload.expires_in * 1000) : null;
-
-      const user = await this.prismaService.$transaction(async (tx) => {
-         const existingAccount = await tx.oAuthAccount.findUnique({
-            where: {
-               provider_providerUserId: {
-                  provider: 'pinterest',
-                  providerUserId,
-               },
-            },
-            include: { user: true },
-         });
-
-         if (existingAccount) {
-            await tx.oAuthAccount.update({
-               where: { id: existingAccount.id },
-               data: {
-                  accessTokenEncrypted: this.encrypt(tokenPayload.access_token),
-                  refreshTokenEncrypted: tokenPayload.refresh_token
-                     ? this.encrypt(tokenPayload.refresh_token)
-                     : existingAccount.refreshTokenEncrypted,
-                  scope: tokenPayload.scope,
-                  expiresAt,
-               },
-            });
-
-            return existingAccount.user;
-         }
-
-         return tx.user.create({
-            data: {
-               oauthAccounts: {
-                  create: {
-                     provider: 'pinterest',
-                     providerUserId,
-                     accessTokenEncrypted: this.encrypt(tokenPayload.access_token),
-                     refreshTokenEncrypted: tokenPayload.refresh_token
-                        ? this.encrypt(tokenPayload.refresh_token)
-                        : null,
-                     scope: tokenPayload.scope,
-                     expiresAt,
-                  },
-               },
-            },
-         });
-      });
-
-      const sessionToken = randomBytes(48).toString('hex');
-      const sessionTokenHash = this.hash(sessionToken);
-      const sessionTtlDays = this.configService.get<number>('SESSION_TTL_DAYS', 14);
-      const sessionExpiresAt = new Date(Date.now() + sessionTtlDays * 24 * 60 * 60 * 1000);
-
-      await this.prismaService.authSession.create({
-         data: {
-            userId: user.id,
-            tokenHash: sessionTokenHash,
-            expiresAt: sessionExpiresAt,
-         },
-      });
-
-      response.cookie(this.required('SESSION_COOKIE_NAME'), sessionToken, {
+      response.cookie(this.authSessionService.getCookieName(), sessionToken, {
          httpOnly: true,
-         secure: this.required('NODE_ENV') === 'production',
+         secure: this.appConfig.required('NODE_ENV') === 'production',
          sameSite: 'lax',
          expires: sessionExpiresAt,
       });
 
-      const frontendBaseUrl = this.required('FRONTEND_URL').replace(/\/$/, '');
-      const encodedUser = encodeURIComponent(providerUserId);
+      const frontendBaseUrl = this.appConfig.required('FRONTEND_URL').replace(/\/$/, '');
+      const encodedUser = encodeURIComponent(providerUsername ?? providerUserId);
       response.redirect(`${frontendBaseUrl}/${encodedUser}`);
    }
 
@@ -155,18 +89,7 @@ export class AuthService {
          return null;
       }
 
-      const tokenHash = this.hash(sessionToken);
-      const session = await this.prismaService.authSession.findUnique({
-         where: { tokenHash },
-         include: {
-            user: {
-               include: {
-                  oauthAccounts: true,
-               },
-            },
-         },
-      });
-
+      const session = await this.authSessionService.getSessionByToken(sessionToken);
       if (!session || session.revokedAt || session.expiresAt < new Date()) {
          return null;
       }
@@ -176,85 +99,27 @@ export class AuthService {
          return null;
       }
 
-      return { providerUserId: pinterestAccount.providerUserId };
+      const refreshed = await this.oauthAccountService.refreshPinterestIfNeeded(
+         {
+            id: pinterestAccount.id,
+            providerUserId: pinterestAccount.providerUserId,
+            refreshTokenEncrypted: pinterestAccount.refreshTokenEncrypted,
+            expiresAt: pinterestAccount.expiresAt,
+         },
+         { id: session.id, userId: session.userId },
+      );
+
+      if (!refreshed) {
+         return null;
+      }
+
+      return {
+         providerUserId: pinterestAccount.providerUserId,
+         username: pinterestAccount.providerUsername ?? null,
+      };
    }
 
    getSessionCookieName() {
-      return this.required('SESSION_COOKIE_NAME');
-   }
-
-   private async requestPinterestTokens(code: string) {
-      const tokenUrl = this.required('PINTEREST_TOKEN_URL');
-      const body = new URLSearchParams({
-         grant_type: 'authorization_code',
-         code,
-         redirect_uri: this.required('PINTEREST_REDIRECT_URI'),
-      });
-
-      const basicToken = Buffer.from(
-         `${this.required('PINTEREST_CLIENT_ID')}:${this.required('PINTEREST_CLIENT_SECRET')}`,
-      ).toString('base64');
-
-      const tokenResponse = await fetch(tokenUrl, {
-         method: 'POST',
-         headers: {
-            Authorization: `Basic ${basicToken}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-         },
-         body,
-      });
-
-      if (!tokenResponse.ok) {
-         throw new InternalServerErrorException('Failed to exchange Pinterest code to token');
-      }
-
-      return (await tokenResponse.json()) as PinterestTokenResponse;
-   }
-
-   private async getPinterestProfile(accessToken: string) {
-      const userUrl = this.required('PINTEREST_USER_URL');
-      const profileResponse = await fetch(userUrl, {
-         headers: {
-            Authorization: `Bearer ${accessToken}`,
-         },
-      });
-
-      if (!profileResponse.ok) {
-         throw new InternalServerErrorException('Failed to fetch Pinterest profile');
-      }
-
-      return (await profileResponse.json()) as PinterestUserResponse;
-   }
-
-   private encrypt(rawValue: string) {
-      const key = Buffer.from(this.required('APP_ENCRYPTION_KEY'), 'hex');
-      const iv = randomBytes(12);
-      const cipher = createCipheriv('aes-256-gcm', key, iv);
-      const encrypted = Buffer.concat([cipher.update(rawValue, 'utf8'), cipher.final()]);
-      const authTag = cipher.getAuthTag();
-
-      return `${iv.toString('hex')}.${authTag.toString('hex')}.${encrypted.toString('hex')}`;
-   }
-
-   private decrypt(payload: string) {
-      const [ivHex, authTagHex, encryptedHex] = payload.split('.');
-      const key = Buffer.from(this.required('APP_ENCRYPTION_KEY'), 'hex');
-      const decipher = createDecipheriv('aes-256-gcm', key, Buffer.from(ivHex, 'hex'));
-      decipher.setAuthTag(Buffer.from(authTagHex, 'hex'));
-      const decrypted = Buffer.concat([decipher.update(Buffer.from(encryptedHex, 'hex')), decipher.final()]);
-      return decrypted.toString('utf8');
-   }
-
-   private hash(value: string) {
-      return createHash('sha256').update(value).digest('hex');
-   }
-
-   private required(key: string) {
-      const value = this.configService.get<string>(key);
-      if (!value) {
-         throw new InternalServerErrorException(`Missing required env variable: ${key}`);
-      }
-
-      return value;
+      return this.authSessionService.getCookieName();
    }
 }

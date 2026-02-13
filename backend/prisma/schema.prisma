@@ -19,6 +19,7 @@ model OAuthAccount {
   userId               String
   provider             String
   providerUserId       String
+  providerUsername     String?
   accessTokenEncrypted String
   refreshTokenEncrypted String?
   scope                String?
