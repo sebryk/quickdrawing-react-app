@@ -11,6 +11,9 @@
    border: none;
    cursor: pointer;
    transition: 0.2s;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 
    &:hover {
       background-color: var(--dark-red-color);
@@ -28,8 +31,7 @@
    border: none;
 
    &:hover {
-      background-color: var(--red-color);
-      color: var(--white-color);
+      background-color: var(--light-gray-color);
    }
 }
 

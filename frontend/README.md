@@ -44,3 +44,7 @@ npm run dev
 ```
 
 This will start the development server. Open http://localhost:3000 to view it in the browser.
+
+## How to add Fastify + PostgreSQL backend
+
+If you want to add a backend API for this project, the cleanest path is to keep the Next.js frontend and run a separate Fastify service.

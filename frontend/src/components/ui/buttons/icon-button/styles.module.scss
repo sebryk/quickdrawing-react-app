@@ -28,3 +28,16 @@
       color: var(--red-color);
    }
 }
+
+.logout {
+   svg {
+      width: 28px;
+      height: 28px;
+      color: var(--white-color);
+      transition: 0.2s;
+   }
+
+   &:hover svg {
+      color: var(--red-color);
+   }
+}
