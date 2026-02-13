@@ -14,7 +14,11 @@ import { data } from './data'
 import StartupCard from './components/startup-card/startup-card'
 import styles from './styles.module.scss'
 
-const Home = () => {
+type HomeProps = {
+   userSlug: string | null
+}
+
+const Home = ({ userSlug }: HomeProps) => {
    const { title, description, link } = data
 
    const dispatch = useAppDispatch()
@@ -46,7 +50,7 @@ const Home = () => {
                priority
             />
          </div>
-         {!showForm && <StartupCard onQuickSession={() => setShowForm(true)} />}
+         {!showForm && <StartupCard onQuickSession={() => setShowForm(true)} userSlug={userSlug} />}
       </section>
    )
 }

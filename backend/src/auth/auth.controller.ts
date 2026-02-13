@@ -26,7 +26,6 @@ export class AuthController {
          throw new UnauthorizedException();
       }
 
-      console.log(sessionUser);
       return { user: sessionUser.providerUserId };
    }
 }

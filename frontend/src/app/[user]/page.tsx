@@ -1,29 +1,10 @@
-import { cookies } from 'next/headers'
 import { notFound } from 'next/navigation'
+import { getSessionUser } from '@/services/auth'
 import styles from './styles.module.scss'
+import Image from 'next/image'
 
 type PageProps = {
    params: { user: string }
-}
-
-async function getSessionUser() {
-   const backendUrl = process.env.BACKEND_API_URL
-   if (!backendUrl) {
-      throw new Error('BACKEND_API_URL is not set')
-   }
-
-   const cookieStore = await cookies()
-   const qd_session = cookieStore.get('qd_session')?.value
-   const response = await fetch(`${backendUrl}/auth/pinterest/me`, {
-      headers: qd_session ? { cookie: `qd_session=${qd_session}` } : undefined,
-      cache: 'no-store',
-   })
-
-   if (!response.ok) {
-      return null
-   }
-
-   return await response.json()
 }
 
 export default async function UserPage({ params }: PageProps) {
@@ -34,15 +15,22 @@ export default async function UserPage({ params }: PageProps) {
       notFound()
    }
 
+   console.log(session)
+
    const username = decodeURIComponent(session.user)
 
    return (
       <main className={styles.page}>
-         <section className={styles.card}>
-            <p className={styles.eyebrow}>Личный кабинет</p>
-            <h1 className={styles.title}>{username}</h1>
-            <p className={styles.subtitle}>Вы успешно авторизовались через Pinterest.</p>
-         </section>
+         <div className={styles.user}>
+            <Image
+               className={styles.user_image}
+               src={session.profile_image}
+               alt={username}
+               width={100}
+               height={100}
+            />
+            <p className={styles.user_name}>{username}</p>
+         </div>
       </main>
    )
 }
