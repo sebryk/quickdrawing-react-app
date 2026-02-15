@@ -121,6 +121,10 @@ export class OAuthAccountService {
       }
    }
 
+   decryptAccessToken(accessTokenEncrypted: string) {
+      return this.decrypt(accessTokenEncrypted);
+   }
+
    private async revokeSession(sessionId: string) {
       await this.prismaService.authSession.update({
          where: { id: sessionId },

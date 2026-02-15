@@ -1,5 +1,10 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import type { PinterestTokenResponse, PinterestUserResponse } from '../types/pinterest.types';
+import type {
+   PinterestPinResponse,
+   PinterestPinsListResponse,
+   PinterestTokenResponse,
+   PinterestUserResponse,
+} from '../types/pinterest.types';
 import { AppConfigService } from '../../config/app-config.service';
 
 @Injectable()
@@ -53,6 +58,44 @@ export class PinterestOAuthService {
       return (await profileResponse.json()) as PinterestUserResponse;
    }
 
+   async fetchPins(accessToken: string, pageSize?: number, bookmark?: string) {
+      const pinsUrl = this.resolvePinterestApiUrl('/pins');
+      if (pageSize !== undefined) {
+         pinsUrl.searchParams.set('page_size', String(pageSize));
+      }
+
+      if (bookmark) {
+         pinsUrl.searchParams.set('bookmark', bookmark);
+      }
+
+      const response = await fetch(pinsUrl.toString(), {
+         headers: {
+            Authorization: `Bearer ${accessToken}`,
+         },
+      });
+
+      if (!response.ok) {
+         throw new InternalServerErrorException('Failed to fetch Pinterest pins');
+      }
+
+      return (await response.json()) as PinterestPinsListResponse;
+   }
+
+   async fetchPinById(accessToken: string, pinId: string) {
+      const pinUrl = this.resolvePinterestApiUrl(`/pins/${pinId}`);
+      const response = await fetch(pinUrl.toString(), {
+         headers: {
+            Authorization: `Bearer ${accessToken}`,
+         },
+      });
+
+      if (!response.ok) {
+         throw new InternalServerErrorException('Failed to fetch Pinterest pin');
+      }
+
+      return (await response.json()) as PinterestPinResponse;
+   }
+
    private async requestTokens(tokenUrl: string, body: URLSearchParams) {
       const basicToken = Buffer.from(
          `${this.appConfig.required('PINTEREST_CLIENT_ID')}:${this.appConfig.required('PINTEREST_CLIENT_SECRET')}`,
@@ -72,5 +115,11 @@ export class PinterestOAuthService {
       }
 
       return (await tokenResponse.json()) as PinterestTokenResponse;
+   }
+
+   private resolvePinterestApiUrl(pathname: string) {
+      const apiBaseUrl = this.appConfig.getString('PINTEREST_API_BASE_URL', 'https://api.pinterest.com/v5');
+      const normalizedApiBaseUrl = apiBaseUrl.endsWith('/') ? apiBaseUrl.slice(0, -1) : apiBaseUrl;
+      return new URL(`${normalizedApiBaseUrl}${pathname}`);
    }
 }

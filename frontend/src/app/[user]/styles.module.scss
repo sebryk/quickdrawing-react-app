@@ -5,11 +5,11 @@
    padding: 40px;
    display: flex;
    flex-direction: column;
+   gap: 32px;
 
    &__user {
       width: fit-content;
       display: flex;
-      flex-direction: column;
       align-items: center;
       align-self: flex-end;
       gap: 8px;
@@ -20,6 +20,13 @@
       border-radius: 16px;
       padding: 16px;
 
+      &-info {
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+      }
+
       &-image {
          border-radius: 50%;
          border: 1px solid #e6e6e62d;
@@ -29,8 +36,8 @@
          display: flex;
          justify-content: center;
          align-items: center;
-         width: 100px;
-         height: 100px;
+         width: 80px;
+         height: 80px;
          border: #e6e6e62d 1px solid;
          border-radius: 50%;
 
@@ -45,6 +52,82 @@
          font-size: 24px;
          font-family: Montserrat, sans-serif;
          color: var(--white-color);
+      }
+   }
+
+   &__pins {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+   }
+
+   &__empty {
+      font-family: Montserrat, sans-serif;
+      color: var(--white-color);
+      opacity: 0.85;
+   }
+}
+
+.pin {
+   @include mixins.glass-background(rgba(206, 206, 206, 0.1));
+
+   border: 1px solid #e6e6e62d;
+   border-radius: 16px;
+   overflow: hidden;
+
+   &__image-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 220px;
+      background: rgb(20 20 20 / 45%);
+   }
+
+   &__image {
+      object-fit: cover;
+   }
+
+   &__placeholder {
+      min-height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--white-color);
+      font-family: Montserrat, sans-serif;
+      opacity: 0.75;
+   }
+
+   &__body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+   }
+
+   &__title {
+      margin: 0;
+      color: var(--white-color);
+      font-size: 18px;
+      font-family: Montserrat, sans-serif;
+      line-height: 1.3;
+   }
+
+   &__description {
+      margin: 0;
+      color: var(--white-color);
+      opacity: 0.9;
+      font-size: 14px;
+      line-height: 1.4;
+   }
+
+   &__link {
+      width: fit-content;
+      color: #8ed8ff;
+      font-size: 14px;
+      font-family: Montserrat, sans-serif;
+      text-decoration: none;
+
+      &:hover {
+         text-decoration: underline;
       }
    }
 }

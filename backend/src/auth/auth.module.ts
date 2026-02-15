@@ -9,5 +9,6 @@ import { AppConfigService } from '../config/app-config.service'
 @Module({
    controllers: [AuthController],
    providers: [AppConfigService, AuthService, AuthSessionService, OAuthAccountService, PinterestOAuthService],
+   exports: [AuthService, PinterestOAuthService],
 })
 export class AuthModule {}

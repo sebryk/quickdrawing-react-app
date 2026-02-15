@@ -26,4 +26,17 @@ export class AppConfigService {
 
       return value;
    }
+
+   getString(key: string, defaultValue?: string) {
+      const value = this.configService.get<string>(key);
+      if (value === undefined || value === null || value === '') {
+         if (defaultValue === undefined) {
+            throw new InternalServerErrorException(`Missing required env variable: ${key}`);
+         }
+
+         return defaultValue;
+      }
+
+      return value;
+   }
 }

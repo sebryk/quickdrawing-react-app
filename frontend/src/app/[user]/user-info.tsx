@@ -41,17 +41,18 @@ const UserInfo = ({ username, profileImageUrl }: UserInfoProps) => {
                className={styles['account__user-image']}
                src={profileImageUrl}
                alt={`User ${username} picture`}
-               width={100}
-               height={100}
+               width={80}
+               height={80}
             />
          ) : (
             <div className={styles['account__user-placeholder']}>
                <CiUser />
             </div>
          )}
-
-         <p className={styles['account__user-name']}>{username}</p>
-         <IconButton variant="logout" onClick={handleLogout} disabled={isPending} ariaLabel="Log out" />
+         <div className={styles['account__user-info']}>
+            <p className={styles['account__user-name']}>{username}</p>
+            <IconButton variant="logout" onClick={handleLogout} disabled={isPending} />
+         </div>
       </div>
    )
 }

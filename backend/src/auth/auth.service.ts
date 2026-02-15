@@ -123,6 +123,45 @@ export class AuthService {
       };
    }
 
+   async getPinterestAccessTokenFromSession(sessionToken?: string): Promise<string | null> {
+      if (!sessionToken) {
+         return null;
+      }
+
+      const session = await this.authSessionService.getSessionByToken(sessionToken);
+      if (!session || session.revokedAt || session.expiresAt < new Date()) {
+         return null;
+      }
+
+      const pinterestAccount = session.user.oauthAccounts.find((account) => account.provider === 'pinterest');
+      if (!pinterestAccount) {
+         return null;
+      }
+
+      const refreshed = await this.oauthAccountService.refreshPinterestIfNeeded(
+         {
+            id: pinterestAccount.id,
+            providerUserId: pinterestAccount.providerUserId,
+            refreshTokenEncrypted: pinterestAccount.refreshTokenEncrypted,
+            expiresAt: pinterestAccount.expiresAt,
+         },
+         { id: session.id, userId: session.userId },
+      );
+      if (!refreshed) {
+         return null;
+      }
+
+      const latestAccount = await this.prismaService.oAuthAccount.findUnique({
+         where: { id: pinterestAccount.id },
+         select: { accessTokenEncrypted: true },
+      });
+      if (!latestAccount) {
+         return null;
+      }
+
+      return this.oauthAccountService.decryptAccessToken(latestAccount.accessTokenEncrypted);
+   }
+
    async logout(sessionToken?: string) {
       if (!sessionToken) {
          return;
