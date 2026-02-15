@@ -1,10 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from '../auth/auth.service';
 import { PinterestOAuthService } from '../auth/services/pinterest-oauth.service';
 import type { PinterestPinResponse } from '../auth/types/pinterest.types';
 
 type ListPinsOptions = {
-   sessionToken?: string;
+   accessToken?: string;
    pageSize?: number;
    bookmark?: string;
 };
@@ -21,12 +20,10 @@ type AppPin = {
 @Injectable()
 export class PinterestService {
    constructor(
-      private readonly authService: AuthService,
       private readonly pinterestOAuthService: PinterestOAuthService,
    ) {}
 
-   async listPins({ sessionToken, pageSize, bookmark }: ListPinsOptions) {
-      const accessToken = await this.authService.getPinterestAccessTokenFromSession(sessionToken);
+   async listPins({ accessToken, pageSize, bookmark }: ListPinsOptions) {
       if (!accessToken) {
          throw new UnauthorizedException();
       }
@@ -40,8 +37,7 @@ export class PinterestService {
       };
    }
 
-   async getPinById(pinId: string, sessionToken?: string) {
-      const accessToken = await this.authService.getPinterestAccessTokenFromSession(sessionToken);
+   async getPinById(pinId: string, accessToken?: string) {
       if (!accessToken) {
          throw new UnauthorizedException();
       }

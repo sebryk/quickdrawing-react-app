@@ -1,12 +1,29 @@
 {
-  "name": "quickdrawing-monorepo",
-  "private": true,
-  "version": "1.0.0",
-  "scripts": {
-    "prepare": "husky ./.husky"
-  },
-  "devDependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.7"
-  }
+   "name": "quickdrawing-monorepo",
+   "private": true,
+   "version": "1.0.0",
+   "scripts": {
+      "prepare": "husky ./.husky",
+      "lint-staged": "lint-staged"
+   },
+   "lint-staged": {
+      "frontend/**/*.{js,jsx,ts,tsx}": [
+         "yarn --cwd frontend eslint --fix",
+         "yarn --cwd frontend prettier --write"
+      ],
+      "frontend/**/*.{css,scss,sass}": [
+         "yarn --cwd frontend stylelint --fix",
+         "yarn --cwd frontend prettier --write"
+      ],
+      "frontend/**/*.{json,md,yml,yaml}": [
+         "yarn --cwd frontend prettier --write"
+      ],
+      "backend/**/*.{js,jsx,ts,tsx}": [
+         "yarn --cwd backend eslint --fix"
+      ]
+   },
+   "devDependencies": {
+      "husky": "^9.1.7",
+      "lint-staged": "^16.2.7"
+   }
 }

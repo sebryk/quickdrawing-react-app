@@ -5,7 +5,6 @@ import Home from './home/home'
 const HomePage = async () => {
    const session = await getSessionUser()
    const userSlug = session ? encodeURIComponent(session.user) : null
-   const userLabel = session ? decodeURIComponent(session.user) : null
 
    return (
       <Layout>

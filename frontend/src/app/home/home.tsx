@@ -1,17 +1,16 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { VscChevronRight } from 'react-icons/vsc'
 import ObjectsForm from '@/components/objects-form'
 import { useAppDispatch } from '@/store/hooks'
 import { resetSelectedOptions } from '@/store/slices/objects-form-slice'
 import { persistor } from '@/store/store'
 import PlayerImage from '../../../public/assets/images/player.webp'
-
-import { data } from './data'
 import StartupCard from './components/startup-card/startup-card'
+import { data } from './data'
 import styles from './styles.module.scss'
 
 type HomeProps = {
@@ -42,15 +41,15 @@ const Home = ({ userSlug }: HomeProps) => {
          <div className={styles['home__content']}>
             {showForm && <ObjectsForm />}
             <Image
-               src={PlayerImage}
                alt="home"
-               className={styles['home__image']}
                width={530}
                height={294}
-               priority
+               priority={true}
+               src={PlayerImage}
+               className={styles['home__image']}
             />
          </div>
-         {!showForm && <StartupCard onQuickSession={() => setShowForm(true)} userSlug={userSlug} />}
+         {!showForm && <StartupCard userSlug={userSlug} onQuickSession={() => setShowForm(true)} />}
       </section>
    )
 }

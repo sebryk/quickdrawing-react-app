@@ -35,6 +35,8 @@
       "@storybook/test": "8.6.4",
       "storybook": "8.6.4",
       "@stylistic/stylelint-plugin": "^5.0.1",
+      "@typescript-eslint/eslint-plugin": "^8.55.0",
+      "@typescript-eslint/parser": "^8.55.0",
       "@types/node": "^25.2.2",
       "@types/react": "^19.2.10",
       "@types/react-dom": "^19.2.3",
