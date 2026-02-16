@@ -1,13 +1,18 @@
-import { Variant, VariantProps } from './types'
+import { FiLogOut } from 'react-icons/fi'
+import { PiArrowCircleLeftThin } from 'react-icons/pi'
 import styles from './styles.module.scss'
-import { IoIosExit } from 'react-icons/io'
+import { Variant, VariantProps } from './types'
 
 const VARIANT_PROPS: Record<Variant, VariantProps> = {
    close: {
       className: styles.close,
    },
+   back: {
+      icon: PiArrowCircleLeftThin,
+      className: styles.back,
+   },
    logout: {
-      icon: IoIosExit,
+      icon: FiLogOut,
       className: styles.logout,
    },
 }

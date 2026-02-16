@@ -83,6 +83,7 @@ const baseRules = {
    'jsx-a11y/aria-proptypes': 'warn',
    'jsx-a11y/aria-role': 'warn',
    'jsx-a11y/aria-unsupported-elements': 'warn',
+   'jsx-a11y/click-events-have-key-events': 'off',
    'perfectionist/sort-array-includes': 'warn',
    'perfectionist/sort-jsx-props': [
       'warn',

@@ -1,7 +1,8 @@
 import cn from 'classnames'
+import Link from 'next/link'
 import styles from './styles.module.scss'
-import VARIANT_PROPS from './variant-props'
 import { IconButtonProps } from './types'
+import VARIANT_PROPS from './variant-props'
 
 const IconButton = ({
    variant = 'close',
@@ -10,19 +11,22 @@ const IconButton = ({
    disabled,
    icon,
    className,
-   ariaLabel,
+   href,
 }: IconButtonProps) => {
    const variantProps = VARIANT_PROPS[variant]
    const Icon = icon ?? variantProps.icon
+   const commonClassName = cn(styles['icon-button'], variantProps.className, className)
+
+   if (href) {
+      return (
+         <Link href={href} className={commonClassName}>
+            {Icon && <Icon />}
+         </Link>
+      )
+   }
 
    return (
-      <button
-         className={cn(styles['icon-button'], variantProps.className, className)}
-         type={type}
-         onClick={onClick}
-         disabled={disabled}
-         aria-label={ariaLabel}
-      >
+      <button type={type} onClick={onClick} disabled={disabled} className={commonClassName}>
          {Icon && <Icon />}
       </button>
    )

@@ -2,7 +2,7 @@ import { IconType } from 'react-icons/lib'
 
 type Type = 'submit' | 'reset' | 'button'
 
-export type Variant = 'close' | 'logout'
+export type Variant = 'close' | 'logout' | 'back'
 
 export interface VariantProps {
    className: string
@@ -16,5 +16,5 @@ export interface IconButtonProps {
    disabled?: boolean
    icon?: IconType
    className?: string
-   ariaLabel?: string
+   href?: string
 }

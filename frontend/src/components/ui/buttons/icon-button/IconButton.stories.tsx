@@ -10,7 +10,6 @@ const meta: Meta<typeof IconButton> = {
       type: 'button',
       disabled: false,
       icon: MdClose,
-      ariaLabel: 'Close',
    },
    argTypes: {
       onClick: { action: 'clicked' },
