@@ -1,6 +1,6 @@
+import cn from 'classnames'
 import Link from 'next/link'
 import styles from './styles.module.scss'
-import cn from 'classnames'
 import { MainButtonProps } from './types'
 import VARIANT_PROPS from './variant-props'
 
@@ -19,7 +19,7 @@ const MainButton = ({
    const variantProps = VARIANT_PROPS[variant]
    const Icon = icon ?? variantProps.icon
    const resolvedPosition = iconPosition ?? variantProps.iconPosition ?? 'left'
-   const commonClassName = cn(styles['main-button'], styles[variant], className)
+   const commonClassName = cn(styles['main-button'], variantProps.className, className)
    const content = (
       <>
          {Icon && resolvedPosition === 'left' && <Icon />}
@@ -31,14 +31,19 @@ const MainButton = ({
    if (href) {
       const rel = target === '_blank' ? 'noopener noreferrer' : undefined
       return (
-         <Link href={href} className={commonClassName} target={target} rel={rel}>
+         <Link
+            rel={rel}
+            href={href}
+            target={target}
+            className={cn(commonClassName, { [styles['disabled']]: disabled })}
+         >
             {content}
          </Link>
       )
    }
 
    return (
-      <button className={commonClassName} type={type} onClick={onClick} disabled={disabled}>
+      <button type={type} onClick={onClick} disabled={disabled} className={commonClassName}>
          {content}
       </button>
    )

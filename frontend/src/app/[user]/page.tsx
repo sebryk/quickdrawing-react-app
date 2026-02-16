@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import IconButton from '@/components/ui/buttons/icon-button'
 import { getSessionUser } from '@/services/auth'
 import { getPinterestPins } from '@/services/pinterest-pins'
+import ControlBar from './components/control-bar'
 import PinsList from './components/pins-list'
 import UserInfo from './components/user-info'
 import styles from './styles.module.scss'
@@ -26,10 +27,10 @@ export default async function UserPage({ params }: PageProps) {
       <main className={styles.account}>
          <div className={styles['account-header']}>
             <IconButton href="/" variant="back" />
-            {/* <PinsCount value={pins.length} /> */}
             <UserInfo username={username} profileImageUrl={session.profileImageUrl} />
          </div>
          <PinsList pins={pins} />
+         <ControlBar />
       </main>
    )
 }

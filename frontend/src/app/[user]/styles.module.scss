@@ -10,23 +10,6 @@
    @include mixins.container;
 
    &-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-
-      @include mixins.glass-background;
-
-      border: 1px solid #e6e6e62d;
-      border-radius: 1000px;
-      padding: 8px;
-      position: relative;
-      z-index: 1;
-
-      &__left {
-         display: flex;
-         align-items: center;
-         gap: 16px;
-      }
+      @include mixins.glass-bar;
    }
 }

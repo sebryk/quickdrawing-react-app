@@ -1,9 +1,9 @@
-import { IconType } from 'react-icons/lib'
 import type { ReactNode, AnchorHTMLAttributes } from 'react'
+import { IconType } from 'react-icons/lib'
 
 type Type = 'submit' | 'reset' | 'button'
 
-export type Variant = 'primary' | 'primary-with-arrow' | 'accent'
+export type Variant = 'primary' | 'primary-with-arrow' | 'accent' | 'transparent'
 
 export interface VariantProps {
    className: string

@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { showModal } from '@/store/slices/modal-slice'
-import { resetSelectedOptions } from '@/store/slices/objects-form-slice'
 import {
    goToImage,
    goToNextImage,
    goToPrevImage,
    resetImageSlider,
 } from '@/store/slices/image-slider-slice'
+import { showModal } from '@/store/slices/modal-slice'
+import { resetSelectedOptions } from '@/store/slices/objects-form-slice'
 
 interface initialState {
    seconds: number

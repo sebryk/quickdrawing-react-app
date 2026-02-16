@@ -1,7 +1,7 @@
-import { Variant, VariantProps } from './types'
-import styles from './styles.module.scss'
 import cn from 'classnames'
 import { BiChevronRight } from 'react-icons/bi'
+import styles from './styles.module.scss'
+import { Variant, VariantProps } from './types'
 
 const VARIANT_PROPS: Record<Variant, VariantProps> = {
    primary: {
@@ -14,6 +14,9 @@ const VARIANT_PROPS: Record<Variant, VariantProps> = {
    },
    accent: {
       className: styles.accent,
+   },
+   transparent: {
+      className: styles.transparent,
    },
 }
 export default VARIANT_PROPS

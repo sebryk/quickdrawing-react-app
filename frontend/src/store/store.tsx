@@ -1,15 +1,16 @@
 'use client'
 
 import { configureStore } from '@reduxjs/toolkit'
-import objectsFormReducer from './slices/objects-form-slice'
-import modalReducer from './slices/modal-slice'
-import timerReducer from './slices/timer-slice'
-import completionBarReducer from './slices/completion-bar-slice/completion-bar-slice'
-import imageSliderReducer, { ImageSliderState } from './slices/image-slider-slice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
 import { imagesApi } from '../api/imagesApi'
 import { ISelectedOptions } from '../components/objects-form/types'
+import completionBarReducer from './slices/completion-bar-slice'
+import imageSliderReducer, { ImageSliderState } from './slices/image-slider-slice'
+import modalReducer from './slices/modal-slice'
+import objectsFormReducer from './slices/objects-form-slice'
+import pinsReducer from './slices/pins-slice'
+import timerReducer from './slices/timer-slice'
 
 const objectsPersistConfig = {
    key: 'options',
@@ -29,6 +30,7 @@ export const store = configureStore({
       timer: timerReducer,
       completionBar: completionBarReducer,
       imageSlider: persistReducer<ImageSliderState>(imageSliderPersistConfig, imageSliderReducer),
+      pins: pinsReducer,
       [imagesApi.reducerPath]: imagesApi.reducer,
    },
    middleware: (getDefaultMiddleware) =>

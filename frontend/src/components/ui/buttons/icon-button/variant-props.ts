@@ -1,5 +1,5 @@
 import { FiLogOut } from 'react-icons/fi'
-import { PiArrowCircleLeftThin } from 'react-icons/pi'
+import { HiArrowSmallLeft } from 'react-icons/hi2'
 import styles from './styles.module.scss'
 import { Variant, VariantProps } from './types'
 
@@ -8,7 +8,7 @@ const VARIANT_PROPS: Record<Variant, VariantProps> = {
       className: styles.close,
    },
    back: {
-      icon: PiArrowCircleLeftThin,
+      icon: HiArrowSmallLeft,
       className: styles.back,
    },
    logout: {

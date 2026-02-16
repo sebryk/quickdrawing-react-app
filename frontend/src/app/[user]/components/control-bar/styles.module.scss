@@ -1,0 +1,61 @@
+@use '@/styles/mixins';
+
+.control-bar {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   position: fixed;
+   left: 40px;
+   right: 40px;
+   bottom: 24px;
+
+   @include mixins.glass-bar;
+
+   &__count {
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      gap: 16px;
+      font-weight: 500;
+   }
+
+   &__value {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      font-family: Montserrat, sans-serif;
+      color: var(--white-color);
+      border: 1px solid #e6e6e62d;
+      padding: 0 20px;
+      border-radius: 1000px;
+      height: 40px;
+   }
+
+   &__label {
+      font-size: 16px;
+      font-family: Montserrat, sans-serif;
+      color: var(--white-color);
+      opacity: 1;
+   }
+
+   &__reset-button {
+      width: fit-content;
+      font-size: 16px;
+      font-family: Montserrat, sans-serif;
+      color: var(--white-color);
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      font-weight: 500;
+      margin-left: auto;
+      padding: 0 20px;
+      height: 100%;
+   }
+
+   & .control-bar__start-button {
+      width: fit-content;
+   }
+}

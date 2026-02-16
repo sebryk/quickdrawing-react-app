@@ -1,13 +1,7 @@
 'use client'
 
 import cn from 'classnames'
-
 import { useEffect, useContext } from 'react'
-import ControllBarButton from './components/controll-bar-button'
-import Timer from '../timer'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { toggleTimer } from '@/store/slices/timer-slice'
-import { setCompletionBar } from '../../store/slices/completion-bar-slice/completion-bar-slice'
 import {
    goToNextImage,
    goToPrevImage,
@@ -16,8 +10,13 @@ import {
    setProgressIndex,
 } from '@/store/slices/image-slider-slice'
 import { showModal } from '@/store/slices/modal-slice'
+import { toggleTimer } from '@/store/slices/timer-slice'
 import { DataContext } from '../../context/context'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { setCompletionBar } from '../../store/slices/completion-bar-slice'
 import Error from '../error/error'
+import Timer from '../timer'
+import ControllBarButton from './components/controll-bar-button'
 import styles from './styles.module.scss'
 
 const ControlBar = () => {
@@ -82,8 +81,8 @@ const ControlBar = () => {
                   isImageSliderFinished={imageSlider.isFinished}
                />
                <ControllBarButton
-                  variant={timer.isActive ? 'pause' : 'play'}
                   onClick={() => dispatch(toggleTimer())}
+                  variant={timer.isActive ? 'pause' : 'play'}
                   isImageSliderFinished={imageSlider.isFinished}
                />
                <ControllBarButton
