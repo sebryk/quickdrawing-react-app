@@ -63,9 +63,9 @@ const Drawing = () => {
       }
    }, [])
 
-   if (!object) {
-      return <Error>Error: Options are not selected</Error>
-   }
+   // if (!object) {
+   //    return <Error>Error: Options are not selected</Error>
+   // }
 
    if (error && 'status' in error) {
       return <Error>Error: {error.status}</Error>

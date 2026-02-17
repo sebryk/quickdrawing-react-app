@@ -1,15 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import MainButton from '@/components/ui/buttons/main-button'
-import { getPinterestAuthUrl } from '@/app/home/actions/get-pinterest-auth-url '
-import { FaPinterest } from 'react-icons/fa'
-
-import styles from './styles.module.scss'
-import { data } from './data'
-
 import cn from 'classnames'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { FaPinterest } from 'react-icons/fa'
+
+import { getPinterestAuthUrl } from '@/app/home/actions/get-pinterest-auth-url '
+import MainButton from '@/components/ui/buttons/main-button'
+
+import { data } from './data'
+import styles from './styles.module.scss'
 
 type StartupCardProps = {
    onQuickSession: () => void
@@ -43,18 +43,22 @@ const StartupCard = ({ onQuickSession, userSlug, className }: StartupCardProps) 
    }
 
    const handleLogin = () => {
-      userSlug ? router.push(`/${userSlug}`) : handlePinterestAuth()
+      if (userSlug) {
+         router.push(`/${userSlug}`)
+         return
+      }
+      handlePinterestAuth()
    }
 
    return (
       <div className={cn(styles['startup-card'], className)}>
          {buttons.map((button, index) => (
             <MainButton
-               className={styles['startup-card__button']}
-               onClick={index === 0 ? onQuickSession : handleLogin}
                key={index}
-               variant={index === 0 ? 'primary' : 'accent'}
                disabled={index === 1 && isLoading}
+               className={styles['startup-card__button']}
+               variant={index === 0 ? 'primary' : 'accent'}
+               onClick={index === 0 ? onQuickSession : handleLogin}
             >
                {index === 1 && userSlug ? button.loggedInTitle : button.title}{' '}
                {index === 1 && !userSlug && pinterestIcon}

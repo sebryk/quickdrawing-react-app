@@ -1,3 +1,5 @@
+import { GroupBase, StylesConfig } from 'react-select'
+
 export interface IOptions {
    [name: string]: IOption[]
 }
@@ -19,4 +21,6 @@ export interface ObjectsFormSelectProps {
    isClearable?: boolean
    name: string
    children: string
+   className?: string
+   customStyles?: StylesConfig<IOption, false, GroupBase<IOption>> | undefined
 }

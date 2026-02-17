@@ -9,4 +9,10 @@ export const data = {
       title: 'Reset all',
    },
    emptyText: 'Select images to start drawing',
+   selectOption: [
+      {
+         name: 'duration',
+         placeholder: 'Select duration',
+      },
+   ],
 }

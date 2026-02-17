@@ -1,13 +1,13 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import ObjectsFormSelect from './components/select'
-import Button from '../ui/buttons/main-button'
-import { useAppSelector } from '../../store/hooks'
-import { options } from './settings'
-import { data } from './data'
-import styles from './styles.module.scss'
 import cn from 'classnames'
+import { useRouter } from 'next/navigation'
+import { useAppSelector } from '../../store/hooks'
+import Button from '../ui/buttons/main-button'
+import ObjectsFormSelect from './components/select'
+import { data } from './data'
+import { options } from './settings'
+import styles from './styles.module.scss'
 
 const ObjectsForm = () => {
    const selectedOptions = useAppSelector((state) => state.selectedOptions)
@@ -29,20 +29,20 @@ const ObjectsForm = () => {
             return (
                <ObjectsFormSelect
                   key={option.name}
-                  placeholder={option.placeholder}
-                  options={options[option.name]}
                   name={option.name}
-                  isVisible={isHumanSpecific ? isHuman : true}
                   isClearable={true}
+                  options={options[option.name]}
+                  placeholder={option.placeholder}
+                  isVisible={isHumanSpecific ? isHuman : true}
                >
                   {option.name}
                </ObjectsFormSelect>
             )
          })}
          <Button
-            onClick={() => router.push('/drawing')}
             disabled={!isFormValid}
             variant="primary-with-arrow"
+            onClick={() => router.push('/drawing')}
          >
             {button.title}
          </Button>
