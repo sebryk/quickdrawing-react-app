@@ -1,7 +1,7 @@
-import { IImage } from '../../api/types'
+import { AccountPin } from '@/services/pinterest-pins'
 
 export interface PreviewImagesProps {
-   imgData: IImage[]
+   data: AccountPin[]
    currentIndex: number
    progressIndex: number
    isFinished: boolean
@@ -9,7 +9,7 @@ export interface PreviewImagesProps {
 }
 
 export interface PreviewDotsProps {
-   imgData: IImage[]
+   data: AccountPin[]
    currentIndex: number
    isMouseMoving: boolean
 }
@@ -33,7 +33,7 @@ export interface NavigationButtonProps {
 }
 
 export interface FooterProps {
-   imgData: IImage[]
+   data: AccountPin[]
    currentIndex: number
    isMouseMoving: boolean
    onMouseOver: () => void

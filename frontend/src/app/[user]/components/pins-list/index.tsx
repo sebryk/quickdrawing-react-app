@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useEffect } from 'react'
 import { FaCheck, FaCircle } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { setPinIds, togglePinSelection } from '@/store/slices/pins-slice'
+import { setPins, togglePinSelection } from '@/store/slices/pins-slice'
 import styles from './styles.module.scss'
 
 type PinsListProps = {
@@ -15,10 +15,10 @@ type PinsListProps = {
 
 const PinsList = ({ pins }: PinsListProps) => {
    const dispatch = useAppDispatch()
-   const selectedPinIds = useAppSelector((state) => state.pins.selectedPinIds)
+   const selectedPins = useAppSelector((state) => state.pins.selectedPins)
 
    useEffect(() => {
-      dispatch(setPinIds(pins.map((pin) => pin.id)))
+      dispatch(setPins(pins))
    }, [dispatch, pins])
 
    if (pins.length === 0) {
@@ -28,13 +28,13 @@ const PinsList = ({ pins }: PinsListProps) => {
    return (
       <section className={styles.pins}>
          {pins.map((pin) => {
-            const isSelected = selectedPinIds.includes(pin.id)
+            const isSelected = selectedPins.some((selectedPin) => selectedPin.id === pin.id)
 
             return (
                <button
                   key={pin.id}
                   type="button"
-                  onClick={() => dispatch(togglePinSelection(pin.id))}
+                  onClick={() => dispatch(togglePinSelection(pin))}
                   className={cn(styles.pin, {
                      [styles['pin--selected']]: isSelected,
                   })}

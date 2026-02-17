@@ -1,39 +1,31 @@
 'use client'
 
-import styles from './styles.module.scss'
+import Image from 'next/image'
+import { AccountPin } from '@/services/pinterest-pins'
+import { showModal } from '@/store/slices/modal-slice'
+import { toggleTimer } from '@/store/slices/timer-slice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import {
    goToNextImage,
    goToPrevImage,
-   setIsLoading,
    setMouseOut,
    setMouseOver,
 } from '../../store/slices/image-slider-slice'
-import { showModal } from '@/store/slices/modal-slice'
 import ControllBarButton from '../control-bar/components/controll-bar-button'
-import { toggleTimer } from '@/store/slices/timer-slice'
-import { useContext } from 'react'
-import { DataContext } from '../../context/context'
-import Error from '../error/error'
+import { Footer } from './components/footer'
 import { NavigationButton } from './components/navigation-button'
 import { PreviewSection } from './components/preview-section'
 import { PreviewDots } from './components/preview-section/components/preview-dots'
 import { PreviewImages } from './components/preview-section/components/preview-images'
-import { Footer } from './components/footer'
-import Image from 'next/image'
+import styles from './styles.module.scss'
 
-const ImageSlider = () => {
+const ImageSlider = ({ data }: { data: AccountPin[] }) => {
    const dispatch = useAppDispatch()
    const imageSlider = useAppSelector((state) => state.imageSlider)
    const timer = useAppSelector((state) => state.timer)
-   const imgDataContext = useContext(DataContext)
+   const currentImage = data?.[imageSlider.currentIndex]?.imageUrl
 
-   if (!imgDataContext) {
-      return <Error>Error: The context data is unavailable</Error>
-   }
-
-   const { data: imgData } = imgDataContext
-   const dataLength = imgData?.length || 0
+   const dataLength = data?.length || 0
 
    const handleMouseOver = () => dispatch(setMouseOver())
    const handleMouseOut = () => dispatch(setMouseOut())
@@ -41,81 +33,84 @@ const ImageSlider = () => {
    return (
       <div className={styles['image-slider']}>
          <div
-            className={styles['image-slider__button-wrapper']}
+            tabIndex={0}
+            role="button"
             onClick={() => dispatch(toggleTimer())}
+            className={styles['image-slider__button-wrapper']}
          >
             {timer.isPaused && imageSlider.isMouseMoving && (
                <ControllBarButton
+                  variant="play"
                   className={styles['image-slider__button']}
                   isImageSliderFinished={imageSlider.isFinished}
-                  variant="play"
                />
             )}
          </div>
 
          <NavigationButton
             variant="close"
-            onClick={() => dispatch(showModal())}
-            onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
+            onMouseOver={handleMouseOver}
+            onClick={() => dispatch(showModal())}
             isMouseMoving={imageSlider.isMouseMoving}
          />
-
-         <Image
-            title="img"
-            className={styles['image-slider__img']}
-            src={imgData?.[imageSlider.currentIndex]?.urls?.regular}
-            alt={imgData?.[imageSlider.currentIndex]?.alt_description}
-            fill
-            sizes="100vw"
-            quality={100}
-         />
+         {currentImage && (
+            <Image
+               fill={true}
+               title="img"
+               sizes="100vw"
+               quality={100}
+               className={styles['image-slider__img']}
+               alt={data?.[imageSlider.currentIndex]?.title || ''}
+               src={data?.[imageSlider.currentIndex]?.imageUrl || ''}
+            />
+         )}
 
          <NavigationButton
             variant="left"
-            onClick={() => dispatch(goToPrevImage())}
-            onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
-            isDisabled={imageSlider.currentIndex === 0 || !imageSlider.isFinished}
+            onMouseOver={handleMouseOver}
             isVisible={imageSlider.isFinished}
+            onClick={() => dispatch(goToPrevImage())}
             isMouseMoving={imageSlider.isMouseMoving}
+            isDisabled={imageSlider.currentIndex === 0 || !imageSlider.isFinished}
          />
          <NavigationButton
             variant="right"
-            onClick={() => dispatch(goToNextImage())}
-            onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
-            isDisabled={imageSlider.currentIndex === dataLength - 1 || !imageSlider.isFinished}
+            onMouseOver={handleMouseOver}
             isVisible={imageSlider.isFinished}
+            onClick={() => dispatch(goToNextImage())}
             isMouseMoving={imageSlider.isMouseMoving}
+            isDisabled={imageSlider.currentIndex === dataLength - 1 || !imageSlider.isFinished}
          />
 
          <PreviewSection
             dataLength={dataLength}
-            isMouseMoving={imageSlider.isMouseMoving}
-            onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
+            onMouseOver={handleMouseOver}
+            isMouseMoving={imageSlider.isMouseMoving}
          >
             <PreviewDots
-               imgData={imgData}
+               data={data}
                currentIndex={imageSlider.currentIndex}
                isMouseMoving={imageSlider.isMouseMoving}
             />
             <PreviewImages
-               imgData={imgData}
+               data={data}
+               isLoading={imageSlider.isLoading}
+               isFinished={imageSlider.isFinished}
                currentIndex={imageSlider.currentIndex}
                progressIndex={imageSlider.progressIndex}
-               isFinished={imageSlider.isFinished}
-               isLoading={imageSlider.isLoading}
             />
          </PreviewSection>
 
          <Footer
-            imgData={imgData}
+            data={data}
+            onMouseOut={handleMouseOut}
+            onMouseOver={handleMouseOver}
             currentIndex={imageSlider.currentIndex}
             isMouseMoving={imageSlider.isMouseMoving}
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
          />
       </div>
    )

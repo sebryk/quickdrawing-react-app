@@ -2,50 +2,50 @@
 
 import cn from 'classnames'
 
+import ControlBar from '@/components/control-bar'
+import CompletionBar from '@/components/image-slider/components/footer/components/completion-bar'
 import { useAppDispatch } from '@/store/hooks'
 import { showModal } from '@/store/slices/modal-slice'
-import CompletionBar from '@/components/image-slider/components/footer/components/completion-bar'
-import ControlBar from '@/components/control-bar'
-import Tooltip from '@/components/ui/tooltip'
-import { truncateText } from '@/utils/truncateText'
+import { data as footerData } from '../../data'
+// import Tooltip from '@/components/ui/tooltip'
+// import { truncateText } from '@/utils/truncateText'
 import { FooterProps } from '../../types'
-import { data } from '../../data'
 import styles from './styles.module.scss'
 
 export const Footer = ({
-   imgData,
-   currentIndex,
+   data,
+   // currentIndex,
    isMouseMoving,
    onMouseOver,
    onMouseOut,
 }: FooterProps) => {
    const dispatch = useAppDispatch()
-   const currentImage = imgData?.[currentIndex]
-   const { logo, author } = data
-   const rawAuthorName = currentImage?.user?.name ?? ''
+   // const currentImage = data?.[currentIndex]
+   const { logo } = footerData
+   // const rawAuthorName = currentImage?.title ?? ''
 
    return (
       <div
+         onMouseOut={onMouseOut}
+         onMouseOver={onMouseOver}
          className={cn(styles['slider-footer'], {
             [styles['slider-footer--hidden']]: !isMouseMoving,
          })}
-         onMouseOver={onMouseOver}
-         onMouseOut={onMouseOut}
       >
          <CompletionBar />
          <div
-            className={cn(styles['slider-footer__logo'], 'logo')}
             onClick={() => dispatch(showModal())}
+            className={cn(styles['slider-footer__logo'], 'logo')}
          >
             {logo}
          </div>
-         <ControlBar />
+         <ControlBar data={data} />
          <h2 className={styles['slider-footer__credit']}>
-            {author}&ensp;
+            {/* {author}&ensp;
             {currentImage && rawAuthorName && (
                <Tooltip content={rawAuthorName} disabled={rawAuthorName.length <= 12}>
                   <a
-                     href={currentImage.user.links.html}
+                     href={currentImage.link ?? ''}
                      className={styles['slider-footer__credit-name']}
                      target="_blank"
                      rel="noopener noreferrer"
@@ -53,7 +53,7 @@ export const Footer = ({
                      {truncateText(rawAuthorName, { limit: 12 })}
                   </a>
                </Tooltip>
-            )}
+            )} */}
          </h2>
       </div>
    )

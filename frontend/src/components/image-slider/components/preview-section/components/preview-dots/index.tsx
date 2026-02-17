@@ -2,7 +2,7 @@ import cn from 'classnames'
 import { PreviewDotsProps } from '../../../../types'
 import styles from './styles.module.scss'
 
-export const PreviewDots = ({ imgData, currentIndex, isMouseMoving }: PreviewDotsProps) => {
+export const PreviewDots = ({ data, currentIndex, isMouseMoving }: PreviewDotsProps) => {
    const getDotsClassName = (dotIndex: number) => {
       const isActive = dotIndex === currentIndex
 
@@ -18,7 +18,7 @@ export const PreviewDots = ({ imgData, currentIndex, isMouseMoving }: PreviewDot
             [styles['preview-dots--visible']]: !isMouseMoving,
          })}
       >
-         {imgData?.map((dot, dotIndex) => (
+         {data?.map((dot, dotIndex) => (
             <div key={dot.id} className={getDotsClassName(dotIndex)} />
          ))}
       </div>

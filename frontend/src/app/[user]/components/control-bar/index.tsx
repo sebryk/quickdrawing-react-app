@@ -9,31 +9,31 @@ import styles from './styles.module.scss'
 const ControlBar = () => {
    const dispatch = useAppDispatch()
    const { title, mainButton, secondaryButton } = data
-   const selectedPinCount = useAppSelector((state) => state.pins.selectedPinIds.length)
+   const selectedPinCount = useAppSelector((state) => state.pins.selectedPins.length)
 
    return (
       <div className={styles['control-bar']}>
-         <div className={styles['control-bar__count']}>
-            <span className={styles['control-bar__value']}>{selectedPinCount}</span>
-            <span className={styles['control-bar__label']}>{title}</span>
-         </div>
-         {selectedPinCount > 0 && (
-            <MainButton
-               type="button"
-               variant="transparent"
-               onClick={() => dispatch(resetPinSelection())}
-               className={styles['control-bar__reset-button']}
-            >
-               {secondaryButton.title}
-            </MainButton>
+         {selectedPinCount > 0 ? (
+            <>
+               <div className={styles['control-bar__count']}>
+                  <span className={styles['control-bar__value']}>{selectedPinCount}</span>
+                  <span className={styles['control-bar__label']}>{title}</span>
+               </div>
+               <MainButton
+                  type="button"
+                  variant="transparent"
+                  onClick={() => dispatch(resetPinSelection())}
+                  className={styles['control-bar__reset-button']}
+               >
+                  {secondaryButton.title}
+               </MainButton>
+               <MainButton href={mainButton.href} className={styles['control-bar__start-button']}>
+                  {mainButton.title}
+               </MainButton>
+            </>
+         ) : (
+            <p className={styles['control-bar__empty']}>{data.emptyText}</p>
          )}
-         <MainButton
-            href={mainButton.href}
-            disabled={selectedPinCount === 0}
-            className={styles['control-bar__start-button']}
-         >
-            {selectedPinCount > 0 ? mainButton.title : mainButton.secondaryTitle}
-         </MainButton>
       </div>
    )
 }

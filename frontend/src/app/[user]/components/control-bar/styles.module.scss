@@ -2,14 +2,24 @@
 
 .control-bar {
    display: flex;
+   width: 100%;
+   max-width: 1300px;
    align-items: center;
    gap: 12px;
    position: fixed;
-   left: 40px;
-   right: 40px;
+   left: 50%;
+   transform: translateX(-50%);
    bottom: 24px;
+   min-height: 56px;
 
    @include mixins.glass-bar;
+
+   @media (width <= 1380px) {
+      left: 40px;
+      right: 40px;
+      width: unset;
+      transform: unset;
+   }
 
    &__count {
       width: fit-content;
@@ -53,6 +63,15 @@
       margin-left: auto;
       padding: 0 20px;
       height: 100%;
+   }
+
+   &__empty {
+      font-size: 16px;
+      font-family: Montserrat, sans-serif;
+      color: var(--white-color);
+      width: 100%;
+      font-weight: 500;
+      text-align: center;
    }
 
    & .control-bar__start-button {

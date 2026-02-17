@@ -1,7 +1,8 @@
 'use client'
 
 import cn from 'classnames'
-import { useEffect, useContext } from 'react'
+import { useEffect } from 'react'
+import { AccountPin } from '@/services/pinterest-pins'
 import {
    goToNextImage,
    goToPrevImage,
@@ -11,26 +12,20 @@ import {
 } from '@/store/slices/image-slider-slice'
 import { showModal } from '@/store/slices/modal-slice'
 import { toggleTimer } from '@/store/slices/timer-slice'
-import { DataContext } from '../../context/context'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { setCompletionBar } from '../../store/slices/completion-bar-slice'
-import Error from '../error/error'
 import Timer from '../timer'
 import ControllBarButton from './components/controll-bar-button'
 import styles from './styles.module.scss'
 
-const ControlBar = () => {
+const ControlBar = ({ data }: { data: AccountPin[] }) => {
    const timer = useAppSelector((state) => state.timer)
    const imageSlider = useAppSelector((state) => state.imageSlider)
    const completionBar = useAppSelector((state) => state.completionBar)
    const selectedOptions = useAppSelector((state) => state.selectedOptions)
-   const imgDataContext = useContext(DataContext)
    const dispatch = useAppDispatch()
 
-   if (!imgDataContext) {
-      return <Error>Error: The context data is unavailable</Error>
-   }
-   const { data: imgData, refetch } = imgDataContext
+   // const { data: imgData, refetch } = imgDataContext
 
    useEffect(() => {
       const durationValue = Number(selectedOptions.duration?.value)
@@ -42,7 +37,7 @@ const ControlBar = () => {
       const isTimerComplete = completionBar.completedPercentOfTime === 100
       if (!isTimerComplete) return
 
-      const isLastImage = imageSlider.currentIndex === (imgData?.length ?? 0) - 1
+      const isLastImage = imageSlider.currentIndex === (data?.length ?? 0) - 1
 
       if (isLastImage) {
          dispatch(toggleTimer())
@@ -56,14 +51,14 @@ const ControlBar = () => {
    }, [
       completionBar.completedPercentOfTime,
       imageSlider.currentIndex,
-      imgData?.length,
+      data?.length,
       selectedOptions.duration?.value,
       timer.seconds,
    ])
 
    const resetSession = () => {
       dispatch(resetImageSlider())
-      refetch()
+      // refetch()
    }
 
    return (
@@ -90,7 +85,7 @@ const ControlBar = () => {
                   onClick={() => dispatch(goToNextImage())}
                   isImageSliderFinished={imageSlider.isFinished}
                   disabled={
-                     imageSlider.currentIndex === imgData.length - 1 ||
+                     imageSlider.currentIndex === data?.length - 1 ||
                      (!imageSlider.isFinished &&
                         imageSlider.currentIndex === imageSlider.progressIndex)
                   }

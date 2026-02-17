@@ -1,5 +1,3 @@
-import { createContext } from 'react'
-import { IImage } from '../api/types'
 import {
    QueryActionCreatorResult,
    QueryDefinition,
@@ -8,12 +6,15 @@ import {
    FetchBaseQueryError,
    FetchBaseQueryMeta,
 } from '@reduxjs/toolkit/query'
+import { createContext } from 'react'
+import { IImage } from '../api/types'
 
 export interface IDataContext {
    data: IImage[]
    refetch: () => QueryActionCreatorResult<
       QueryDefinition<
          Record<string, string | number>,
+         // eslint-disable-next-line @typescript-eslint/no-empty-object-type
          BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
          never,
          IImage[],

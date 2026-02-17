@@ -8,4 +8,5 @@ export const data = {
    secondaryButton: {
       title: 'Reset all',
    },
+   emptyText: 'Select images to start drawing',
 }

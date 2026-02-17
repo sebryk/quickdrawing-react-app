@@ -1,13 +1,12 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
+import { useGetImagesByTypeQuery } from '@/api/imagesApi'
+import Error from '@/components/error/error'
 import ImageSlider from '@/components/image-slider'
+import LoadingBar from '@/components/loading-bar/loading-bar'
 import { mouseIsMoving } from '@/store/slices/image-slider-slice'
-import { useGetImagesByTypeQuery } from '../../api/imagesApi'
-import Error from '../../components/error/error'
 import Modal from '../../components/image-slider/components/modal'
-import LoadingBar from '../../components/loading-bar/loading-bar'
-import { DataContext } from '../../context/context'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getRandomNumber } from '../../utils/getRandomNumber'
 import styles from './styles.module.scss'
@@ -22,13 +21,15 @@ const Drawing = () => {
       useAppSelector((state) => state.selectedOptions) || {}
    const { isMouseOver, key } = useAppSelector((state) => state.imageSlider)
    const { isOpen } = useAppSelector((state) => state.modal)
+   // const sessionType = useAppSelector((state) => state.imageSlider.sessionType)
+   const selectedPins = useAppSelector((state) => state.pins.selectedPins)
 
    const isHuman = object?.value === 'human'
    const objectQuery = isHuman
       ? `${object.value} ${gender?.value} ${clothing?.value}`.trim()
       : object?.value
 
-   const { data, isLoading, error, refetch } = useGetImagesByTypeQuery({
+   const { data, isLoading, error } = useGetImagesByTypeQuery({
       query: String(objectQuery),
       page: randomPageNumber,
       count: Number(count?.value),
@@ -83,9 +84,8 @@ const Drawing = () => {
          className={styles['drawing-section']}
       >
          {isOpen && <Modal />}
-         <DataContext.Provider value={{ data, refetch }}>
-            <ImageSlider />
-         </DataContext.Provider>
+
+         <ImageSlider data={selectedPins} />
       </section>
    )
 }

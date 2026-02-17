@@ -2,8 +2,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { closeModal } from '../modal-slice'
 import { resetSelectedOptions } from '../objects-form-slice'
 
+export type SessionType = 'quick' | 'account'
+
 export interface ImageSliderState {
    key: number
+   sessionType: SessionType | null
    isMouseOver: boolean
    isMouseMoving: boolean
    currentIndex: number
@@ -14,6 +17,7 @@ export interface ImageSliderState {
 
 const initialState: ImageSliderState = {
    key: 0,
+   sessionType: null,
    isMouseOver: false,
    isMouseMoving: true,
    currentIndex: 0,
@@ -66,6 +70,10 @@ const imageSliderSlice = createSlice({
          state.isFinished = false
          state.currentIndex = 0
          state.key = state.key + 1
+      },
+
+      setSessionType: (state, action: PayloadAction<SessionType | null>) => {
+         state.sessionType = action.payload
       },
    },
    extraReducers: (builder) => {

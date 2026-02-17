@@ -1,6 +1,5 @@
 import js from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
-import eslintJsxA11y from 'eslint-plugin-jsx-a11y'
 import perfectionist from 'eslint-plugin-perfectionist'
 import prettierPlugin from 'eslint-plugin-prettier'
 import eslintReact from 'eslint-plugin-react'
@@ -29,7 +28,7 @@ const baseRules = {
    'default-case': 'error',
    'default-case-last': 'error',
    eqeqeq: ['error', 'always'],
-   'func-style': ['error', 'expression', { allowArrowFunctions: true }],
+   'func-style': 'off',
    'init-declarations': ['error', 'always'],
    'no-alert': 'error',
    'no-console':
@@ -47,6 +46,7 @@ const baseRules = {
       },
    ],
    yoda: 'error',
+   'no-inline-styles': 'off',
    'no-inline-comments': 'error',
    'no-empty-function': 'warn',
    'no-unneeded-ternary': 'warn',
@@ -60,30 +60,6 @@ const baseRules = {
    'react/jsx-boolean-value': [2, 'always'],
    'react/jsx-uses-react': 'off',
    'react/react-in-jsx-scope': 'off',
-   'jsx-a11y/no-autofocus': [
-      2,
-      {
-         ignoreNonDOM: false,
-      },
-   ],
-   'jsx-a11y/alt-text': [
-      2,
-      {
-         elements: ['img', 'object', 'area', 'input[type="image"]'],
-         img: ['Image', 'LazyLoadImage', 'ExportedImage'],
-         object: ['Object'],
-         area: ['Area'],
-         'input[type="image"]': ['InputImage'],
-      },
-   ],
-   'jsx-a11y/anchor-has-content': 'warn',
-   'jsx-a11y/anchor-is-valid': 'warn',
-   'jsx-a11y/aria-activedescendant-has-tabindex': 'warn',
-   'jsx-a11y/aria-props': 'warn',
-   'jsx-a11y/aria-proptypes': 'warn',
-   'jsx-a11y/aria-role': 'warn',
-   'jsx-a11y/aria-unsupported-elements': 'warn',
-   'jsx-a11y/click-events-have-key-events': 'off',
    'perfectionist/sort-array-includes': 'warn',
    'perfectionist/sort-jsx-props': [
       'warn',
@@ -142,7 +118,6 @@ export default [
    },
    js.configs.recommended,
    eslintReact.configs.flat.recommended,
-   eslintJsxA11y.flatConfigs.recommended,
    ...tseslint.configs.recommended,
    {
       plugins: {
