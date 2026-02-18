@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ISelectedOptions } from '../../../components/objects-form/types'
+import { IOption, ISelectedOptions } from '../../../components/objects-form/types'
 
-const initialState: ISelectedOptions | null = {}
+const defaultDurationOption: IOption = { value: 300, label: '5 min' }
+
+const initialState: ISelectedOptions | null = {
+   duration: defaultDurationOption,
+}
 
 export const objectsFormSlice = createSlice({
    name: 'selectedOptions',

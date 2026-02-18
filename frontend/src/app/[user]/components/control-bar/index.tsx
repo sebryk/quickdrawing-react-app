@@ -1,12 +1,11 @@
 'use client'
 
 import ObjectsFormSelect from '@/components/objects-form/components/select'
-import { options } from '@/components/objects-form/settings'
 import MainButton from '@/components/ui/buttons/main-button'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { resetPinSelection } from '@/store/slices/pins-slice'
 import { data } from './data'
-import { selectStyles } from './settings'
+import { selectStyles, options } from './settings'
 import styles from './styles.module.scss'
 
 const ControlBar = () => {

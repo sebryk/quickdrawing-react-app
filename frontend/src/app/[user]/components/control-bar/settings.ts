@@ -1,5 +1,5 @@
 import { GroupBase, StylesConfig } from 'react-select'
-import { IOption } from '@/components/objects-form/types'
+import { IOption, IOptions } from '@/components/objects-form/types'
 
 export const selectStyles: StylesConfig<IOption, false, GroupBase<IOption>> = {
    control: (base) => ({
@@ -78,4 +78,21 @@ export const selectStyles: StylesConfig<IOption, false, GroupBase<IOption>> = {
       border: 0,
       cursor: 'pointer',
    }),
+}
+
+export const options: IOptions = {
+   duration: [
+      { value: 300, label: '5 min' },
+      { value: 600, label: '10 min' },
+      { value: 900, label: '15 min' },
+      { value: 1200, label: '20 min' },
+      { value: 1500, label: '25 min' },
+      { value: 1800, label: '30 min' },
+      { value: 2100, label: '35 min' },
+      { value: 2400, label: '40 min' },
+      { value: 2700, label: '45 min' },
+      { value: 3000, label: '50 min' },
+      { value: 3300, label: '55 min' },
+      { value: 3600, label: '60 min' },
+   ],
 }
