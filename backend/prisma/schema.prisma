@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String        @id @default(cuid())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  oauthAccounts OAuthAccount[]
+  sessions      AuthSession[]
+}
+
+model OAuthAccount {
+  id                   String   @id @default(cuid())
+  userId               String
+  provider             String
+  providerUserId       String
+  providerUsername     String?
+  providerProfileImageUrl String?
+  accessTokenEncrypted String
+  refreshTokenEncrypted String?
+  scope                String?
+  expiresAt            DateTime?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerUserId])
+  @@unique([provider, providerUsername])
+  @@index([userId])
+}
+
+model AuthSession {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])
+}
+
+model OAuthState {
+  state     String   @id
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  usedAt    DateTime?
+}
