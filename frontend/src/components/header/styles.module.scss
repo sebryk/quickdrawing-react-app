@@ -1,15 +1,37 @@
 @use '@/styles/mixins';
 
 .header {
-   width: 100%;
+   width: calc(100% - 80px);
    display: flex;
    justify-content: space-between;
    align-items: center;
    font-family: Montserrat, sans-serif;
-   padding-top: 36px;
+   min-height: 54px;
    margin-bottom: 0;
+   border-radius: 1000px;
+   position: relative;
 
    @include mixins.container;
+
+   padding-inline: 20px;
+   margin-top: 24px;
+
+   &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      outline: 1px solid #e6e6e62d;
+      z-index: 0;
+
+      @include mixins.glass-background;
+   }
+
+   > * {
+      position: relative;
+      z-index: 1;
+   }
 
    &__nav {
       display: flex;
@@ -57,12 +79,14 @@
    }
 
    .header {
+      padding-inline: 16px;
+
       &__nav {
          width: 50%;
          height: 100vh;
          top: 0;
          right: 0;
-         position: absolute;
+         position: fixed;
          flex-direction: column;
          gap: 100px;
          transform: translateX(100%);
