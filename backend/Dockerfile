@@ -16,4 +16,4 @@ RUN npm run build
 ENV NODE_ENV=production
 EXPOSE 4000
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
+CMD ["sh", "-c", "echo DATABASE_URL_PRESENT=${DATABASE_URL:+true}; npx prisma migrate deploy && node dist/main.js"]
