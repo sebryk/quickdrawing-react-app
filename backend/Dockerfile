@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 COPY prisma ./prisma
+COPY prisma.config.ts ./
 
 CMD ["sh", "-c", "echo DATABASE_URL=$DATABASE_URL; npx prisma migrate deploy && node dist/main.js"]
 
