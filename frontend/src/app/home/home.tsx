@@ -7,6 +7,7 @@ import { VscChevronRight } from 'react-icons/vsc'
 import ObjectsForm from '@/components/objects-form'
 import { useAppDispatch } from '@/store/hooks'
 import { resetSelectedOptions } from '@/store/slices/objects-form-slice'
+import { resetPinSelection } from '@/store/slices/pins-slice'
 import { persistor } from '@/store/store'
 import PlayerImage from '../../../public/assets/images/player.webp'
 import StartupCard from './components/startup-card/startup-card'
@@ -26,6 +27,12 @@ const Home = ({ userSlug }: HomeProps) => {
    useEffect(() => {
       dispatch(resetSelectedOptions())
       persistor.purge()
+   }, [])
+
+   useEffect(() => {
+      return () => {
+         dispatch(resetPinSelection())
+      }
    }, [])
 
    return (
