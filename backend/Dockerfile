@@ -10,7 +10,7 @@ CMD ["sh", "-c", "echo DATABASE_URL=$DATABASE_URL; npx prisma migrate deploy && 
 
 
 RUN npm install
-RUN npx prisma generate
+RUN DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres npx prisma generate
 
 COPY tsconfig.json ./
 COPY src ./src
