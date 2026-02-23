@@ -1,0 +1,15 @@
+@use './effects';
+
+@mixin glass-bar($gap: 16px, $padding: 8px, $radius: 1000px) {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: $gap;
+
+   @include effects.glass-background;
+
+   border: 1px solid #e6e6e62d;
+   border-radius: $radius;
+   padding: $padding;
+   z-index: 1;
+}

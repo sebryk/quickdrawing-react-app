@@ -1,0 +1,125 @@
+@use '@/styles/mixins';
+
+.header {
+   width: calc(100% - 80px);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   font-family: Montserrat, sans-serif;
+   min-height: 54px;
+   margin-bottom: 0;
+   border-radius: 1000px;
+   position: relative;
+
+   @include mixins.container;
+
+   padding-inline: 20px;
+   margin-top: 24px;
+
+   &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      outline: 1px solid #e6e6e62d;
+      z-index: 0;
+
+      @include mixins.glass-background;
+   }
+
+   > * {
+      position: relative;
+      z-index: 1;
+   }
+
+   &__nav {
+      display: flex;
+      gap: 71px;
+      color: var(--white-color);
+      font-size: 14px;
+      font-family: Montserrat, sans-serif;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: uppercase;
+
+      &.header__nav--show {
+         right: 0;
+         transform: translateX(0);
+      }
+   }
+}
+
+.logo {
+   color: var(--red-color);
+   font-size: 24px;
+   font-weight: 600;
+   text-transform: uppercase;
+   cursor: pointer;
+}
+
+.nav {
+   &__listLink {
+      position: relative;
+      transition: color 0.2s;
+
+      &:hover {
+         color: var(--light-gray-color);
+      }
+   }
+}
+
+@media (width <= 830px) {
+   .nav {
+      &__listLink {
+         &:hover::after {
+            opacity: 0;
+         }
+      }
+   }
+
+   .header {
+      padding-inline: 16px;
+
+      &__nav {
+         width: 50%;
+         height: 100vh;
+         top: 0;
+         right: 0;
+         position: fixed;
+         flex-direction: column;
+         gap: 100px;
+         transform: translateX(100%);
+         padding-top: 80px;
+         padding-left: 40px;
+         background-color: var(--black-color);
+         font-size: 26px;
+         z-index: 1;
+         transition: 0.5s ease;
+      }
+   }
+}
+
+@media (width <= 600px) {
+   .header {
+      &__nav {
+         width: 60%;
+      }
+   }
+}
+
+@media (width <= 500px) {
+   .header {
+      &__nav {
+         width: 70%;
+      }
+   }
+}
+
+@media (width <= 360px) {
+   .header {
+      &__nav {
+         width: 80%;
+      }
+   }
+}

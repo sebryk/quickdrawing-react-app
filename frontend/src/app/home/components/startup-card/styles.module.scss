@@ -1,0 +1,24 @@
+@use '@/styles/mixins';
+
+.startup-card {
+   align-self: flex-start;
+   border-radius: 1000px;
+   width: 100%;
+   max-width: 539px;
+   display: flex;
+   gap: 8px;
+   padding: 8px;
+   border: 1px solid #e6e6e62d;
+   margin: 24px auto 0;
+
+   @include mixins.glass-background(rgba(206, 206, 206, 0.1));
+
+   &__icon-wrapper {
+      display: flex;
+      align-items: center;
+   }
+
+   &__button {
+      gap: 4px;
+   }
+}
