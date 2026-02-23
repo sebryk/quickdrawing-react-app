@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import type { Response } from 'express';
+import type { CookieOptions, Response } from 'express';
 import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuthSessionService } from './services/auth-session.service';
@@ -75,12 +75,11 @@ export class AuthService {
       );
       const { sessionToken, sessionExpiresAt } = await this.authSessionService.createSession(user.id);
 
-      response.cookie(this.authSessionService.getCookieName(), sessionToken, {
-         httpOnly: true,
-         secure: this.shouldUseSecureCookies(),
-         sameSite: 'lax',
-         expires: sessionExpiresAt,
-      });
+      response.cookie(
+         this.authSessionService.getCookieName(),
+         sessionToken,
+         this.getSessionCookieOptions(sessionExpiresAt),
+      );
 
       const frontendBaseUrl = this.appConfig.required('FRONTEND_URL').replace(/\/$/, '');
       const encodedUser = encodeURIComponent(providerUsername ?? providerUserId);
@@ -181,5 +180,21 @@ export class AuthService {
 
    shouldUseSecureCookies() {
       return this.appConfig.required('NODE_ENV') === 'production';
+   }
+
+   getSessionCookieOptions(expires?: Date): CookieOptions {
+      const configuredDomain = this.appConfig.getString('COOKIE_DOMAIN', '').trim() || undefined;
+      const configuredSameSite = this.appConfig.getString('COOKIE_SAME_SITE', 'lax').toLowerCase();
+      const sameSite = configuredSameSite === 'none' || configuredSameSite === 'strict' ? configuredSameSite : 'lax';
+      const secure = sameSite === 'none' ? true : this.shouldUseSecureCookies();
+
+      return {
+         httpOnly: true,
+         secure,
+         sameSite,
+         domain: configuredDomain,
+         path: '/',
+         ...(expires ? { expires } : {}),
+      };
    }
 }

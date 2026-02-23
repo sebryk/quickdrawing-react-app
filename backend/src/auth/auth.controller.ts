@@ -39,11 +39,7 @@ export class AuthController {
 
       await this.authService.logout(sessionToken);
 
-      response.clearCookie(cookieName, {
-         httpOnly: true,
-         secure: this.authService.shouldUseSecureCookies(),
-         sameSite: 'lax',
-      });
+      response.clearCookie(cookieName, this.authService.getSessionCookieOptions());
 
       return { success: true };
    }

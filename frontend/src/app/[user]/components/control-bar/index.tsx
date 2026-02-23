@@ -1,5 +1,7 @@
 'use client'
 
+'use client'
+
 import ObjectsFormSelect from '@/components/objects-form/components/select'
 import MainButton from '@/components/ui/buttons/main-button'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'

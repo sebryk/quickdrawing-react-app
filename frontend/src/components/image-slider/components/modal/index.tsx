@@ -1,16 +1,16 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useRef, useEffect } from 'react'
+import { RxCross2 } from 'react-icons/rx'
+import IconButton from '@/components/ui/buttons/icon-button'
+import MainButton from '@/components/ui/buttons/main-button'
+import { setMouseOver } from '@/store/slices/image-slider-slice'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import { closeModal } from '../../../../store/slices/modal-slice'
-import { useRef, useEffect } from 'react'
 import { resetSelectedOptions } from '../../../../store/slices/objects-form-slice'
-import { setMouseOver } from '@/store/slices/image-slider-slice'
 import { data } from './data'
 import styles from './styles.module.scss'
-import MainButton from '@/components/ui/buttons/main-button'
-import IconButton from '@/components/ui/buttons/icon-button'
-import { RxCross2 } from 'react-icons/rx'
 
 const Modal = () => {
    const dispatch = useAppDispatch()
@@ -22,7 +22,11 @@ const Modal = () => {
 
    const clearLocalStorage = () => {
       dispatch(closeModal())
-      router.push('/')
+      if (window.history.length > 1) {
+         router.back()
+      } else {
+         router.push('/')
+      }
       dispatch(resetSelectedOptions())
    }
 
@@ -42,13 +46,13 @@ const Modal = () => {
 
    return (
       <div className={styles['modal']} onMouseOver={() => dispatch(setMouseOver())}>
-         <div className={styles['modal__container']} ref={modalRef}>
+         <div ref={modalRef} className={styles['modal__container']}>
             <IconButton
-               onClick={() => dispatch(closeModal())}
                type="button"
                variant="close"
                icon={RxCross2}
                className={styles['modal__close']}
+               onClick={() => dispatch(closeModal())}
             />
             <p className={styles['modal__title']}>
                {imageSlider.isFinished && completionBar.completedPercentOfTime === 100
@@ -58,8 +62,8 @@ const Modal = () => {
             <div className={styles['modal__buttons-wrap']}>
                {buttons.map((button, index) => (
                   <MainButton
-                     key={button.title}
                      variant="primary"
+                     key={button.title}
                      onClick={index === 0 ? () => dispatch(closeModal()) : clearLocalStorage}
                   >
                      {button.title}
