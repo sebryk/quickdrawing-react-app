@@ -89,9 +89,18 @@ const baseRules = {
          order: 'asc',
          ignoreCase: true,
          internalPattern: ['^@/'],
-         newlinesBetween: 'ignore',
+         newlinesBetween: 1,
+
+         customGroups: [
+            {
+               groupName: 'react',
+               elementNamePattern: ['^react$', '^react/'],
+            },
+         ],
+
          groups: [
             'type',
+            'react',
             ['builtin', 'external'],
             'internal',
             ['parent', 'sibling', 'index'],

@@ -1,11 +1,13 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
+
 import { useGetImagesByTypeQuery } from '@/api/imagesApi'
 import Error from '@/components/error/error'
 import ImageSlider from '@/components/image-slider'
 import LoadingBar from '@/components/loading-bar/loading-bar'
 import { mouseIsMoving } from '@/store/slices/image-slider-slice'
+
 import Modal from '../../components/image-slider/components/modal'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getRandomNumber } from '../../utils/getRandomNumber'
