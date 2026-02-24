@@ -1,5 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import type {
+   PinterestBoardResponse,
+   PinterestBoardsListResponse,
    PinterestPinResponse,
    PinterestPinsListResponse,
    PinterestTokenResponse,
@@ -56,6 +58,45 @@ export class PinterestOAuthService {
       }
 
       return (await profileResponse.json()) as PinterestUserResponse;
+   }
+
+
+   async fetchBoards(accessToken: string, pageSize?: number, bookmark?: string) {
+      const boardsUrl = this.resolvePinterestApiUrl('/boards');
+      if (pageSize !== undefined) {
+         boardsUrl.searchParams.set('page_size', String(pageSize));
+      }
+
+      if (bookmark) {
+         boardsUrl.searchParams.set('bookmark', bookmark);
+      }
+
+      const response = await fetch(boardsUrl.toString(), {
+         headers: {
+            Authorization: `Bearer ${accessToken}`,
+         },
+      });
+
+      if (!response.ok) {
+         throw new InternalServerErrorException('Failed to fetch Pinterest boards');
+      }
+
+      return (await response.json()) as PinterestBoardsListResponse;
+   }
+
+   async fetchBoardById(accessToken: string, boardId: string) {
+      const boardUrl = this.resolvePinterestApiUrl(`/boards/${boardId}`);
+      const response = await fetch(boardUrl.toString(), {
+         headers: {
+            Authorization: `Bearer ${accessToken}`,
+         },
+      });
+
+      if (!response.ok) {
+         throw new InternalServerErrorException('Failed to fetch Pinterest board');
+      }
+
+      return (await response.json()) as PinterestBoardResponse;
    }
 
    async fetchPins(accessToken: string, pageSize?: number, bookmark?: string) {

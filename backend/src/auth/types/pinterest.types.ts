@@ -38,3 +38,17 @@ export type PinterestPinsListResponse = {
    items?: PinterestPinResponse[];
    bookmark?: string | null;
 };
+
+export type PinterestBoardResponse = {
+   id: string;
+   name?: string | null;
+   description?: string | null;
+   privacy?: string | null;
+   created_at?: string | null;
+   [key: string]: unknown;
+};
+
+export type PinterestBoardsListResponse = {
+   items?: PinterestBoardResponse[];
+   bookmark?: string | null;
+};
