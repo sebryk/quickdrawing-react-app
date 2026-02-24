@@ -27,13 +27,13 @@ const pinsSlice = createSlice({
             return
          }
 
-         const pinIndex = state.selectedPins.findIndex((selectedPin) => selectedPin.id === pin.id)
-         if (pinIndex >= 0) {
-            state.selectedPins.splice(pinIndex, 1)
+         const isSelected = state.selectedPins.some((selectedPin) => selectedPin.id === pin.id)
+         if (isSelected) {
+            state.selectedPins = []
             return
          }
 
-         state.selectedPins.push(pin)
+         state.selectedPins = [pin]
       },
       resetPinSelection: (state) => {
          state.selectedPins = []

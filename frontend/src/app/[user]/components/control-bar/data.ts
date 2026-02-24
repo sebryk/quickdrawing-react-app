@@ -8,7 +8,7 @@ export const data = {
    secondaryButton: {
       title: 'Reset all',
    },
-   emptyText: 'Select images to start drawing',
+   emptyText: 'Select one board to start drawing',
    selectOption: [
       {
          name: 'duration',

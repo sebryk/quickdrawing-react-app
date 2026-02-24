@@ -14,6 +14,7 @@ type AppBoard = {
    description: string | null;
    privacy: string | null;
    createdAt: string | null;
+   imageUrl: string | null;
 };
 
 type AppPin = {
@@ -85,6 +86,7 @@ export class PinterestService {
          description: board.description ?? null,
          privacy: board.privacy ?? null,
          createdAt: board.created_at ?? null,
+         imageUrl: this.pickBoardImageUrl(board),
       };
    }
 
@@ -108,5 +110,20 @@ export class PinterestService {
          .sort((a, b) => (b.width ?? 0) * (b.height ?? 0) - (a.width ?? 0) * (a.height ?? 0));
 
       return variantsWithSize[0]?.url ?? null;
+   }
+
+   private pickBoardImageUrl(board: PinterestBoardResponse) {
+      const rawMedia = board.media;
+      if (!rawMedia || typeof rawMedia !== 'object') {
+         return null;
+      }
+
+      const media = rawMedia as {
+         image_cover_url?: string;
+         cover_image_url?: string;
+         image_cover?: string;
+      };
+
+      return media.image_cover_url ?? media.cover_image_url ?? media.image_cover ?? null;
    }
 }
