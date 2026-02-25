@@ -15,7 +15,6 @@ export interface PreviewDotsProps {
 }
 
 export interface PreviewSectionProps {
-   dataLength: number
    isMouseMoving: boolean
    onMouseOver: () => void
    onMouseOut: () => void

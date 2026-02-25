@@ -1,9 +1,11 @@
 'use client'
 
 import Image from 'next/image'
+
 import { AccountPin } from '@/services/pinterest-pins'
 import { showModal } from '@/store/slices/modal-slice'
 import { toggleTimer } from '@/store/slices/timer-slice'
+
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import {
    goToNextImage,
@@ -86,7 +88,6 @@ const ImageSlider = ({ data }: { data: AccountPin[] }) => {
          />
 
          <PreviewSection
-            dataLength={dataLength}
             onMouseOut={handleMouseOut}
             onMouseOver={handleMouseOver}
             isMouseMoving={imageSlider.isMouseMoving}
