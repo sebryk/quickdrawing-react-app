@@ -1,7 +1,45 @@
 .preview-images {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+
+   &__viewport {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+   }
+
+   &__viewport--slider {
+      max-width: 470px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+         display: none;
+      }
+   }
+
+   &__arrow {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 50%;
+      background-color: rgb(0 0 0 / 50%);
+      color: var(--light-gray-color);
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:disabled {
+         opacity: 0.35;
+         cursor: not-allowed;
+      }
+   }
+
    &__image {
       position: relative;
       width: 50px;
+      min-width: 50px;
       height: 50px;
       border-radius: 8px;
       background-size: cover;
