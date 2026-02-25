@@ -4,11 +4,18 @@ import { AccountPin } from '@/services/pinterest-pins'
 export interface PinState {
    pins: AccountPin[]
    selectedPins: AccountPin[]
+   selectedBoardId: string | null
+}
+
+type SelectBoardPayload = {
+   boardId: string
+   pins: AccountPin[]
 }
 
 const initialState: PinState = {
    pins: [],
    selectedPins: [],
+   selectedBoardId: null,
 }
 
 const pinsSlice = createSlice({
@@ -18,28 +25,33 @@ const pinsSlice = createSlice({
       setPins: (state, action: PayloadAction<AccountPin[]>) => {
          state.pins = action.payload
          const availablePinIds = new Set(action.payload.map((pin) => pin.id))
-         state.selectedPins = state.selectedPins.filter((pin) => availablePinIds.has(pin.id))
+         if (state.selectedBoardId && !availablePinIds.has(state.selectedBoardId)) {
+            state.selectedPins = []
+            state.selectedBoardId = null
+         }
       },
-      togglePinSelection: (state, action: PayloadAction<AccountPin>) => {
-         const pin = action.payload
-         const pinExists = state.pins.some((statePin) => statePin.id === pin.id)
-         if (!pinExists) {
+      toggleBoardSelection: (state, action: PayloadAction<SelectBoardPayload>) => {
+         const { boardId, pins } = action.payload
+         const boardExists = state.pins.some((statePin) => statePin.id === boardId)
+         if (!boardExists) {
             return
          }
 
-         const pinIndex = state.selectedPins.findIndex((selectedPin) => selectedPin.id === pin.id)
-         if (pinIndex >= 0) {
-            state.selectedPins.splice(pinIndex, 1)
+         if (state.selectedBoardId === boardId) {
+            state.selectedPins = []
+            state.selectedBoardId = null
             return
          }
 
-         state.selectedPins.push(pin)
+         state.selectedPins = pins
+         state.selectedBoardId = boardId
       },
       resetPinSelection: (state) => {
          state.selectedPins = []
+         state.selectedBoardId = null
       },
    },
 })
 
-export const { setPins, togglePinSelection, resetPinSelection } = pinsSlice.actions
+export const { setPins, toggleBoardSelection, resetPinSelection } = pinsSlice.actions
 export default pinsSlice.reducer

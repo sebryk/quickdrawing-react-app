@@ -61,10 +61,19 @@
       }
    }
 
-   &__image-wrap {
+   &__preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, 110px);
+      gap: 1px;
+      background: rgb(255 255 255 / 10%);
+      min-height: 220px;
+   }
+
+   &__preview-item {
       position: relative;
       width: 100%;
-      min-height: 220px;
+      height: 100%;
    }
 
    &__image {
@@ -103,13 +112,14 @@
    }
 
    &__placeholder {
-      min-height: 220px;
+      min-height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       color: var(--white-color);
       font-family: Montserrat, sans-serif;
       opacity: 0.75;
+      font-size: 13px;
    }
 
    &__body {
@@ -125,25 +135,5 @@
       font-size: 18px;
       font-family: Montserrat, sans-serif;
       line-height: 1.3;
-   }
-
-   &__description {
-      margin: 0;
-      color: var(--white-color);
-      opacity: 0.9;
-      font-size: 14px;
-      line-height: 1.4;
-   }
-
-   &__link {
-      width: fit-content;
-      color: #8ed8ff;
-      font-size: 14px;
-      font-family: Montserrat, sans-serif;
-      text-decoration: none;
-
-      &:hover {
-         text-decoration: underline;
-      }
    }
 }

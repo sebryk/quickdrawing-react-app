@@ -1,40 +1,51 @@
 'use client'
 
-import type { AccountPin } from '@/services/pinterest-pins'
+import type { AccountBoardWithPins } from '@/services/pinterest-boards'
 import cn from 'classnames'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { FaCheck, FaCircle } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { setPins, togglePinSelection } from '@/store/slices/pins-slice'
+import { setPins, toggleBoardSelection } from '@/store/slices/pins-slice'
 import styles from './styles.module.scss'
 
 type PinsListProps = {
-   pins: AccountPin[]
+   boards: AccountBoardWithPins[]
 }
 
-const PinsList = ({ pins }: PinsListProps) => {
+const PinsList = ({ boards }: PinsListProps) => {
    const dispatch = useAppDispatch()
-   const selectedPins = useAppSelector((state) => state.pins.selectedPins)
+   const selectedBoardId = useAppSelector((state) => state.pins.selectedBoardId)
 
    useEffect(() => {
-      dispatch(setPins(pins))
-   }, [dispatch, pins])
+      dispatch(
+         setPins(
+            boards.map((board) => ({
+               id: board.id,
+               title: board.name,
+               description: board.description,
+               link: null,
+               createdAt: board.createdAt,
+               imageUrl: board.imageUrl,
+            })),
+         ),
+      )
+   }, [boards, dispatch])
 
-   if (pins.length === 0) {
-      return <p className={styles.pins__empty}>No Pinterest pins yet.</p>
+   if (boards.length === 0) {
+      return <p className={styles.pins__empty}>No Pinterest boards yet.</p>
    }
 
    return (
       <section className={styles.pins}>
-         {pins.map((pin) => {
-            const isSelected = selectedPins.some((selectedPin) => selectedPin.id === pin.id)
+         {boards.map((board) => {
+            const isSelected = selectedBoardId === board.id
 
             return (
                <button
-                  key={pin.id}
+                  key={board.id}
                   type="button"
-                  onClick={() => dispatch(togglePinSelection(pin))}
+                  onClick={() => dispatch(toggleBoardSelection({ boardId: board.id, pins: board.pins }))}
                   className={cn(styles.pin, {
                      [styles['pin--selected']]: isSelected,
                   })}
@@ -43,18 +54,29 @@ const PinsList = ({ pins }: PinsListProps) => {
                      <FaCircle className={styles['pin__selected-icon-bg']} />
                      <FaCheck className={styles['pin__selected-icon-check']} />
                   </span>
-                  <div className={styles['pin__image-wrap']}>
-                     {pin.imageUrl ? (
-                        <Image
-                           fill={true}
-                           src={pin.imageUrl}
-                           alt={`Pinterest pin ${pin.id}`}
-                           className={styles['pin__image']}
-                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
+                  <div className={styles['pin__preview-grid']}>
+                     {board.previewPins.length > 0 ? (
+                        board.previewPins.map((pin) => (
+                           <div key={pin.id} className={styles['pin__preview-item']}>
+                              {pin.imageUrl ? (
+                                 <Image
+                                    fill={true}
+                                    src={pin.imageUrl}
+                                    alt={`Board ${board.name ?? board.id} pin ${pin.id}`}
+                                    className={styles['pin__image']}
+                                    sizes="(max-width: 768px) 50vw, 25vw"
+                                 />
+                              ) : (
+                                 <div className={styles['pin__placeholder']}>No image</div>
+                              )}
+                           </div>
+                        ))
                      ) : (
-                        <div className={styles['pin__placeholder']}>No image</div>
+                        <div className={styles['pin__placeholder']}>No preview</div>
                      )}
+                  </div>
+                  <div className={styles['pin__body']}>
+                     <h3 className={styles['pin__title']}>{board.name ?? 'Untitled board'}</h3>
                   </div>
                </button>
             )

@@ -33,6 +33,23 @@ export class PinterestController {
       return this.pinterestService.getBoardById(boardId, accessToken);
    }
 
+   @Get('boards/:boardId/pins')
+   async listBoardPins(
+      @PinterestAccessToken() accessToken: string,
+      @Param('boardId') boardId: string,
+      @Query('page_size') pageSizeRaw?: string,
+      @Query('bookmark') bookmark?: string,
+   ) {
+      const pageSize = pageSizeRaw ? Number.parseInt(pageSizeRaw, 10) : undefined;
+      const normalizedPageSize = pageSize && pageSize > 0 ? Math.min(250, pageSize) : undefined;
+
+      return this.pinterestService.listBoardPins(boardId, {
+         accessToken,
+         pageSize: normalizedPageSize,
+         bookmark,
+      });
+   }
+
    @Get('pins')
    async listPins(
       @PinterestAccessToken() accessToken: string,
