@@ -69,6 +69,20 @@ export class PinterestService {
       };
    }
 
+   async listBoardPins(boardId: string, { accessToken, pageSize, bookmark }: ListPinterestOptions) {
+      if (!accessToken) {
+         throw new UnauthorizedException();
+      }
+
+      const payload = await this.pinterestOAuthService.fetchBoardPins(accessToken, boardId, pageSize, bookmark);
+      const items = (payload.items ?? []).map((pin) => this.normalizePin(pin));
+
+      return {
+         items,
+         bookmark: payload.bookmark ?? null,
+      };
+   }
+
    async getPinById(pinId: string, accessToken?: string) {
       if (!accessToken) {
          throw new UnauthorizedException();

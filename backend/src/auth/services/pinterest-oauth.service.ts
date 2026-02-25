@@ -122,6 +122,29 @@ export class PinterestOAuthService {
       return (await response.json()) as PinterestPinsListResponse;
    }
 
+   async fetchBoardPins(accessToken: string, boardId: string, pageSize?: number, bookmark?: string) {
+      const boardPinsUrl = this.resolvePinterestApiUrl(`/boards/${boardId}/pins`);
+      if (pageSize !== undefined) {
+         boardPinsUrl.searchParams.set('page_size', String(pageSize));
+      }
+
+      if (bookmark) {
+         boardPinsUrl.searchParams.set('bookmark', bookmark);
+      }
+
+      const response = await fetch(boardPinsUrl.toString(), {
+         headers: {
+            Authorization: `Bearer ${accessToken}`,
+         },
+      });
+
+      if (!response.ok) {
+         throw new InternalServerErrorException('Failed to fetch Pinterest board pins');
+      }
+
+      return (await response.json()) as PinterestPinsListResponse;
+   }
+
    async fetchPinById(accessToken: string, pinId: string) {
       const pinUrl = this.resolvePinterestApiUrl(`/pins/${pinId}`);
       const response = await fetch(pinUrl.toString(), {
