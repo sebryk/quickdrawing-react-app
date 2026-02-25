@@ -68,12 +68,31 @@
       gap: 1px;
       background: rgb(255 255 255 / 10%);
       min-height: 220px;
+
+      &--count-1 {
+         grid-template-columns: 1fr;
+         grid-template-rows: 220px;
+      }
+
+      &--count-2 {
+         grid-template-columns: repeat(2, minmax(0, 1fr));
+         grid-template-rows: 220px;
+      }
+
+      &--count-3 {
+         grid-template-columns: repeat(2, minmax(0, 1fr));
+         grid-template-rows: repeat(2, 110px);
+      }
    }
 
    &__preview-item {
       position: relative;
       width: 100%;
       height: 100%;
+
+      &--third {
+         grid-column: 1 / -1;
+      }
    }
 
    &__image {

@@ -40,6 +40,7 @@ const PinsList = ({ boards }: PinsListProps) => {
       <section className={styles.pins}>
          {boards.map((board) => {
             const isSelected = selectedBoardId === board.id
+            const previewCount = board.previewPins.length
 
             return (
                <button
@@ -54,10 +55,21 @@ const PinsList = ({ boards }: PinsListProps) => {
                      <FaCircle className={styles['pin__selected-icon-bg']} />
                      <FaCheck className={styles['pin__selected-icon-check']} />
                   </span>
-                  <div className={styles['pin__preview-grid']}>
-                     {board.previewPins.length > 0 ? (
-                        board.previewPins.map((pin) => (
-                           <div key={pin.id} className={styles['pin__preview-item']}>
+                  <div
+                     className={cn(styles['pin__preview-grid'], {
+                        [styles['pin__preview-grid--count-1']]: previewCount === 1,
+                        [styles['pin__preview-grid--count-2']]: previewCount === 2,
+                        [styles['pin__preview-grid--count-3']]: previewCount === 3,
+                     })}
+                  >
+                     {previewCount > 0 ? (
+                        board.previewPins.map((pin, index) => (
+                           <div
+                              key={pin.id}
+                              className={cn(styles['pin__preview-item'], {
+                                 [styles['pin__preview-item--third']]: previewCount === 3 && index === 2,
+                              })}
+                           >
                               {pin.imageUrl ? (
                                  <Image
                                     fill={true}
