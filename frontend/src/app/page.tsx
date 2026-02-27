@@ -1,5 +1,6 @@
 import Layout from '@/components/layout'
 import { getSessionUser } from '@/services/auth'
+
 import Home from './home/home'
 
 const HomePage = async () => {

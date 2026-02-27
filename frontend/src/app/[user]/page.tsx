@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+
 import { data as headerData } from '@/components/header/data'
 import IconButton from '@/components/ui/buttons/icon-button'
 import { getSessionUser } from '@/services/auth'
@@ -8,6 +9,7 @@ import {
    getPinterestBoardPins,
    getPinterestBoards,
 } from '@/services/pinterest-boards'
+
 import ControlBar from './components/control-bar'
 import PinsList from './components/pins-list'
 import UserInfo from './components/user-info'

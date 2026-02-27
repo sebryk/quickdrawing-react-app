@@ -3,6 +3,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
+
 import { imagesApi } from '../api/imagesApi'
 import { ISelectedOptions } from '../components/objects-form/types'
 import completionBarReducer from './slices/completion-bar-slice'

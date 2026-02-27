@@ -1,20 +1,36 @@
 'use client'
 
+import cn from 'classnames'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+
 import useBurgerMenu from '@/hooks/useBurgerMenu'
+
 import BurgerBtn from '../ui/buttons/burger-button/burger-button'
+import IconButton from '../ui/buttons/icon-button'
 import { activeStyles, data, navigationItems } from './data'
 import styles from './styles.module.scss'
-import cn from 'classnames'
 
 const Header = () => {
    const { logo } = data
    const { isBurgerMenuOpen, toggleBurgerMenu, menuRef, setIsBurgerMenuOpen } = useBurgerMenu()
    const pathname = usePathname()
+   const router = useRouter()
+
+   const handleBack = () => {
+      if (window.history.length > 1) {
+         router.back()
+      } else {
+         router.push('/')
+      }
+   }
 
    return (
-      <header className={styles.header} ref={menuRef}>
+      <header
+         ref={menuRef}
+         className={cn(styles.header, { [styles['header--back']]: pathname !== '/' })}
+      >
+         {pathname !== '/' && <IconButton variant="back" onClick={handleBack} />}
          <Link href="/" className={styles.logo} onClick={() => setIsBurgerMenuOpen(false)}>
             {logo}
          </Link>
@@ -28,8 +44,8 @@ const Header = () => {
                   key={index}
                   href={item.route}
                   className={styles.nav__listLink}
-                  style={pathname === item.route ? activeStyles : {}}
                   onClick={() => setIsBurgerMenuOpen(false)}
+                  style={pathname === item.route ? activeStyles : {}}
                >
                   {item.label}
                </Link>

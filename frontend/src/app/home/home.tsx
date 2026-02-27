@@ -1,35 +1,38 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { VscChevronRight } from 'react-icons/vsc'
+
 import ObjectsForm from '@/components/objects-form'
 import { useAppDispatch } from '@/store/hooks'
 import { resetSelectedOptions } from '@/store/slices/objects-form-slice'
 import { resetPinSelection } from '@/store/slices/pins-slice'
 import { persistor } from '@/store/store'
+
 import PlayerImage from '../../../public/assets/images/player.webp'
 import StartupCard from './components/startup-card/startup-card'
 import { data } from './data'
 import styles from './styles.module.scss'
 
 type HomeProps = {
-   userSlug: string | null
+   userSlug?: string | null
+   page?: 'home' | 'quick-session'
 }
 
-const Home = ({ userSlug }: HomeProps) => {
+const Home = ({ userSlug = null, page = 'home' }: HomeProps) => {
    const { title, description, link } = data
 
    const dispatch = useAppDispatch()
-   const [showForm, setShowForm] = useState(false)
+   const router = useRouter()
 
    useEffect(() => {
       dispatch(resetSelectedOptions())
       persistor.purge()
-   }, [])
 
-   useEffect(() => {
       return () => {
          dispatch(resetPinSelection())
       }
@@ -46,7 +49,7 @@ const Home = ({ userSlug }: HomeProps) => {
             </Link>
          </span>
          <div className={styles['home__content']}>
-            {showForm && <ObjectsForm />}
+            {page === 'quick-session' && <ObjectsForm />}
             <Image
                alt="home"
                width={530}
@@ -56,7 +59,9 @@ const Home = ({ userSlug }: HomeProps) => {
                className={styles['home__image']}
             />
          </div>
-         {!showForm && <StartupCard userSlug={userSlug} onQuickSession={() => setShowForm(true)} />}
+         {page === 'home' && (
+            <StartupCard userSlug={userSlug} onQuickSession={() => router.push('/quick-session')} />
+         )}
       </section>
    )
 }

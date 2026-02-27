@@ -10,11 +10,16 @@
    margin-bottom: 0;
    border-radius: 1000px;
    position: relative;
+   gap: 12px;
 
    @include mixins.container;
 
    padding-inline: 20px;
    margin-top: 24px;
+
+   &--back {
+      padding-left: 8px;
+   }
 
    &::before {
       content: '';
@@ -56,6 +61,7 @@
    font-weight: 600;
    text-transform: uppercase;
    cursor: pointer;
+   margin-right: auto;
 }
 
 .nav {

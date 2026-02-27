@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import Link from 'next/link'
+
 import styles from './styles.module.scss'
 import { IconButtonProps } from './types'
 import VARIANT_PROPS from './variant-props'

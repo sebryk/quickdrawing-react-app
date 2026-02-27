@@ -2,6 +2,7 @@
 
 import cn from 'classnames'
 import { useRouter } from 'next/navigation'
+
 import { useAppSelector } from '../../store/hooks'
 import Button from '../ui/buttons/main-button'
 import ObjectsFormSelect from './components/select'
@@ -11,7 +12,6 @@ import styles from './styles.module.scss'
 
 const ObjectsForm = () => {
    const selectedOptions = useAppSelector((state) => state.selectedOptions)
-
    const router = useRouter()
 
    const { selectOption, button } = data

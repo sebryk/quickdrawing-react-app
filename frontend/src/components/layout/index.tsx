@@ -1,7 +1,8 @@
-import Header from '../header'
-import Footer from '../footer'
-import styles from './styles.module.scss'
 import type { ReactNode } from 'react'
+
+import Footer from '../footer'
+import Header from '../header'
+import styles from './styles.module.scss'
 
 interface LayoutProps {
    children: ReactNode
